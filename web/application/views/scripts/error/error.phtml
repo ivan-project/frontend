@@ -1,0 +1,14 @@
+<section class="header">
+  <div class="rich">
+    <h2 style="text-align: center;">Supersite <span class="blue">404</span></h2>
+    <p><?php echo $this->message ?></p>
+    <?php if (isset($this->exception)) { ?>
+        <h4 style="color: #2082b7;">Exception information:</h4>
+        <p>Message: <?php echo $this->exception->getMessage(); ?></p>
+        <h4 style="color: #2082b7;">Stack trace:</h4>
+        <pre><?php echo $this->exception->getTraceAsString(); ?></pre>
+        <h4 style="color: #2082b7;">Request Parameters:</h4>
+        <pre><?php echo $this->escape(var_export($this->request->getParams(), true)); ?></pre>
+    <?php } ?>
+  </div>
+</section>

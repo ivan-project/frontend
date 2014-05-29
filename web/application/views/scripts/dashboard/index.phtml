@@ -1,0 +1,78 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<div class="group avatar">
+	<a href="<?php $this->eurl();?>" data-remote></a>
+	<p><?php echo $this->user_['name'];?> <span><a href="<?php $this->eurl('user/sign-out');?>" data-remote>wyloguj</a></span></p>
+	<div class="avatar">
+		<img src="<?php echo $this->avatar($this->user_);?>" alt="<?php echo $this->user_['name'];?>"/>
+	</div>
+</div>
+<div class="group lr">
+	<h4>Dokumenty </h4>
+	<div class="left">
+		<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+		<span>7</span>
+		<h5>Podejrzanych </h5>
+	</div>
+	<div class="right">
+		<a href="<?php $this->eurl('dashboard/documents');?>" data-remote></a>
+		<span>52</span>
+		<h5>Wszystkich </h5>
+	</div>
+</div>
+<div class="group add">
+	<h3><span>Prześlij pracę</span><?php $this->svg('graphics/icons/document-create.svg');?></h3>
+	<a href="<?php $this->eurl('dashboard/documents/create');?>" data-remote></a>
+</div>
+<div class="group pending-users" style="margin-top: 50px;">
+	<h3>Oczekują na akceptację</h3>
+	<div class="pending">
+		<ul>
+			<li>
+				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg" alt=""/>
+			</li>
+			<li>
+				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/chexee/128.jpg" alt=""/>
+			</li>
+			<li>
+				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/olivierpineda/128.jpg" alt=""/>
+			</li>
+			<li>
+				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/isacosta/128.jpg" alt=""/>
+			</li>
+			<li>
+				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" alt=""/>
+			</li>
+			<li>
+				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
+				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/mrjamesnoble/128.jpg" alt=""/>
+			</li>
+		</ul>
+		<div class="more"></div>
+	</div>
+</div>
+<div class="group lr">
+	<div class="left">
+		<a href="<?php $this->eurl('dashboard/users/admins');?>" data-remote></a>
+		<span>2</span>
+		<h5>Administratorów </h5>
+	</div>
+	<div class="right">
+		<a href="<?php $this->eurl('dashboard/users');?>" data-remote></a>
+		<span>13</span>
+		<h5>Wszystkich </h5>
+	</div>
+</div>
+<div class="group add">
+	<h3><span>Dodaj użytkownika</span><?php $this->svg('graphics/icons/user-create.svg');?></h3>
+	<a href="<?php $this->eurl('dashboard/users/create');?>" data-remote></a>
+</div>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

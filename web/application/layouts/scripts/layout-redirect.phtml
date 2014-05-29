@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?php $this->headScript()->appendFile($this->path("scripts/js/jquery-1.10.2.min.js"))
+               ->appendFile($this->path('scripts/js/jquery-ui-1.9.2.custom.js','text/javascript'))
+               ->appendFile($this->path('scripts/js/jq_easing.js','text/javascript'))
+               ->appendFile($this->path('scripts/js/jq_animate_color.js','text/javascript'))
+               ->appendFile($this->path('scripts/js/BasicLayout.js','text/javascript'));
+      echo $this->headScript();
+    ?>
+  </head>
+  <body>
+    <div id="remote-content">
+      <?php echo $this->layout()->content; ?>
+    </div>
+    <script type="text/javascript">top.redirect('<?php $this->eurl($this->config_["redirect"]);?>', true);</script>
+  </body>
+</html>

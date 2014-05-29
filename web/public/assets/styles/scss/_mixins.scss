@@ -1,0 +1,99 @@
+// ----------------
+//     MIXINS
+// ----------------
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time #{$method};
+    -moz-transition: $transition-property $transition-time #{$method};
+    -ms-transition: $transition-property $transition-time #{$method};
+    -o-transition: $transition-property $transition-time #{$method};
+    transition: $transition-property $transition-time #{$method};
+}
+
+@mixin prefixer($property, $value, $prefixes) {
+
+    $noPrefixes: false !default;
+    $prefixes: if($noPrefixes, false, $prefixes);
+
+    @if $prefixes {
+        @each $prefix in $prefixes {
+            -#{$prefix}-#{$property}: $value;
+        }
+    }
+
+}
+@mixin transform($property: none) {
+//  none | <transform-function>
+  @include prefixer(transform, $property, webkit moz ms o spec);
+}
+@mixin transform-origin($axes: 50%) {
+// x-axis - left | center | right  | length | %
+// y-axis - top  | center | bottom | length | %
+// z-axis -                          length
+  @include prefixer(transform-origin, $axes, webkit moz ms o spec);
+}
+
+@mixin rotate($arg) {
+    -webkit-transform: rotate($arg);
+    -moz-transform: rotate($arg);
+    -ms-transform: rotate($arg);
+    transform: rotate($arg);
+}
+
+@mixin box-shadow($args) {
+  -webkit-box-shadow: $args;
+          box-shadow: $args;
+}
+
+@mixin sizing() {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@mixin zoom($arg) {
+  -moz-transform: scale($arg); /* Firefox */
+  -moz-transform-origin: 50% 50%;
+  -o-transform: scale($arg); /* Opera */
+  -o-transform-origin: 50% 50%;
+  -webkit-transform: scale($arg); /* Safari And Chrome */
+  -webkit-transform-origin: 50% 50%;
+  transform: scale($arg); /* Standard Property */
+  transform-origin: 50% 50%;  /* Standard Property */
+}
+
+@mixin placeholder() {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin touchNone() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@mixin breakpoint($point) {
+  @if $point == break-normal {
+    @media all and (max-width: 970px) { @content; }
+  }
+  @else if $point == break-medium {
+    @media all and (max-width: 800px) { @content; }
+  }
+  @else if $point == break-small {
+    @media all and (max-width: 479px)  { @content; }
+  }
+}

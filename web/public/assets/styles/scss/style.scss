@@ -1,0 +1,904 @@
+//@import url('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300&subset=latin,latin-ext');
+
+@charset "utf-8";
+
+@import "variables";
+@import "mixins";
+@import "reset";
+@import "calibre";
+
+/* =========================================================================== */
+/* =================================== STRUCTURE ============================= */
+/* =========================================================================== */
+
+html, body {
+	font-family: $defFont;
+	font-size: 14px;
+	line-height: 22px;
+	font-weight: 400;
+	color: $colDef;
+	background: $backDark;
+	height: 100% !important;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+body {
+	float: left;
+	width: 100%;
+	min-height: 100% !important;
+}
+hr {
+	border: none;
+	border-bottom: 1px solid $lineLight;
+	margin: 18px 0px;
+}
+// TEXTS
+h2, .s-h2 {
+	font-size: 27px;
+	line-height: 32px;
+	font-weight: 400;
+	margin: 24px 5px 12px 0px;
+}
+h3, .s-h3 {
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: 400;
+	margin: 20px 5px 10px 0px;
+}
+h4, .s-h4 {
+	font-size: 17px;
+	line-height: 19px;
+	font-weight: 600;
+	margin: 16px 5px 8px 0px;
+}
+h5, .s-h5 {
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: 700;
+	margin: 12px 5px 6px 0px;
+	text-transform: uppercase;
+}
+.s-ul {
+	list-style: none;
+	margin: 20px 0px 10px;
+	padding: 0px;
+	@extend .full-block;
+	
+	& > li {
+		margin: 0px;
+		padding: 0px;
+		@extend .full-block;
+	}
+}
+a {
+	position: relative;
+	text-decoration: none;
+	color: $colAccent2;
+	white-space: nowrap;
+	
+	&:after {
+		content: "";
+		position: absolute;
+		display: block;
+		height: calc(100% + 2px);
+		border-bottom: 1px solid $colAccent2;
+		bottom: -1px;
+		left: 50%;
+		width: 100%;
+		margin-left: -50%;
+		opacity: 0;
+		outline: none;
+		@extend .transition-smooth;
+	}
+	&:hover, &:focus {
+		outline: none;
+
+		&:after {
+			width: 100%;
+			margin-left: -50%;
+			opacity: 1;
+		}
+	}
+}
+a.button {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	padding: 6px 25px;
+	margin: 22px 0px 10px;
+	outline: none;
+	background: #3a3c41;
+	border: 1px solid #3a3c41;
+	color: $backDark;
+	border-radius: 2px;
+	font-size: 15px;
+	line-height: 27px;
+	font-weight: 500;
+	display: inline-block;
+	text-decoration: none;
+	@include box-shadow(0px 0px 10px 0px transparentize(darken($colAccent, 40%), 1) inset);
+	@extend .sizing;
+	@extend .transition-inputs;
+
+	&:after {
+		display: none;
+	}
+	&:hover {
+		background: lighten(#3a3c41, 5%);
+		border-color: lighten(#3a3c41, 5%);
+		color: darken($backDark, 2%);
+	}
+	&:active, &:focus {
+		background: darken($colAccent, 15%);
+		border-color: darken($colAccent, 10%);
+		color: darken(#ffffff, 10%);//darken($colAccent, 30%);
+		@include box-shadow(0px 0px 10px 0px transparentize(darken($colAccent, 40%), 0.7) inset);
+	}
+}
+a.submit {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	padding: 6px 25px;
+	margin: 22px 0px 10px;
+	outline: none;
+	border-radius: 2px;
+	font-size: 15px;
+	line-height: 27px;
+	font-weight: 500;
+	display: inline-block;
+	text-decoration: none;
+	color: #ffffff;
+	background: $colAccent;
+	border: 1px solid $colAccent;
+	@include box-shadow(0px 0px 10px 0px transparentize(darken($colAccent, 40%), 1) inset);
+	@extend .sizing;
+	@extend .transition-inputs;
+
+	&:hover {
+		background: darken($colAccent, 5%);
+		border-color: darken($colAccent, 5%);
+		color: darken(#ffffff, 2%);
+	}
+	&:active, &:focus {
+		background: darken($colAccent, 15%);
+		border-color: darken($colAccent, 10%);
+		color: darken(#ffffff, 10%);//darken($colAccent, 30%);
+		@include box-shadow(0px 0px 10px 0px transparentize(darken($colAccent, 40%), 0.7) inset);
+	}
+}
+.well {
+	background: #1C1C1F;
+	padding: 11px 20px 16px;
+	border-radius: 2px;
+	color: #3a3c41;
+}
+.input-style {
+	background: none;
+	color: $colWhite;//$colDef2;
+	text-transform: uppercase;
+	font-size: 13px;
+	font-weight: 700;
+	border: none;
+	border-bottom: 2px solid $lineLight;
+	margin: 10px 0px 5px 0px;
+	width: 100%;
+	padding: 10px 0px;
+	line-height: 22px;
+	display: block;
+	outline: none;
+	height: 42px;
+	@extend .sizing;
+	@extend .transition-inputs;
+	
+	&:after {
+		display: none;
+	}
+	&.emp {
+		border-bottom: 2px solid #2c2d31;
+		color: $colWhite;
+		padding-bottom: 15px;
+		padding-top: 0px;
+		margin-bottom: 0px;
+		text-transform: none;
+		height: 45px;
+		margin-top: 20px;
+
+		@extend .s-h3;
+	}
+	&.no-line {
+		border: none;
+	}
+}
+// EXTENDS
+.sizing {
+	@include sizing();
+}
+.transition-smooth {
+	@include transition(all, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+}
+.transition-long {
+	@include transition(all, 0.4s, cubic-bezier(0.2, 0.750, 0.440, 1.000));
+}
+.transition-inputs {
+	@include transition(all, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+}
+.full-relative {
+	position: relative;
+	float: left;
+	clear: both;
+	width: 100%;
+	display: block;
+}
+.full-block {
+	position: relative;
+	width: 100%;
+	display: block;
+}
+.a-absolute {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display: block;
+	background: $transparent;
+	z-index: 5;
+	cursor: pointer;
+	
+	&:after {
+		display: none;
+	}
+}
+.no-touch {
+	@include touchNone();
+}
+// CLASSES
+#page-holder {
+	float: left;
+	clear: both;
+	display: block;
+	width: 100%;
+	height: 100% !important;
+	overflow: hidden;
+	@extend .full-relative;
+
+	&.no-touch {
+		@extend .no-touch;
+	}
+}
+#panel {
+	background: $backDark;
+	height: 100% !important;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	width: calc(#{$panelSize});
+	padding: 80px 100px; //70px 60px 70px 60px; //50px 40px 50px 80px;
+	@extend .full-relative;
+	@extend .sizing;
+	@include transition(all, 0.8s, cubic-bezier(0.635, 0.005, 0.070, 1.000));
+
+	.inside {
+		width: 100%;
+		min-height: 100%;
+		@extend .full-relative;
+		@extend .sizing;
+
+		& > .logo {
+			width: 204px;
+			height: 51px;
+			margin-left: -4px;
+			padding-bottom: 20px;
+			@extend .full-block;
+
+			& > a {
+				outline: none;
+				@extend .a-absolute;
+			}
+			a:hover + svg *, a:focus + svg * {
+				fill: #ffffff;
+			}
+			& > svg {
+				width: 100%;
+				height: 100%;
+				@extend .full-block;
+
+				& * {
+					fill: $colDef2;
+					@extend .transition-smooth;
+				}
+			}
+		}
+
+		& > .contents {
+			top: 0px;
+			overflow: visible !important;
+			@extend .full-block;
+
+			form {
+				@extend .full-block;
+
+				.half-input {
+					width: 100%;
+					font-size: 0px;
+					margin: 10px 0px 5px;
+					@extend .full-block;
+
+					input {
+						width: calc(50% - 5px);
+						display: inline-block;
+						margin: 0px;
+						&:first-child {
+							margin-right: 10px;
+						}
+					}
+				}
+				input {
+					@extend .input-style;
+
+					&, &.emp {
+						&::-webkit-input-placeholder {
+							color: $colDef2;
+							@include transition(color, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+						}
+						&:-moz-placeholder { /* Firefox 18- */
+							color: $colDef2;
+							@include transition(color, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+						}
+						&::-moz-placeholder {  /* Firefox 19+ */
+							color: $colDef2;
+							@include transition(color, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+						}
+						&:-ms-input-placeholder {
+							color: $colDef2;
+							@include transition(all, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+						}
+					}
+
+					&.ic {
+						text-indent: 26px;
+						background-repeat: no-repeat;
+						background-position: 2px 50%;
+						background-size: 18px 18px;
+
+						&.ic-key {
+							background-image: url('../graphics/icons/key.svg');
+						}
+						&.ic-user {
+							background-image: url('../graphics/icons/user.svg');
+						}
+						&:focus {
+							//text-indent: 0px;
+							//background-position: 11px 50%;
+							//background-size: 0px 0px;
+						}
+					}
+
+					&:not(.emp):focus {
+						color: $colDef;
+						//border-color: $colDef;
+
+						&::-webkit-input-placeholder {
+						   color: transparentize($colDef, 1);
+						}
+						&:-moz-placeholder {
+						   color: transparentize($colDef, 1);
+						}
+						&::-moz-placeholder {
+						   color: transparentize($colDef, 1);
+						}
+						&:-ms-input-placeholder {
+						   color: transparentize($colDef, 1);
+						}
+					}
+					&.emp:focus {
+						color: $colDef;
+					}
+				}
+				button, input[type="button"] {
+					@extend a.button;
+				}
+				button[type="submit"] {
+					@extend a.submit;
+				}
+				.select-radio {
+					color: $colDef2;
+					@extend .input-style;
+
+					& > .label {
+						float: left;
+						clear: none;
+					}
+					& > ul {
+						float: right;
+						clear: none;
+						list-style: none;
+						margin: 0px;
+						padding: 0px;
+						margin-right: -4px;
+
+						& > li {
+							float: left;
+							clear: none;
+							cursor: pointer;
+							@extend .no-touch;
+
+							& > input {
+								width: 1px;
+								height: 1px;
+								position: absolute;
+								display: none;
+								opacity: 0;
+							}
+							& > div {
+								float: left;
+								clear: none;
+								padding: 4px 4px;
+								margin: -4px 0px;
+								@extend .transition-inputs;
+							}
+							&.selected > div {
+								color: $colWhite;
+							}
+							&:hover:not(.selected) > div {
+								color: lighten($colDef2, 20%);
+							}
+						}
+					}
+				}
+			}
+			.group {
+				width: 100%;
+				@extend .sizing;
+
+				&:before {
+					content: "";
+					display: block;
+					width: 100%;
+					min-height: 1px;
+				}
+			}
+			.avatar {
+				margin: 0px 0px 60px;
+				position: relative;
+				// min-height: 80px;
+				font-size: 0px;
+				min-height: 50px;
+
+				& > .avatar {
+					position: relative;
+					// width: 80px;
+					// height: 80px;
+					width: 50px;
+					height: 50px;
+					// margin: 0px 15px -34px 0px;//0px calc((100% - 80px) / 2);
+					margin: 0px 0px -20px 0px;//0px calc((100% - 80px) / 2);
+					// border-radius: 40px;
+					border-radius: 25px;
+					border: 4px solid $lineBitLighten;
+					background-color: $lineBitLighten;
+					display: inline-block;
+					overflow: hidden;
+
+					@extend .sizing;
+					@extend .transition-long;
+
+					& img, & object {
+						max-width: 100%;
+						max-height: 100%;
+
+						@extend .full-block;
+					}
+					&:after {
+						content: "";
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						top: 0px;
+						left: 0px;
+						z-index: 2;
+						background: rgba(0,0,0,0);
+						// border-radius: 40px;
+						border-radius: 25px;
+						box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) inset;
+
+						@extend .transition-long;
+					}
+				}
+				& > p {
+					margin: 0px 0px 20px;
+					display: inline-block;
+					color: $colDef2;
+					width: calc(100% - 50px);
+
+					@extend .s-h5;
+					@extend .transition-long;
+
+					& > span:not(.after) {
+						margin-left: 5px;
+						text-transform: none;
+
+						& > a {
+							position: relative;
+							z-index: 10;
+							font-weight: 400;
+							color: transparentize($colDef2, 1);
+							padding: 10px;
+							margin: -10px;
+							
+							&:after {
+								display: none;
+							}
+
+							&:hover {
+								color: $colAccent;
+							}
+
+							@extend .transition-long;
+						}
+					}
+					& > svg {
+						width: 30px;
+						height: 30px;
+						display: inline-block;
+						margin: -11px 0px -11px -8px;
+
+						& * {
+							fill: $lineBitLighten;
+
+							@extend .transition-smooth;
+						}
+					}
+					&:last-child {
+						margin-top: 18px;
+					}
+				}
+				& > a {
+					@extend .a-absolute;
+				}
+				&:hover {
+					& > .avatar {
+						border-color: $colWhite;
+						background-color: $colWhite;
+
+						&:after {
+							box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset;
+						}
+					}
+					& > p {
+						color: $colWhite;
+
+						& > span {
+
+							& > a {
+								color: $colDef2;
+
+								@extend .transition-smooth;
+
+								&:hover {
+									color: $colAccent;
+								}
+							}
+						}
+						& > svg * {
+							fill: $colWhite;
+						}
+					}
+				}
+			}
+			.pending-users {
+				display: inline-block;
+				border-bottom: 2px solid $lineLight;
+
+				@extend .full-block;
+
+				& > h3 {
+					width: 100%;
+					color: $colDef2;
+					padding-bottom: 15px;
+					margin-bottom: 0px;
+					@extend .s-h5;
+					@extend .full-relative;
+				}
+				& > .pending {
+					width: 100%;
+					overflow: hidden;
+					@extend .full-relative;
+
+					& > ul {
+						list-style: none;
+						padding: 0px 0px 10px;
+						margin: -6px -6px;
+						width: 9999px;
+						@extend .full-relative;
+
+						& > li {
+							width: auto;
+							clear: none;
+							@extend .full-relative;
+
+							& > img {
+								width: 40px;
+								height: 40px;
+								border-radius: 40px;
+								padding: 6px;
+								opacity: 0.3;
+								@extend .full-relative;
+								@extend .transition-smooth;
+							}
+							& > a {
+								@extend .a-absolute;
+							}
+							&:hover {
+								img {
+									opacity: 1;
+								}
+							}
+						}
+					}
+				}
+			}
+			.lr {
+				display: inline-block;
+				border-bottom: 2px solid $lineLight;
+
+				@extend .full-block;
+
+				& > h4 {
+					width: 100%;
+					border-bottom: 2px solid $lineLight;
+					color: $colWhite;
+					padding-bottom: 15px;
+					margin-bottom: 0px;
+
+					@extend .s-h3;
+					@extend .full-relative;
+				}
+				& > .left, & > .right {
+					font-size: 0px;
+					margin: 40px 0px;
+					overflow: hidden;
+
+					@extend .full-relative;
+					@extend .sizing;
+
+					& > span {
+						margin: 0px;
+						margin-top: -7px;
+
+						@extend .full-relative;
+						@extend .s-h2;
+						@extend .transition-smooth;
+					}
+					& > h5 {
+						margin: 0px;
+						margin-bottom: -2px;
+						color: $colDef2;
+
+						@extend .full-relative;
+						@extend .s-h5;
+						@extend .transition-smooth;
+					}
+					& > a {
+						@extend .a-absolute;
+					}
+
+					&:hover {
+						& > h5 {
+							color: $colWhite;
+							//color: $colAccent;
+						}
+					}
+				}
+				& > .left {
+					width: calc(40% - 2px);
+					border-right: 2px solid $lineLight;
+
+					@extend .sizing;
+				}
+				& > .right {
+					width: 50%;
+					clear: none;
+					padding-left: 15px;
+				}
+			}
+			.add {
+				@extend .full-block;
+
+				& > h3 {
+					margin: 0px;
+					color: $colDef1;
+					line-height: 28px;
+					text-align: center;
+					padding: 20px 0px 18px;
+
+					@extend .full-block;
+					@extend .s-h4;
+					@extend .transition-smooth;
+
+					& > span {
+						width: auto;
+						display: inline-block;
+					}
+					& > svg {
+						//width: 29px;
+						//height: 30px;
+						width: 24px;
+						height: 30px;
+						display: inline-block;
+						margin: -2px 0px -9px 6px;
+
+						& * {
+							fill: $colDef1;
+
+							@extend .transition-smooth;
+						}
+					}
+				}
+				& > a {
+					@extend .a-absolute;
+				}
+				&:hover > h3 {
+					color: $colWhite;
+
+					& > svg > * {
+						fill: $colAccent;
+					}
+				}
+			}
+		}
+	}
+	.panel-scroll {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		background: rgba(255, 255, 255, 0);
+		width: 24px;
+		height: 100%;
+		margin: 0px;
+		padding: 10px 8px 10px 8px;
+		cursor: pointer;
+		z-index: 20;
+		@include transition(opacity, 0.15s, cubic-bezier(0.2, 0.750, 0.440, 1.000));
+
+		@extend .no-touch;
+		@extend .sizing;
+
+		&:after {
+			content: "";
+			width: 100%;
+			height: 100%;
+			background: darken($backDark, 4%);
+			border-radius: 4px;
+			@extend .full-block;
+			@extend .transition-long;
+		}
+
+		&:hover, &.dragging {
+			&:after {
+				background: darken($backDark, 8%);
+			}
+		}
+
+		&.hidden:not(.dragging) {
+			opacity: 0;
+			cursor: default;
+		}
+	}
+	.file-browse {
+		margin: 25px 0px 30px 0px;
+		border: 2px dashed $lineLight;
+		width: calc(100% - 4px);
+		@extend .full-block;
+		@extend .transition-smooth;
+
+		& > input[type="file"][data-file-trigger] {
+			border: none;
+			margin: 0px;
+			padding: 0px;
+			display: block;
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			opacity: 0;
+			top: 50%;
+			left: 50%;
+		}
+		& > div {
+			margin: 0px;
+			color: $colDef1;
+			line-height: 28px;
+			text-align: center;
+			padding: 25px 0px 22px;
+
+			@extend .full-block;
+			@extend .s-h4;
+			@extend .transition-smooth;
+
+			& > span {
+				width: auto;
+				display: inline-block;
+			}
+			& > svg {
+				width: 24px;
+				height: 30px;
+				display: inline-block;
+				margin: -2px 0px -9px 6px;
+
+				& * {
+					fill: $colDef1;
+
+					@extend .transition-smooth;
+				}
+			}
+		}
+		& > a {
+			@extend .a-absolute;
+		}
+		&:hover { 
+			border-color: $lineBitLighten;
+
+			& > div {
+				color: $colWhite;
+
+				& > svg > * {
+					fill: $colAccent;
+				}
+			}
+		}
+	}
+}
+#content {
+	width: calc(100% - #{$panelSize});
+	background: #ffffff;
+	color: $colDef3;
+	height: 100% !important;
+	position: absolute;
+	left: $panelSize;
+	top: 0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	@extend .full-relative;
+	@extend .sizing;
+	@include transition(all, 0.8s, cubic-bezier(0.635, 0.005, 0.070, 1.000));
+
+	.inside {
+		min-height: 100%;
+		@extend .full-relative;
+	}
+}
+#page-holder.colapsed {
+	/*#panel {
+		width: calc(100%);
+		padding: 70px 35%;
+	}*/
+	#content {
+		left: 100%;
+	}
+}
+#ajax-block {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 2000;
+	//background-color: transparentize($backDark, 0.9);
+	background-image: url('../graphics/loader.gif');
+	background-repeat: repeat-x;
+	background-position: 0px -6px;
+	display: none;
+	&.anim {
+		@include transition(all, 0.15s, ease-out);
+	}
+	&.show {
+		background-position: 0px 0px;
+	}
+} 
+// FORM
+form {
+}

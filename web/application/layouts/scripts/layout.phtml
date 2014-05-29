@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="<?php echo strtolower($this->c_lang_id);?>">
+  <head>
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
+            ->appendName('keywords',$this->head_keys)
+            ->appendName('description',$this->head_desc)
+            ->appendName('robots', 'index,follow'); ?>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" href="<?php $this->epath('graphics/favicon.png');?>"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<?php $this->epath('styles/style.css');?>" />
+    <?php $this->headScript()->appendFile($this->path("scripts/js/jquery-1.10.2.min.js"))
+               ->appendFile($this->path('scripts/js/jquery-ui-1.9.2.custom.js','text/javascript'))
+               ->appendFile($this->path('scripts/js/jq_easing.js','text/javascript'))
+               ->appendFile($this->path('scripts/js/jq_animate_color.js','text/javascript'))
+               ->appendFile($this->path('scripts/js/BasicLayout.js','text/javascript'));
+      echo $this->headLink();
+      echo $this->headScript();
+      echo $this->headTitle($this->title);
+    ?>
+    <script type="text/javascript">var baseUrl="<?php $this->eurl('');?>"; var basePath="<?php $this->epath('');?>";</script>
+  </head>
+  <body>
+    <iframe id="remote_iframe" name="remote_iframe" src="" style="width:0;height:0;border:0px;display:none;"></iframe>
+    <?php echo $this->layout()->content; ?>
+    <div id="ajax-block"></div>
+  </body>
+</html>

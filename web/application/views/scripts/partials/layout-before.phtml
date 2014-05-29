@@ -1,0 +1,10 @@
+<div id="page-holder" class="<?php echo $this->config_['state'];?>">
+  <div id="panel">
+    <div class="inside">
+      <?php if($this->config_['logo']) { ?>
+      <div class="logo">
+        <a href="<?php $this->eurl();?>" data-remote></a>
+        <?php $this->svg('graphics/true-detection.svg'); ?>
+      </div>
+      <?php } ?>
+      <div class="contents">

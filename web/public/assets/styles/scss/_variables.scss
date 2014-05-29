@@ -1,0 +1,33 @@
+// ----------------
+//     VARIABLES
+// ----------------
+
+// BACKS
+$backDark: #26272b;
+
+// LINES
+$lineLight: #2c2d31;
+$lineBitLighten: #38393f;
+$lineLighten: #525357;
+
+// COLORS
+$colAccent: #1cc58e;
+$colAccent2: #32745E;//#f2eb36;
+$colAccent3: #e24f33;
+$colDef: #ffffff;
+$colWhite: #ffffff;
+$colDef2: #797a7e;
+$colDef1: lighten($colDef2, 14%);
+$colDef0: lighten($colDef2, 30%);
+$colDef3: #5c5c5c;
+$transparent: rgba(0,0,0,0);
+
+// SIZES
+$panelSize: 500px;
+
+$transparentLevel: 0.05;
+
+//@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&subset=latin,latin-ext);
+
+$defFont: "Calibre", Helvetica, Arial, sans-serif;
+//$defFont: "Source Sans Pro", Helvetica, Arial, sans-serif;

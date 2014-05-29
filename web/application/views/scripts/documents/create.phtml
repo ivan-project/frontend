@@ -1,0 +1,36 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<div class="group avatar">
+	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
+	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
+</div>
+<form name="register" action="<?php $this->eurl('dashboard/documents/create'); ?>" method="post" data-remote>
+<div class="group">
+	<input class="emp no-line" type="text" name="title" placeholder="Temat pracy" value="<?php $this->formVal('title');?>" required autofocus/>
+	<div class="file-browse" data-file-browse="true">
+		<input type="file" name="document" accept="application/pdf,application/msword" data-file-trigger required>
+		<div><span>Wybierz plik</span><?php $this->svg('graphics/icons/document-create.svg');?></div>
+		<a></a>
+	</div>
+	<input type="text" name="author" placeholder="Autor" value="<?php $this->formVal('author');?>" required/>
+	<input type="email" name="email" placeholder="E-mail kontaktowy" value="<?php $this->formVal('email');?>"/>
+	<div class="select-radio" data-select-radio="radio" style="margin-bottom: 30px;">
+		<div class="label">Typ dokumentu:</div>
+		<ul>
+			<li>
+				<div>Książka</div>
+				<input type="radio" name="document_type" value="book">
+			</li>
+			<li>
+				<div>Praca</div>
+				<input type="radio" name="document_type" value="thesis" checked>
+			</li>
+		</ul>
+	</div>
+	<button type="submit" name="submit" value="ok">Prześlij pracę</button>
+</div>
+</form>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

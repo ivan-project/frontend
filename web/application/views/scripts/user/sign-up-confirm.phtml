@@ -1,0 +1,9 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<h3 class="input-style"><?php echo $this->register_mail; ?></h3>
+<p class="well">Na podany adres e-mail został wysłany do Ciebie link aktywacyjny. Kliknij go aby dokonać wstępnej aktywacji swojego konta. W następnym kroku jeden z administratorów zweryfikuje Twoją tożsamość. </p>
+<p>Powrót do strony <a href="<?php $this->eurl('user/sign-in');?>" data-remote>logowania.</a> </p>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>
