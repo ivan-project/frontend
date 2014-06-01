@@ -438,10 +438,22 @@ h3, .s-h3, .input-style.emp, #panel .inside > .contents form input.emp, #panel .
   font-weight: 400;
   margin: 20px 5px 10px 0px; }
 
+.s-h3-2, #content .inside .user h2 {
+  font-size: 21px;
+  line-height: 24px;
+  font-weight: 600;
+  margin: 18px 5px 9px 0px; }
+
 h4, .s-h4, #panel .inside > .contents .add > h3, #panel .file-browse > div {
   font-size: 17px;
   line-height: 19px;
   font-weight: 600;
+  margin: 16px 5px 8px 0px; }
+
+.s-h4-2, #content .inside .user h3, #content .inside .user-mini ul li > h4 {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 300;
   margin: 16px 5px 8px 0px; }
 
 h5, .s-h5, #panel .inside > .contents .avatar > p, #panel .inside > .contents .pending-users > h3, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5 {
@@ -451,6 +463,12 @@ h5, .s-h5, #panel .inside > .contents .avatar > p, #panel .inside > .contents .p
   margin: 12px 5px 6px 0px;
   text-transform: uppercase; }
 
+.s-h5-2, #tooltips > div > div > p {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  margin: 12px 5px 6px 0px; }
+
 .s-ul {
   list-style: none;
   margin: 20px 0px 10px;
@@ -458,30 +476,6 @@ h5, .s-h5, #panel .inside > .contents .avatar > p, #panel .inside > .contents .p
   .s-ul > li {
     margin: 0px;
     padding: 0px; }
-
-a {
-  position: relative;
-  text-decoration: none;
-  color: #32745e;
-  white-space: nowrap; }
-  a:after {
-    content: "";
-    position: absolute;
-    display: block;
-    height: calc(100% + 2px);
-    border-bottom: 1px solid #32745e;
-    bottom: -1px;
-    left: 50%;
-    width: 100%;
-    margin-left: -50%;
-    opacity: 0;
-    outline: none; }
-  a:hover, a:focus {
-    outline: none; }
-    a:hover:after, a:focus:after {
-      width: 100%;
-      margin-left: -50%;
-      opacity: 1; }
 
 a.button, #panel .inside > .contents form button, #panel .inside > .contents form input[type="button"] {
   width: 100%;
@@ -578,19 +572,19 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   .input-style.no-line, #panel .inside > .contents form input.no-line, #panel .inside > .contents form .no-line.select-radio {
     border: none; }
 
-.sizing, a.button, #panel .inside > .contents form button, a.submit, .input-style, #panel .inside > .contents form input, #panel .inside > .contents form .select-radio, #panel, #panel .inside, #panel .inside > .contents .group, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .panel-scroll, #content {
+.sizing, a.button, #panel .inside > .contents form button, a.submit, .input-style, #panel .inside > .contents form input, #panel .inside > .contents form .select-radio, #panel, #panel .inside, #panel .inside > .contents .group, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .container-scroll, #content, #content .inside, #content .inside .user img, #content .inside .user-type ul li a, #content .inside .user-type ul li button, #content .inside .user-mini ul li > .avatar, #content .container-scroll {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.transition-smooth, a:after, #panel .inside > .logo > svg *, #panel .inside > .contents .avatar > p > svg *, #panel .inside > .contents .avatar:hover > p > span > a, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #panel .inside > .contents .add > h3, #panel .inside > .contents .add > h3 > svg *, #panel .file-browse, #panel .file-browse > div, #panel .file-browse > div > svg * {
+.transition-smooth, #panel a:after, #panel .inside > .logo > svg *, #panel .inside > .contents .avatar > p > svg *, #panel .inside > .contents .avatar:hover > p > span > a, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #panel .inside > .contents .add > h3, #panel .inside > .contents .add > h3 > svg *, #panel .file-browse, #panel .file-browse > div, #panel .file-browse > div > svg *, #content a, #content .inside .user-type ul li, #content .inside .user-type ul li:last-child > svg *, #content .inside .user-mini ul li {
   -webkit-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -moz-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -ms-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -o-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1); }
 
-.transition-long, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .avatar > .avatar:after, #panel .inside > .contents .avatar > p, #panel .inside > .contents .avatar > p > span:not(.after) > a, #panel .panel-scroll:after {
+.transition-long, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .avatar > .avatar:after, #panel .inside > .contents .avatar > p, #panel .inside > .contents .avatar > p > span:not(.after) > a, #panel .container-scroll:after, #content .inside .user-mini ul li > .avatar, #content .inside .user-mini ul li > .avatar:after, #content .container-scroll:after {
   -webkit-transition: all 0.4s cubic-bezier(0.2, 0.75, 0.44, 1);
   -moz-transition: all 0.4s cubic-bezier(0.2, 0.75, 0.44, 1);
   -ms-transition: all 0.4s cubic-bezier(0.2, 0.75, 0.44, 1);
@@ -604,19 +598,19 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   -o-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1); }
 
-.full-relative, #page-holder, #panel, #panel .inside, #panel .inside > .contents .pending-users > h3, #panel .inside > .contents .pending-users > .pending, #panel .inside > .contents .pending-users > .pending > ul, #panel .inside > .contents .pending-users > .pending > ul > li, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > h4, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #content, #content .inside {
+.full-relative, #page-holder, #panel, #panel .inside, #panel .inside > .contents .pending-users > h3, #panel .inside > .contents .pending-users > .pending, #panel .inside > .contents .pending-users > .pending > ul, #panel .inside > .contents .pending-users > .pending > ul > li, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > h4, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #content, #content .inside, #content .inside .block, #content .inside .user img, #content .inside .user h2, #content .inside .user h3, #content .inside .user-type ul, #content .inside .user-type ul li, #content .inside .user-type ul li a, #content .inside .user-type ul li button, #content .inside .user-mini ul, #content .inside .user-mini ul li, #content .inside .user-mini ul li > h4 {
   position: relative;
   float: left;
   clear: both;
   width: 100%;
   display: block; }
 
-.full-block, .s-ul, .s-ul > li, #panel .inside > .logo, #panel .inside > .logo > svg, #panel .inside > .contents, #panel .inside > .contents form, #panel .inside > .contents form .half-input, #panel .inside > .contents .avatar > .avatar img, #panel .inside > .contents .avatar > .avatar object, #panel .inside > .contents .pending-users, #panel .inside > .contents .lr, #panel .inside > .contents .add, #panel .inside > .contents .add > h3, #panel .panel-scroll:after, #panel .file-browse, #panel .file-browse > div {
+.full-block, .s-ul, .s-ul > li, #panel .inside > .logo, #panel .inside > .logo > svg, #panel .inside > .contents, #panel .inside > .contents form, #panel .inside > .contents form .half-input, #panel .inside > .contents .avatar > .avatar img, #panel .inside > .contents .avatar > .avatar object, #panel .inside > .contents .pending-users, #panel .inside > .contents .lr, #panel .inside > .contents .add, #panel .inside > .contents .add > h3, #panel .container-scroll:after, #panel .file-browse, #panel .file-browse > div, #content .inside .user-mini ul li > .avatar img, #content .inside .user-mini ul li > .avatar object, #content .container-scroll:after {
   position: relative;
   width: 100%;
   display: block; }
 
-.a-absolute, #panel .inside > .logo > a, #panel .inside > .contents .avatar > a, #panel .inside > .contents .pending-users > .pending > ul > li > a, #panel .inside > .contents .lr > .left > a, #panel .inside > .contents .lr > .right > a, #panel .inside > .contents .add > a, #panel .file-browse > a {
+.a-absolute, #panel .inside > .logo > a, #panel .inside > .contents .avatar > a, #panel .inside > .contents .pending-users > .pending > ul > li > a, #panel .inside > .contents .lr > .left > a, #panel .inside > .contents .lr > .right > a, #panel .inside > .contents .add > a, #panel .file-browse > a, #content .inside .user-mini ul li > a {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -626,10 +620,10 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   background: rgba(0, 0, 0, 0);
   z-index: 5;
   cursor: pointer; }
-  .a-absolute:after, #panel .inside > .logo > a:after, #panel .inside > .contents .avatar > a:after, #panel .inside > .contents .pending-users > .pending > ul > li > a:after, #panel .inside > .contents .lr > .left > a:after, #panel .inside > .contents .lr > .right > a:after, #panel .inside > .contents .add > a:after, #panel .file-browse > a:after {
+  .a-absolute:after, #panel .inside > .logo > a:after, #panel .inside > .contents .avatar > a:after, #panel .inside > .contents .pending-users > .pending > ul > li > a:after, #panel .inside > .contents .lr > .left > a:after, #panel .inside > .contents .lr > .right > a:after, #panel .inside > .contents .add > a:after, #panel .file-browse > a:after, #content .inside .user-mini ul li > a:after {
     display: none; }
 
-.no-touch, #page-holder.no-touch, #panel .inside > .contents form .select-radio > ul > li, #panel .panel-scroll {
+.no-touch, #page-holder.no-touch, #panel .inside > .contents form .select-radio > ul > li, #panel .container-scroll, #content .container-scroll {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -643,7 +637,8 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   display: block;
   width: 100%;
   height: 100% !important;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 1; }
 
 #panel {
   background: #26272b;
@@ -660,9 +655,56 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   -ms-transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1);
   -o-transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1);
   transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1); }
+  #panel a {
+    position: relative;
+    text-decoration: none;
+    color: #32745e;
+    white-space: nowrap; }
+    #panel a:after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: calc(100% + 2px);
+      border-bottom: 1px solid #32745e;
+      bottom: -1px;
+      left: 50%;
+      width: 100%;
+      margin-left: -50%;
+      opacity: 0;
+      outline: none; }
+    #panel a:hover, #panel a:focus {
+      outline: none; }
+      #panel a:hover:after, #panel a:focus:after {
+        width: 100%;
+        margin-left: -50%;
+        opacity: 1; }
   #panel .inside {
     width: 100%;
-    min-height: 100%; }
+    min-height: 100%;
+    -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    -moz-transition: -webkit-transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    -ms-transition: -webkit-transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    -o-transition: -webkit-transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: -webkit-transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1); }
+    #panel .inside.hide {
+      -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      -moz-transition: -webkit-transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      -ms-transition: -webkit-transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      -o-transition: -webkit-transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      transition: -webkit-transform 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      -moz-transform: scale(0.8);
+      /* Firefox */
+      -moz-transform-origin: 50% 50%;
+      -o-transform: scale(0.8);
+      /* Opera */
+      -o-transform-origin: 50% 50%;
+      -webkit-transform: scale(0.8);
+      /* Safari And Chrome */
+      -webkit-transform-origin: 50% 50%;
+      transform: scale(0.8);
+      /* Standard Property */
+      transform-origin: 50% 50%;
+      /* Standard Property */ }
     #panel .inside > .logo {
       width: 204px;
       height: 51px;
@@ -729,6 +771,10 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
           background-image: url("../graphics/icons/key.svg"); }
         #panel .inside > .contents form input.ic.ic-user {
           background-image: url("../graphics/icons/user.svg"); }
+        #panel .inside > .contents form input.ic.ic-search {
+          background-image: url("../graphics/icons/search.svg");
+          text-indent: 0px;
+          background-position: calc(100% - 2px) 50%; }
       #panel .inside > .contents form input:not(.emp):focus {
         color: white; }
         #panel .inside > .contents form input:not(.emp):focus::-webkit-input-placeholder {
@@ -790,7 +836,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
           height: 50px;
           margin: 0px 0px -20px 0px;
           border-radius: 25px;
-          border: 4px solid #38393f;
+          border: 3px solid #38393f;
           background-color: #38393f;
           display: inline-block;
           overflow: hidden; }
@@ -858,12 +904,13 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
           padding-bottom: 15px;
           margin-bottom: 0px; }
         #panel .inside > .contents .pending-users > .pending {
-          width: 100%;
+          margin: -6px -6px;
+          width: calc(100% + 12px);
           overflow: hidden; }
           #panel .inside > .contents .pending-users > .pending > ul {
             list-style: none;
             padding: 0px 0px 10px;
-            margin: -6px -6px;
+            margin: 0px;
             width: 9999px; }
             #panel .inside > .contents .pending-users > .pending > ul > li {
               width: auto;
@@ -902,7 +949,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
           width: calc(40% - 2px);
           border-right: 2px solid #2c2d31; }
         #panel .inside > .contents .lr > .right {
-          width: 50%;
+          width: 60%;
           clear: none;
           padding-left: 15px; }
       #panel .inside > .contents .add > h3 {
@@ -925,7 +972,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
         color: white; }
         #panel .inside > .contents .add:hover > h3 > svg > * {
           fill: #1cc58e; }
-  #panel .panel-scroll {
+  #panel .container-scroll {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -941,15 +988,15 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
     -ms-transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1);
     -o-transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1);
     transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1); }
-    #panel .panel-scroll:after {
+    #panel .container-scroll:after {
       content: "";
       width: 100%;
       height: 100%;
       background: #1c1d20;
       border-radius: 4px; }
-    #panel .panel-scroll:hover:after, #panel .panel-scroll.dragging:after {
+    #panel .container-scroll:hover:after, #panel .container-scroll.dragging:after {
       background: #131315; }
-    #panel .panel-scroll.hidden:not(.dragging) {
+    #panel .container-scroll.hidden:not(.dragging) {
       opacity: 0;
       cursor: default; }
   #panel .file-browse {
@@ -983,12 +1030,16 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
         margin: -2px 0px -9px 6px; }
         #panel .file-browse > div > svg * {
           fill: #9d9ea1; }
+      #panel .file-browse > div.photo > svg {
+        width: 32px;
+        height: 32px;
+        margin: -4px 0px -9px 6px; }
     #panel .file-browse:hover {
       border-color: #38393f; }
       #panel .file-browse:hover > div {
         color: white; }
         #panel .file-browse:hover > div > svg > * {
-          fill: #1cc58e; }
+          fill: #e24f33; }
 
 #content {
   width: calc(100% - 500px);
@@ -999,14 +1050,186 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   left: 500px;
   top: 0px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
+  padding: 80px 100px;
   -webkit-transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1);
   -moz-transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1);
   -ms-transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1);
   -o-transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1);
   transition: all 0.8s cubic-bezier(0.635, 0.005, 0.07, 1); }
+  #content a {
+    position: relative;
+    text-decoration: none;
+    color: inherit; }
+    #content a:hover {
+      color: #1cc58e; }
   #content .inside {
-    min-height: 100%; }
+    width: 100%;
+    min-height: 100%;
+    -moz-transform: scale(1);
+    /* Firefox */
+    -moz-transform-origin: 50% 50%;
+    -o-transform: scale(1);
+    /* Opera */
+    -o-transform-origin: 50% 50%;
+    -webkit-transform: scale(1);
+    /* Safari And Chrome */
+    -webkit-transform-origin: 50% 50%;
+    transform: scale(1);
+    /* Standard Property */
+    transform-origin: 50% 50%;
+    /* Standard Property */ }
+    #content .inside .user {
+      border-bottom: 2px solid #eeeeee;
+      margin-bottom: 30px; }
+      #content .inside .user img {
+        width: 70px;
+        height: 70px;
+        border: 6px solid white;
+        background: white;
+        border-radius: 35px;
+        clear: none;
+        float: right;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        margin-right: -6px; }
+      #content .inside .user h2, #content .inside .user h3 {
+        width: calc(100% - 92px);
+        text-align: left;
+        clear: none;
+        margin: 0px; }
+    #content .inside .user-type ul {
+      margin: 0px;
+      padding: 0px;
+      list-style: none;
+      border-radius: 2px;
+      overflow: hidden; }
+      #content .inside .user-type ul li {
+        clear: none;
+        width: calc(( 100% - 60px ) / 3 );
+        background: #eeeeee; }
+        #content .inside .user-type ul li a, #content .inside .user-type ul li button {
+          text-align: center;
+          margin: 0px;
+          padding: 6px 25px;
+          cursor: pointer;
+          color: #969696;
+          background: none;
+          font-size: 15px;
+          line-height: 27px;
+          font-weight: 500;
+          border: none;
+          outline: none; }
+        #content .inside .user-type ul li:last-child {
+          width: 60px; }
+          #content .inside .user-type ul li:last-child > svg {
+            width: 26px;
+            height: 26px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -13px;
+            z-index: 1; }
+            #content .inside .user-type ul li:last-child > svg * {
+              fill: #969696; }
+          #content .inside .user-type ul li:last-child > a, #content .inside .user-type ul li:last-child > button {
+            position: relative;
+            z-index: 2;
+            color: rgba(0, 0, 0, 0); }
+          #content .inside .user-type ul li:last-child:hover > svg * {
+            fill: white; }
+          #content .inside .user-type ul li:last-child:hover {
+            background: #e24f33; }
+        #content .inside .user-type ul li:nth-child(1):hover a, #content .inside .user-type ul li:nth-child(1):hover button, #content .inside .user-type ul li:nth-child(2):hover a, #content .inside .user-type ul li:nth-child(2):hover button {
+          color: #1cc58e; }
+        #content .inside .user-type ul li:nth-child(1).selected a, #content .inside .user-type ul li:nth-child(1).selected button, #content .inside .user-type ul li:nth-child(2).selected a, #content .inside .user-type ul li:nth-child(2).selected button {
+          color: white; }
+        #content .inside .user-type ul li:nth-child(1).selected, #content .inside .user-type ul li:nth-child(2).selected {
+          background: #1cc58e; }
+        #content .inside .user-type ul li:nth-child(3):hover a, #content .inside .user-type ul li:nth-child(3):hover button {
+          color: #26272b; }
+        #content .inside .user-type ul li:nth-child(3).selected a, #content .inside .user-type ul li:nth-child(3).selected button {
+          color: white; }
+        #content .inside .user-type ul li:nth-child(3).selected {
+          background: #969696; }
+    #content .inside .user-mini {
+      margin-bottom: 30px; }
+      #content .inside .user-mini ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none; }
+        #content .inside .user-mini ul li {
+          clear: none;
+          width: 100%;
+          border-bottom: 2px solid #eeeeee;
+          margin: 10px 0px; }
+          #content .inside .user-mini ul li:first-child {
+            margin-top: 0px; }
+          #content .inside .user-mini ul li:last-child {
+            margin-bottom: 0px; }
+          #content .inside .user-mini ul li > h4 {
+            text-align: left;
+            clear: none;
+            margin: 4px 0px;
+            width: calc(100% - 30px); }
+            #content .inside .user-mini ul li > h4 span {
+              display: none; }
+          #content .inside .user-mini ul li > .avatar {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            margin: -3px;
+            border-radius: 18px;
+            border: 3px solid white;
+            background-color: white;
+            display: inline-block;
+            overflow: hidden; }
+            #content .inside .user-mini ul li > .avatar img, #content .inside .user-mini ul li > .avatar object {
+              max-width: 100%;
+              max-height: 100%; }
+            #content .inside .user-mini ul li > .avatar:after {
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              top: 0px;
+              left: 0px;
+              z-index: 2;
+              background: rgba(0, 0, 0, 0);
+              border-radius: 25px;
+              box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) inset; }
+          #content .inside .user-mini ul li:hover > .avatar {
+            border-color: #eeeeee;
+            background-color: #eeeeee; }
+            #content .inside .user-mini ul li:hover > .avatar:after {
+              box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset; }
+  #content .container-scroll {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: rgba(255, 255, 255, 0);
+    width: 24px;
+    height: 100%;
+    margin: 0px;
+    padding: 10px 8px 10px 8px;
+    cursor: pointer;
+    z-index: 20;
+    -webkit-transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1);
+    -moz-transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1);
+    -ms-transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1);
+    -o-transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1);
+    transition: opacity 0.15s cubic-bezier(0.2, 0.75, 0.44, 1); }
+    #content .container-scroll:after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: #1c1d20;
+      border-radius: 4px; }
+    #content .container-scroll:hover:after, #content .container-scroll.dragging:after {
+      background: #131315; }
+    #content .container-scroll.hidden:not(.dragging) {
+      opacity: 0;
+      cursor: default; }
 
 #page-holder.colapsed {
   /*#panel {
@@ -1016,13 +1239,73 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   #page-holder.colapsed #content {
     left: 100%; }
 
+#tooltips {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2; }
+  #tooltips > div {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 99999px;
+    height: 0px;
+    display: block; }
+    #tooltips > div > div {
+      position: absolute;
+      display: block;
+      z-index: 999;
+      background: rgba(226, 79, 51, 0.9);
+      border-radius: 2px;
+      margin-top: 0px;
+      opacity: 0;
+      box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+      -webkit-transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), margin-top 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), -webkit-transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      -moz-transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), margin-top 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), -moz-transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      -ms-transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), margin-top 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), -ms-transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      -o-transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), margin-top 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), -o-transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), margin-top 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      -webkit-transform: scale(0.9, 0.9);
+      -moz-transform: scale(0.9, 0.9);
+      -ms-transform: scale(0.9, 0.9);
+      -o-transform: scale(0.9, 0.9);
+      -spec-transform: scale(0.9, 0.9); }
+      #tooltips > div > div.showed {
+        opacity: 1;
+        margin-top: -8px;
+        -webkit-transform: scale(1, 1);
+        -moz-transform: scale(1, 1);
+        -ms-transform: scale(1, 1);
+        -o-transform: scale(1, 1);
+        -spec-transform: scale(1, 1); }
+      #tooltips > div > div > div.arr {
+        position: absolute;
+        bottom: -8px;
+        left: calc(50% - 8px);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid rgba(226, 79, 51, 0.9); }
+      #tooltips > div > div > p {
+        color: white;
+        margin: 0px;
+        padding: 8px 12px;
+        max-width: 180px; }
+  #tooltips > div.t2 > div {
+    background: rgba(28, 29, 32, 0.95); }
+    #tooltips > div.t2 > div > div.arr {
+      border-top: 8px solid rgba(28, 29, 32, 0.95); }
+    #tooltips > div.t2 > div > p {
+      color: white; }
+
 #ajax-block {
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
-  z-index: 2000;
+  z-index: 3;
   background-image: url("../graphics/loader.gif");
   background-repeat: repeat-x;
   background-position: 0px -6px;

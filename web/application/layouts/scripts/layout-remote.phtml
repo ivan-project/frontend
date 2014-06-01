@@ -13,6 +13,6 @@
     <div id="remote-content">
       <?php echo $this->layout()->content; ?>
     </div>
-    <script type="text/javascript">top.reloadByIframe($('#remote-content'));</script>
+    <script type="text/javascript">top.console.log('LAYOUT REMOTE'); try { top.reloadByIframe($('#remote-content')); } catch(e) {}</script>
   </body>
 </html>

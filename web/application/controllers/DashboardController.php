@@ -13,5 +13,9 @@ class DashboardController extends AppController
     }
     public function indexAction() {
         $this->view->config_['state']='';
+        $db_users = new Application_Model_MongoDB_User();
+        $this->view->users_pending = $db_users->getPendings();
+        $this->view->users_admin_count = $db_users->getByRole(3)->count();
+        $this->view->users_all_count = $db_users->getAll()->count();
     }
 }

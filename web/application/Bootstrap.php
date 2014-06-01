@@ -27,7 +27,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $router->addRoute(
             'dashboard_more',
-            new Zend_Controller_Router_Route("dashboard/:controller/:action", array('module' => 'default', 'controller' => null, 'action' => null))
+            new Zend_Controller_Router_Route("dashboard/:controller/:action/:param1/:param2", array('module' => 'default', 'controller' => null, 'action' => null, 'param1' => null, 'param2' => null))
         );
         $router->addRoute(
             'deshboard',

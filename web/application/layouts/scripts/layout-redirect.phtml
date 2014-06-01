@@ -13,6 +13,6 @@
     <div id="remote-content">
       <?php echo $this->layout()->content; ?>
     </div>
-    <script type="text/javascript">top.redirect('<?php $this->eurl($this->config_["redirect"]);?>', true);</script>
+    <script type="text/javascript">top.console.log('LAYOUT REDIRECT'); top.redirect('<?php $this->eurl($this->config_["redirect"]);?>', true);</script>
   </body>
 </html>

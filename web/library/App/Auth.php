@@ -36,6 +36,14 @@ class App_Auth {
 	    	return false;
 	    }
     }
+    public function isAdmin() {
+        $identity = self::getIdentity();
+        return ($identity && $identity['role']==3);
+    }
+    public function isSelf($id) {
+        $identity = self::getIdentity();
+        return ($identity && $identity['_id']==$id);
+    }
     public function getIdentity() {
     	if(!self::$user) {
     		$this->isValid();

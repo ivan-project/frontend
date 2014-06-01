@@ -1,0 +1,43 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<div class="group avatar">
+	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
+	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
+</div>
+<form name="users_filter" action="<?php $this->eurl('dashboard/users'); ?>" method="get" data-remote>
+<div class="group">
+	<input class="ic ic-search" type="text" name="phrase" placeholder="Fraza wyszukiwania" value="<?php $this->formVal('email');?>" required/>
+	<div class="select-radio" data-select-radio="checkbox" style="margin-bottom: 30px;">
+		<div class="label">Uprawnienia:</div>
+		<ul>
+			<li>
+				<div>Administrator</div>
+				<input type="checkbox" name="role" value="administrator" checked>
+			</li>
+			<li>
+				<div>Promotor</div>
+				<input type="checkbox" name="role" value="promotor" checked>
+			</li>
+		</ul>
+	</div>
+	<button type="submit" name="submit" value="ok">Filtruj wyniki</button>
+</div>
+</form>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<div class="block user-mini">
+	<ul>
+		<?php foreach($this->users as $user) { ?>
+		<li>
+			<a href="<?php $this->eurl('dashboard/users/show/'.$user['_id']); ?>" data-remote></a>
+			<h4><?php echo $user['name'];?> <span><a href="mailto:<?php echo $user['email'];?>"><?php echo $user['email'];?></a></span></h4>
+			<div class="avatar">
+				<img src="<?php echo $this->avatar($user);?>" alt="Karol Kochan">
+			</div>
+		</li>
+		<?php } ?>
+	</ul>
+</div>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

@@ -4,20 +4,25 @@
 	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
 	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
 </div>
-<form name="register" action="<?php $this->eurl('dashboard/users/create'); ?>" method="post" data-remote>
+<form name="register" action="<?php $this->eurl('dashboard/users/create'); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
 	<input class="emp no-line" type="text" name="name" placeholder="Imię i nazwisko" value="<?php $this->formVal('name');?>" required autofocus/>
+	<div class="file-browse" data-file-browse="true">
+		<input type="file" name="avatar" accept="image/gif,image/jpeg,image/png" data-file-trigger>
+		<div class="photo"><span>Dodaj avatar</span><?php $this->svg('graphics/icons/photo.svg');?></div>
+		<a></a>
+	</div>
 	<input type="email" name="email" placeholder="Adres e-mail" value="<?php $this->formVal('email');?>" required/>
 	<div class="select-radio" data-select-radio="radio" style="margin-bottom: 30px;">
 		<div class="label">Uprawnienia:</div>
 		<ul>
 			<li>
 				<div>Administrator</div>
-				<input type="radio" name="role" value="administrator">
+				<input type="radio" name="role" value="3">
 			</li>
 			<li>
 				<div>Promotor</div>
-				<input type="radio" name="role" value="promotor" checked>
+				<input type="radio" name="role" value="2" checked>
 			</li>
 		</ul>
 	</div>

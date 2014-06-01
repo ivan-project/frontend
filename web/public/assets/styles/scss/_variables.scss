@@ -9,6 +9,8 @@ $backDark: #26272b;
 $lineLight: #2c2d31;
 $lineBitLighten: #38393f;
 $lineLighten: #525357;
+$lineDark: #eeeeee;
+$lineDarken: #969696;
 
 // COLORS
 $colAccent: #1cc58e;
@@ -21,6 +23,11 @@ $colDef1: lighten($colDef2, 14%);
 $colDef0: lighten($colDef2, 30%);
 $colDef3: #5c5c5c;
 $transparent: rgba(0,0,0,0);
+
+$tooltipBack: transparentize($colAccent3, 0.1);//#ffffff, 0.1);//
+$tooltipCol: $colWhite;//#000000;//
+$tooltipBack2: transparentize(#1c1d20, 0.05);//#ffffff, 0.1);//
+$tooltipCol2: $colWhite;//#000000;//
 
 // SIZES
 $panelSize: 500px;

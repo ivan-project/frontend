@@ -46,10 +46,22 @@ h3, .s-h3 {
 	font-weight: 400;
 	margin: 20px 5px 10px 0px;
 }
+.s-h3-2 {
+	font-size: 21px;
+	line-height: 24px;
+	font-weight: 600;
+	margin: 18px 5px 9px 0px;
+}
 h4, .s-h4 {
 	font-size: 17px;
 	line-height: 19px;
 	font-weight: 600;
+	margin: 16px 5px 8px 0px;
+}
+.s-h4-2 {
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 300;
 	margin: 16px 5px 8px 0px;
 }
 h5, .s-h5 {
@@ -58,6 +70,12 @@ h5, .s-h5 {
 	font-weight: 700;
 	margin: 12px 5px 6px 0px;
 	text-transform: uppercase;
+}
+.s-h5-2 {
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: 400;
+	margin: 12px 5px 6px 0px;
 }
 .s-ul {
 	list-style: none;
@@ -69,36 +87,6 @@ h5, .s-h5 {
 		margin: 0px;
 		padding: 0px;
 		@extend .full-block;
-	}
-}
-a {
-	position: relative;
-	text-decoration: none;
-	color: $colAccent2;
-	white-space: nowrap;
-	
-	&:after {
-		content: "";
-		position: absolute;
-		display: block;
-		height: calc(100% + 2px);
-		border-bottom: 1px solid $colAccent2;
-		bottom: -1px;
-		left: 50%;
-		width: 100%;
-		margin-left: -50%;
-		opacity: 0;
-		outline: none;
-		@extend .transition-smooth;
-	}
-	&:hover, &:focus {
-		outline: none;
-
-		&:after {
-			width: 100%;
-			margin-left: -50%;
-			opacity: 1;
-		}
 	}
 }
 a.button {
@@ -262,6 +250,7 @@ a.submit {
 	width: 100%;
 	height: 100% !important;
 	overflow: hidden;
+	z-index: 1;
 	@extend .full-relative;
 
 	&.no-touch {
@@ -282,11 +271,48 @@ a.submit {
 	@extend .sizing;
 	@include transition(all, 0.8s, cubic-bezier(0.635, 0.005, 0.070, 1.000));
 
+	a {
+		position: relative;
+		text-decoration: none;
+		color: $colAccent2;
+		white-space: nowrap;
+		
+		&:after {
+			content: "";
+			position: absolute;
+			display: block;
+			height: calc(100% + 2px);
+			border-bottom: 1px solid $colAccent2;
+			bottom: -1px;
+			left: 50%;
+			width: 100%;
+			margin-left: -50%;
+			opacity: 0;
+			outline: none;
+			@extend .transition-smooth;
+		}
+		&:hover, &:focus {
+			outline: none;
+
+			&:after {
+				width: 100%;
+				margin-left: -50%;
+				opacity: 1;
+			}
+		}
+	}
+
 	.inside {
 		width: 100%;
 		min-height: 100%;
 		@extend .full-relative;
 		@extend .sizing;
+		@include transition(-webkit-transform, 0.6s, cubic-bezier(0.215, 0.610, 0.355, 1.000));
+
+		&.hide {
+			@include transition(-webkit-transform, 0.4s, cubic-bezier(0.550, 0.055, 0.675, 0.190));
+			@include zoom(0.8);
+		}
 
 		& > .logo {
 			width: 204px;
@@ -370,6 +396,11 @@ a.submit {
 						}
 						&.ic-user {
 							background-image: url('../graphics/icons/user.svg');
+						}
+						&.ic-search {
+							background-image: url('../graphics/icons/search.svg');
+							text-indent: 0px;
+							background-position: calc(100% - 2px) 50%;
 						}
 						&:focus {
 							//text-indent: 0px;
@@ -479,7 +510,7 @@ a.submit {
 					margin: 0px 0px -20px 0px;//0px calc((100% - 80px) / 2);
 					// border-radius: 40px;
 					border-radius: 25px;
-					border: 4px solid $lineBitLighten;
+					border: 3px solid $lineBitLighten;
 					background-color: $lineBitLighten;
 					display: inline-block;
 					overflow: hidden;
@@ -605,14 +636,15 @@ a.submit {
 					@extend .full-relative;
 				}
 				& > .pending {
-					width: 100%;
+					margin: -6px -6px;
+					width: calc(100% + 12px);
 					overflow: hidden;
 					@extend .full-relative;
 
 					& > ul {
 						list-style: none;
 						padding: 0px 0px 10px;
-						margin: -6px -6px;
+						margin: 0px;
 						width: 9999px;
 						@extend .full-relative;
 
@@ -701,7 +733,7 @@ a.submit {
 					@extend .sizing;
 				}
 				& > .right {
-					width: 50%;
+					width: 60%;
 					clear: none;
 					padding-left: 15px;
 				}
@@ -752,7 +784,7 @@ a.submit {
 			}
 		}
 	}
-	.panel-scroll {
+	.container-scroll {
 		position: absolute;
 		top: 0px;
 		right: 0px;
@@ -835,6 +867,11 @@ a.submit {
 					@extend .transition-smooth;
 				}
 			}
+			&.photo > svg {
+				width: 32px;
+				height: 32px;
+				margin: -4px 0px -9px 6px;
+			}
 		}
 		& > a {
 			@extend .a-absolute;
@@ -846,7 +883,7 @@ a.submit {
 				color: $colWhite;
 
 				& > svg > * {
-					fill: $colAccent;
+					fill: $colAccent3;
 				}
 			}
 		}
@@ -861,14 +898,282 @@ a.submit {
 	left: $panelSize;
 	top: 0px;
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: hidden;
+	padding: 80px 100px; //70px 60px 70px 60px; //50px 40px 50px 80px;
 	@extend .full-relative;
 	@extend .sizing;
 	@include transition(all, 0.8s, cubic-bezier(0.635, 0.005, 0.070, 1.000));
 
+	// ::selection {
+	// 	color: $colWhite;
+	// 	background: $backDark;
+	// }
+	// ::-moz-selection {
+	// 	color: $colWhite;
+	// 	background: $backDark;
+	// }
+
+	a {
+		position: relative;
+		text-decoration: none;
+		color: inherit;
+		@extend .transition-smooth;
+
+		&:hover {
+			color: $colAccent;
+		}
+	}
+
 	.inside {
+		width: 100%;
 		min-height: 100%;
+		@include zoom(1);
 		@extend .full-relative;
+		@extend .sizing;
+
+		.block {
+			@extend .full-relative;
+		}
+		.user {
+			border-bottom: 2px solid $lineDark;
+			margin-bottom: 30px;
+
+			img {
+				width: 70px;
+				height: 70px;
+				border: 6px solid $colWhite;
+				background: $colWhite;
+				border-radius: 35px;
+				clear: none;
+				float: right;
+				margin-top: -10px;
+				margin-bottom: 20px;
+				margin-right: -6px;
+				@extend .sizing;
+				@extend .full-relative;
+			}
+			h2, h3 {
+				width: calc(100% - 92px);
+				text-align: left;
+				clear: none;
+				margin: 0px;
+				@extend .full-relative;
+			}
+			h2 {
+				@extend .s-h3-2;
+			}
+			h3 {
+				@extend .s-h4-2;
+			}
+		}
+		.user-type {
+			ul {
+				margin: 0px;
+				padding: 0px;
+				list-style: none;
+				border-radius: 2px;
+				overflow: hidden;
+				@extend .full-relative;
+				
+				li {
+					clear: none;
+					width: calc( ( 100% - 60px ) / 3 );
+					background: $lineDark;
+					@extend .full-relative;
+					@extend .transition-smooth;
+
+					a, button {
+						text-align: center;
+						margin: 0px;
+						padding: 6px 25px;
+						cursor: pointer;
+						color: $lineDarken;
+						background: none;
+						font-size: 15px;
+						line-height: 27px;
+						font-weight: 500;
+						border: none;
+						outline: none;
+						@extend .sizing;
+						@extend .full-relative;
+					}
+					&:last-child {
+						width: 60px;
+
+						& > svg {
+							width: 26px;
+							height: 26px;
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							margin: -13px;
+							z-index: 1;
+							& * {
+								fill: $lineDarken;
+								@extend .transition-smooth;
+							}
+						}
+						& > a, & > button {
+							position: relative;
+							z-index: 2;
+							color: rgba(0,0,0,0);
+						}
+						&:hover > svg * {
+							fill: $colWhite;
+						}
+						&:hover {
+							background: $colAccent3;
+						}
+					}
+					&:nth-child(1), &:nth-child(2) {
+						&:hover a, &:hover button {
+							color: $colAccent;
+						}
+						&.selected a, &.selected button {
+							color: $colWhite;
+						}
+						&.selected {
+							background: $colAccent;
+						}
+					}
+					&:nth-child(3) {
+						&:hover a, &:hover button {
+							color: $backDark;
+						}
+						&.selected a, &.selected button {
+							color: $colWhite;
+						}
+						&.selected {
+							background: $lineDarken;
+						}
+					}
+				}
+			}
+		}
+		.user-mini {
+			margin-bottom: 30px;
+
+			ul {
+				margin: 0px;
+				padding: 0px;
+				list-style: none;
+				@extend .full-relative;
+				
+				li {
+					clear: none;
+					width: 100%;
+					border-bottom: 2px solid $lineDark;
+					margin: 10px 0px;
+					@extend .full-relative;
+					@extend .transition-smooth;
+					
+					&:first-child {
+						margin-top: 0px;
+					}
+					&:last-child {
+						margin-bottom: 0px;
+					}
+					& > a {
+						@extend .a-absolute;
+					}
+					& > h4 {
+						text-align: left;
+						clear: none;
+						margin: 4px 0px;
+						width: calc(100% - 30px);
+						@extend .s-h4-2;
+						@extend .full-relative;
+
+						span {
+							display: none;
+						}
+					}
+					& > .avatar {
+						position: relative;
+						width: 36px;
+						height: 36px;
+						margin: -3px;
+						border-radius: 18px;
+						border: 3px solid $colWhite;
+						background-color: $colWhite;
+						display: inline-block;
+						overflow: hidden;
+
+						@extend .sizing;
+						@extend .transition-long;
+
+						& img, & object {
+							max-width: 100%;
+							max-height: 100%;
+
+							@extend .full-block;
+						}
+						&:after {
+							content: "";
+							position: absolute;
+							width: 100%;
+							height: 100%;
+							top: 0px;
+							left: 0px;
+							z-index: 2;
+							background: rgba(0,0,0,0);
+							// border-radius: 40px;
+							border-radius: 25px;
+							box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) inset;
+
+							@extend .transition-long;
+						}
+					}
+					&:hover {
+						& > .avatar {
+							border-color: $lineDark;
+							background-color: $lineDark;
+
+							&:after {
+								box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.container-scroll {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		background: rgba(255, 255, 255, 0);
+		width: 24px;
+		height: 100%;
+		margin: 0px;
+		padding: 10px 8px 10px 8px;
+		cursor: pointer;
+		z-index: 20;
+		@include transition(opacity, 0.15s, cubic-bezier(0.2, 0.750, 0.440, 1.000));
+
+		@extend .no-touch;
+		@extend .sizing;
+
+		&:after {
+			content: "";
+			width: 100%;
+			height: 100%;
+			background: darken($backDark, 4%);
+			border-radius: 4px;
+			@extend .full-block;
+			@extend .transition-long;
+		}
+
+		&:hover, &.dragging {
+			&:after {
+				background: darken($backDark, 8%);
+			}
+		}
+
+		&.hidden:not(.dragging) {
+			opacity: 0;
+			cursor: default;
+		}
 	}
 }
 #page-holder.colapsed {
@@ -880,13 +1185,79 @@ a.submit {
 		left: 100%;
 	}
 }
+#tooltips {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+	& > div {
+		position: relative;
+		top: 0px;
+		left: 0px;
+		width: 99999px;
+		height: 0px;
+		display: block;
+
+		& > div {
+			position: absolute;
+			display: block;
+			z-index: 999;
+			background: $tooltipBack;
+			border-radius: 2px;
+			margin-top: 0px;
+			opacity: 0;
+			box-shadow: 0px 1px 6px rgba(0,0,0,0.2);
+			//@include transition(all, 0.15s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
+		    -webkit-transition: opacity 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), margin-top 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), -webkit-transform 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+		    -moz-transition: opacity 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), margin-top 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), -moz-transform 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+		    -ms-transition: opacity 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), margin-top 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), -ms-transform 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+		    -o-transition: opacity 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), margin-top 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), -o-transform 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+		    transition: opacity 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), margin-top 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000), transform 0.2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+			@include transform(scale(0.9, 0.9));
+			
+			&.showed {
+				opacity: 1;
+				margin-top: -8px;
+				@include transform(scale(1, 1));
+			}
+			& > div.arr {
+				position: absolute;
+				bottom: -8px;
+				left: calc(50% - 8px);
+				width: 0; 
+				height: 0; 
+				border-left: 8px solid transparent;
+				border-right: 8px solid transparent;
+				border-top: 8px solid $tooltipBack;
+			}
+			& > p {
+				color: $tooltipCol;
+				margin: 0px;
+				padding: 8px 12px;
+				max-width: 180px;
+				@extend .s-h5-2;
+			}
+		}
+	}
+	& > div.t2 {
+		& > div {
+			background: $tooltipBack2;
+			& > div.arr {
+				border-top: 8px solid $tooltipBack2;
+			}
+			& > p {
+				color: $tooltipCol2;
+			}
+		}
+	}
+}
 #ajax-block {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	width: 100%;
 	height: 100%;
-	z-index: 2000;
+	z-index: 3;
 	//background-color: transparentize($backDark, 0.9);
 	background-image: url('../graphics/loader.gif');
 	background-repeat: repeat-x;
@@ -898,7 +1269,7 @@ a.submit {
 	&.show {
 		background-position: 0px 0px;
 	}
-} 
+}
 // FORM
 form {
 }

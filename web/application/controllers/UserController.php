@@ -13,7 +13,7 @@ class UserController extends AppController
     }
     public function signInAction() {
         $form = array();
-        if($this->_request->isPost() && $this->_request->getPost('email') && !App_Auth::getInstance()->isValid()) {
+        if($this->_request->isPost() && $this->_request->getPost('email')) {
             $form['email'] = $this->_request->getPost('email');
             $pwd = $this->_request->getPost('pwd');
 
@@ -37,10 +37,20 @@ class UserController extends AppController
             $pwd_repeat = $this->_request->getPost('pwd_repeat');
             if(strcmp($pwd,$pwd_repeat)==0) {
                 $db_users = new Application_Model_MongoDB_User();
-                $object = $db_users->register($form['name'], $form['email'], $pwd);
+                $object = $db_users->create($form['name'], $form['email'], $pwd);
                 if($object) {
-                    // if($db_users->welcomeMail($form['email']))
-                    // $this->_forward('sign-up-confirm','user');
+                    if(is_uploaded_file($_FILES['avatar']['tmp_name'])) {
+                        $id = $object['_id'];
+                        $user_dir = 'assets/contents/users/'.$id;
+                        $avatar_temp = $user_dir.'/_tmp_avatar.'.App_Methods::ext($_FILES["avatar"]["name"]);
+                        $avatar_final = $user_dir.'/avatar.png';
+                        if(!is_dir($user_dir)) {
+                            mkdir($user_dir);
+                        }
+                        move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar_temp);
+                        App_Methods::makeAvatar($avatar_temp, $avatar_final);
+                    }
+                    // $db_users->welcomeMail($object['email']);
                     $auth = App_Auth::getInstance()->signIn($form['email'], $pwd);
                     $this->redirect_('dashboard');
                 }
@@ -48,11 +58,4 @@ class UserController extends AppController
         }
         $this->view->form = $form;
     }
-    /*public function signUpConfirmAction() {
-        $this->view->register_mail = $this->_request->getPost('email');
-    }
-    public function welcomeMailAction() {
-        $this->_helper->layout()->disableLayout();
-        $this->render('user/welcome-mail');
-    }*/
 }

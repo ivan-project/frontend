@@ -1,7 +1,7 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
 <div class="group avatar">
-	<a href="<?php $this->eurl();?>" data-remote></a>
+	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
 	<p><?php echo $this->user_['name'];?> <span><a href="<?php $this->eurl('user/sign-out');?>" data-remote>wyloguj</a></span></p>
 	<div class="avatar">
 		<img src="<?php echo $this->avatar($this->user_);?>" alt="<?php echo $this->user_['name'];?>"/>
@@ -9,62 +9,45 @@
 </div>
 <div class="group lr">
 	<h4>Dokumenty </h4>
-	<div class="left">
+	<div class="left" data-ttip="Prace które są podejrzewane o plagiat">
 		<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
 		<span>7</span>
 		<h5>Podejrzanych </h5>
 	</div>
-	<div class="right">
+	<div class="right" data-ttip="Wszystkie prace dodane przez Ciebie do systemu">
 		<a href="<?php $this->eurl('dashboard/documents');?>" data-remote></a>
 		<span>52</span>
 		<h5>Wszystkich </h5>
 	</div>
 </div>
 <div class="group add">
-	<h3><span>Prześlij pracę</span><?php $this->svg('graphics/icons/document-create.svg');?></h3>
+	<h3><span>Prześlij dokument</span><?php $this->svg('graphics/icons/document-create.svg');?></h3>
 	<a href="<?php $this->eurl('dashboard/documents/create');?>" data-remote></a>
 </div>
+<?php if(App_Auth::getInstance()->isAdmin()) { ?>
 <div class="group pending-users" style="margin-top: 50px;">
 	<h3>Oczekują na akceptację</h3>
 	<div class="pending">
 		<ul>
+			<?php foreach($this->users_pending as $item) { ?>
 			<li>
-				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg" alt=""/>
+				<a href="<?php $this->eurl('dashboard/users/show/'.$item['_id']);?>" data-ttip="<?php echo $item['email'];?>" data-ttip-time="0" data-remote></a>
+				<img src="<?php echo $this->avatar($item);?>" alt=""/>
 			</li>
-			<li>
-				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/chexee/128.jpg" alt=""/>
-			</li>
-			<li>
-				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/olivierpineda/128.jpg" alt=""/>
-			</li>
-			<li>
-				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/isacosta/128.jpg" alt=""/>
-			</li>
-			<li>
-				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" alt=""/>
-			</li>
-			<li>
-				<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-				<img src="https://s3.amazonaws.com/uifaces/faces/twitter/mrjamesnoble/128.jpg" alt=""/>
-			</li>
+			<?php } ?>
 		</ul>
 		<div class="more"></div>
 	</div>
 </div>
 <div class="group lr">
-	<div class="left">
-		<a href="<?php $this->eurl('dashboard/users/admins');?>" data-remote></a>
-		<span>2</span>
+	<div class="left" data-ttip="Użytkownicy posiadającymi uprawnienia administratora">
+		<a href="<?php $this->eurl('dashboard/users?role=3');?>" data-remote></a>
+		<span><?php echo $this->users_admin_count;?></span>
 		<h5>Administratorów </h5>
 	</div>
-	<div class="right">
+	<div class="right" data-ttip="Wszyscy użytkownicy w systemie">
 		<a href="<?php $this->eurl('dashboard/users');?>" data-remote></a>
-		<span>13</span>
+		<span><?php echo $this->users_all_count;?></span>
 		<h5>Wszystkich </h5>
 	</div>
 </div>
@@ -72,6 +55,7 @@
 	<h3><span>Dodaj użytkownika</span><?php $this->svg('graphics/icons/user-create.svg');?></h3>
 	<a href="<?php $this->eurl('dashboard/users/create');?>" data-remote></a>
 </div>
+<?php } ?>
 
 <?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
 

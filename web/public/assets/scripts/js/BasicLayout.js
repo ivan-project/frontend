@@ -61,18 +61,22 @@ $(document).ready(function() {
   }
   document.onmousewheel = scrollMouse;
 
-  initReloads();
-  initPanelScroll();
-  setTimeout(initReloads,1000);
+  //initReloads();
+  initContainerScroll('#panel');
+  initContainerScroll('#content');
+  setTimeout(initReloads,10);
 });
 function initReloads() {
+  console.log("RELOADS!!!!!!!!!!!!!");
   resizeListener();
   scrollListener();
 
   initPostRemote();
   initDataRemote();
   initRadios();
+  initCheckboxes();
   initFileBrowse();
+  initTooltips();
   $('#page-holder *[autofocus]').first().focus();
 }
 // CUSTOMS ####################################################
@@ -86,8 +90,6 @@ function redirect(redirect, unblock) {
   loadContents(redirect);
 }
 function initPostRemote() {
-  var panel = $('#panel');
-  var panel_contents = panel.find('> .inside > .contents');
   $('form[data-remote]:not(form[data-remote="true"])').each(function() {
     var th = $(this);
     th.attr('data-remote','true');
@@ -97,8 +99,8 @@ function initPostRemote() {
       if(!remote_block) {
         remote_block = true;
         reloadByIframe = function(contents) {
-          preUpdateContents(contents, null);
-          remoteFormFinal = null;
+          preUpdateContents(contents[0].outerHTML, null);
+          reloadByIframe = null;
         }
       } else {
         e.preventDefault();
@@ -138,6 +140,7 @@ function loadContents(url) {
   }
 }
 function preUpdateContents(contents, url) {
+  console.log(contents);
   if(typeof(contents)!="object" && contents.substr(0,1)=="{") {
     var json = $.parseJSON(contents);
     redirect(json.redirect, true);
@@ -149,17 +152,18 @@ function updateContents(contents, url) {
   var panel = $('#panel');
   var contents_holder = $('#panel > .inside, #content > .inside > .contents');
   var container = panel.find('> .inside > .contents');
-  var move = 0;
-  panel.stop();
-  panel.find('> .inside, > .panel-scroll').stop().animate({'top':0}, 250, 'easeInOutQuart');
+  //panel.stop();
+  //panel.find('> .inside, > .container-scroll').stop().animate({'top':0}, 250, 'easeInQuad');
   $('#page-holder').attr('class',$(contents).attr('class'));
   contents_holder.stop();
-  contents_holder.animate({'opacity':0,'top':-move}, 250, 'easeInQuad', function() {
+  contents_holder.addClass('hide');
+  contents_holder.animate({'opacity':0}, 250, 'easeInQuad').promise().done(function () {
     contents_holder.empty();
+    contents_holder.css({'top':0});
+    panel.find('> .inside, > .container-scroll').stop().css({'top':0});
     $('#panel > .inside').append($(contents).find('#panel > .inside').html());
     $('#content > .inside > .contents').append($(contents).find('#content > .inside > .contents').html());
     initReloads();
-    contents_holder.css({'top':move});
     if(url!=null) {
       history.replaceState(
         {},                 // HISTORY DATA
@@ -168,6 +172,7 @@ function updateContents(contents, url) {
       );
     }
     contents_holder.animate({'opacity':1,'top':0}, 400, 'easeOutQuart');
+    contents_holder.removeClass('hide');
     remote_block = false;
     busy(false);
   });
@@ -189,6 +194,25 @@ function initRadios() {
     th.find('li').click(selectMe);
   });
 }
+function initCheckboxes() {
+  var checkboxes = $('[data-select-radio="checkbox"]');
+  checkboxes.attr('data-select-radio','');
+  var selectMe = function() {
+    var th = $(this);
+    if(th.hasClass('selected')) {
+      th.removeClass('selected');
+      th.find('input').prop('checked', false);
+    } else {
+      th.addClass('selected');
+      th.find('input').prop('checked', true);
+    }
+  }
+  checkboxes.each(function() {
+    var th = $(this);
+    th.find('input[type=checkbox]:checked').parent().addClass('selected');
+    th.find('li').click(selectMe);
+  });
+}
 function initFileBrowse() {
   var files = $('[data-file-browse="true"]');
   files.attr('data-file-browse','');
@@ -202,11 +226,63 @@ function initFileBrowse() {
   files.find('a').click(trigger);
   files.first().find('a').click();
 }
+// TOOLTIPS ###################################################
+function initTooltips() {
+  var ttips = $('[data-ttip]:not([data-ttip-ready])');
+  ttips.attr('data-ttip-ready',true);
+  var tooltips_holder = $('#tooltips');
+  var tooltipEnter = function() {
+    var tim, inter, top, left;
+    var delay = 1000;
+    var th = $(this);
+    if(th.attr('data-ttip-time')) {
+      delay = th.attr('data-ttip-time');
+    }
+    var el = $('<div><div><div class="arr"></div></div></div>');
+    var el_in = el.find('> div');
+    if($.contains($('#content')[0], th[0])) {
+      el.addClass('t2');
+    }
+    el_in.append('<p>'+th.attr('data-ttip')+'</p>');
+    function setMe() {
+      top = th.offset().top - el_in.outerHeight();
+      left = parseInt(th.offset().left + th.outerWidth()/2 - el_in.width()/2);
+      el_in.css({'top':top, 'left':left});
+    }
+    function show() {
+      tooltips_holder.append(el);
+      setMe();
+      
+      el_in.addClass('showed');
+      inter = setInterval(setMe, 10);
+    }
+    th.mouseleave(function() {
+      try { clearTimeout(tim); } catch(e) {}
+      try { 
+        el_in.removeClass('showed');
+        setTimeout(function() {
+          clearInterval(inter);
+          el.remove();
+        },200);
+        th.unbind('mouseleave');
+      } catch(e) {}
+    });
+    th.click(function() {
+      th.mouseleave();
+    });
+    if(tooltips_holder.is(':empty')) {
+      tim = setTimeout(show, delay);
+    } else {
+      show();
+    }
+  }
+  ttips.mouseenter(tooltipEnter);
+}
 // SCROLL #####################################################
-function initPanelScroll() {
-  var panel = $('#panel');
+function initContainerScroll(target) {
+  var panel = $(target);
   var inside = panel.find('> .inside');
-  var scroll = panel.find('> .panel-scroll');
+  var scroll = panel.find('> .container-scroll');
   var panel_h, view_h, inside_h, scroll_h;
   var scroll_start, scroll_new, y_mouse, y_mouse_new;
   var inside_y = 0;
