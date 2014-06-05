@@ -1,0 +1,34 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<div class="group avatar">
+	<a href="<?php $this->eurl('dashboard/documents');?>" data-remote></a>
+	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Spis dokumentów</span></p>
+</div>
+<?php if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->document['_owner'])) { ?>
+<form name="document_data_change" action="<?php $this->eurl('dashboard/documents/update/'.$this->document['_id']); ?>" method="post" enctype="multipart/form-data" data-remote>
+<div class="group">
+    <?php $this->Input('text', 'title', 'Tytuł pracy', $this->document['title'], true, 'emp');?>
+  	<?php $this->Input('text', 'author', 'Autor', $this->document['author'], true);?>
+  	<?php $this->Input('email', 'email', 'E-mail', $this->document['email']);?>
+	
+	<?php if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->document['_owner'])) { ?>
+  	<?php $this->InputRadio('action', 'Akcja', array(
+  				'1'=>'-', 
+  				'0'=>array('Usuń dokument','destroy','graphics/icons/destroy.svg')
+  			),'1');?>
+	<?php } ?>
+
+  	<?php $this->Input('submit', 'submit', 'Zapisz zmiany', 'ok');?>
+</div>
+</form>
+<?php } ?>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<div class="block document">
+	<div class="status ok"><?php $this->svg('graphics/icons/document-ok.svg');?></div>
+	<h2><?php echo $this->document['title'];?> </h2>
+	<h3><a href="mailto:<?php echo $this->document['email'];?>"><?php echo $this->document['author'];?></a> </h3>
+</div>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

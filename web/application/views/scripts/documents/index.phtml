@@ -1,0 +1,42 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<div class="group avatar">
+	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
+	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
+</div>
+<form name="documents_filter" action="<?php $this->eurl('dashboard/documents'); ?>" method="get" data-remote>
+<div class="group">
+  	<?php $this->Input('text', 'search', 'Tytuł, autor lub e-mail', $this->formVal('search'), false, 'ic ic-search');?>
+  	<?php $this->InputCheckbox('type','Typ:',array(
+  				'1'=>'Praca',
+				'2'=>'Książka' 
+  			),$this->formVal('type'));?>
+  	<?php $this->InputRadio('owner','Właściciel',array(
+  				'true'=>'Tylko moje',
+				'false'=>'Wszystkie dokumenty' 
+  			),$this->formVal('owner'));?>
+  	<?php $this->Input('submit', 'submit', 'Filtruj wyniki', 'ok');?>
+</div>
+</form>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<div class="block document-mini">
+	<ul>
+		<?php if($this->documents->count()>0) { foreach($this->documents as $document) { ?>
+		<li>
+			<a href="<?php $this->eurl('dashboard/documents/show/'.$document['_id']); ?>" data-remote></a>
+			<h4><?php echo $document['title'];?> <span><?php echo $document['author'];?></span></h4>
+			<div class="status">
+				<div class="ok"></div>
+			</div>
+		</li>
+		<?php } } else { ?>
+		<li class="empty">
+			<h4>Brak wyników</h4>
+		</li>
+		<?php } ?>
+	</ul>
+</div>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

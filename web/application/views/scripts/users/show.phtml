@@ -7,14 +7,31 @@
 <?php if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->user['_id'])) { ?>
 <form name="user_data_change" action="<?php $this->eurl('dashboard/users/update/'.$this->user['_id']); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
-	<input class="emp" type="text" name="name" placeholder="Imię i nazwisko" value="<?php echo $this->user['name'];?>" required/>
-	<input type="email" name="email" placeholder="E-mail" value="<?php echo $this->user['email'];?>" required/>
-	<div class="file-browse" data-file-browse="true">
-		<input type="file" name="avatar" accept="image/gif,image/jpeg,image/png" data-file-trigger>
-		<div class="photo"><span>Zmień avatar</span><?php $this->svg('graphics/icons/photo.svg');?></div>
-		<a></a>
-	</div>
-	<button type="submit" name="submit" value="ok">Zapisz zmiany</button>
+  	<?php $this->Input('text', 'name', 'Imię i nazwisko', $this->user['name'], true, 'emp');?>
+  	<?php $this->Input('email', 'email', 'E-mail', $this->user['email'], true);?>
+  	<?php $this->Input('image', 'avatar', 'Wybierz zdjęcie');?>
+	
+
+    <?php if(App_Auth::getInstance()->isAdmin()) { ?>
+
+  	<?php $this->InputRadio('role', 'Uprawnienia', array(
+  				'3'=>'Administrator', 
+  				'2'=>'Promotor', 
+  				'1'=>'Zawieszony', 
+  				'0'=>array('Usuń konto','destroy','graphics/icons/destroy.svg')
+  			),$this->user['role']);?>
+
+    <?php } else if(App_Auth::getInstance()->isSelf($this->user['_id'])) { ?>
+
+    <?php $this->InputRadio('action', 'Akcja', array(
+          '1'=>'-', 
+          '0'=>array('Usuń konto','destroy','graphics/icons/destroy.svg')
+        ),'1');?>
+
+    <?php } ?>
+
+
+  	<?php $this->Input('submit', 'submit', 'Zapisz zmiany', 'ok');?>
 </div>
 </form>
 <?php } ?>
@@ -26,17 +43,5 @@
 	<h2><?php echo $this->user['name'];?> </h2>
 	<h3><a href="mailto:<?php echo $this->user['email'];?>"><?php echo $this->user['email'];?></a> </h3>
 </div>
-<?php if(App_Auth::getInstance()->isAdmin()) { ?>
-<form name="user_role_change" action="<?php $this->eurl('dashboard/users/update-role/'.$this->user['_id']); ?>" method="post" data-remote>
-<div class="block user-type">
-	<ul>
-		<li <?php if($this->user['role']==3) echo 'class="selected"';?>><button name="submit" value="3">Administrator</button></li>
-		<li <?php if($this->user['role']==2) echo 'class="selected"';?>><button name="submit" value="2">Promotor</button></li>
-		<li <?php if($this->user['role']==1) echo 'class="selected"';?>><button name="submit" value="1">Zawieszony</button></li>
-		<li data-ttip="Usuń użytkownika" data-ttip-time="0"><button name="submit" value="0">Usuń</button><?php $this->svg('graphics/icons/destroy.svg');?></li>
-	</ul>
-</div>
-</form>
-<?php } ?>
 
 <?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

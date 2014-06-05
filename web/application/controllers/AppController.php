@@ -9,6 +9,7 @@ class AppController extends Zend_Controller_Action
         $this->view->head_desc="";
         //$this->view->config_ = array();
         $this->view->config_['active_path'] = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+        $this->view->config_['full_url'] = 'http://ivan.dev'.$this->view->config_['active_path'];
 
         $this->view->by_ajax = false;
         $this->view->by_frame = false;

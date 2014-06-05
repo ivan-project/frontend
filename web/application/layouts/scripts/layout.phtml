@@ -19,7 +19,7 @@
     ?>
     <script type="text/javascript">var baseUrl="<?php $this->eurl('');?>"; var basePath="<?php $this->epath('');?>";</script>
   </head>
-  <body>
+  <body data-url="<?php $this->eurl($this->config_['active_path']);?>">
     <iframe id="remote_iframe" name="remote_iframe" src="" style="width:0;height:0;border:0px;display:none;"></iframe>
     <?php echo $this->layout()->content; ?>
     <div id="tooltips"></div>

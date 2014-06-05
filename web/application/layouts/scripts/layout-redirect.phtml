@@ -9,7 +9,7 @@
       echo $this->headScript();
     ?>
   </head>
-  <body>
+  <body data-url="<?php $this->eurl($this->config_['active_path']);?>">
     <div id="remote-content">
       <?php echo $this->layout()->content; ?>
     </div>

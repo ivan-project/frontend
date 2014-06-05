@@ -13,8 +13,36 @@ class UsersController extends AppController
         }
     }
     public function indexAction() {
+        $form = array();
+
         $db_users = new Application_Model_MongoDB_User();
-        $this->view->users = $db_users->getAll();
+        
+        $filter = array();
+        if($this->_request->getParam('role')) {
+            $form['role'] = $this->_request->getParam('role');
+            $roles = array();
+            foreach($form['role'] as $role) {
+                array_push($roles, new MongoInt32($role));
+            }
+            $filter = array(
+                'role' => array(
+                    '$in' => $roles
+                )
+            );
+        }
+        if($this->_request->getParam('search')) {
+            $form['search'] = $this->_request->getParam('search');
+            $regex = new MongoRegex("/{$form['search']}/i");
+            $roles = $filter;
+            $filter = array(
+                '$or' => array(
+                    array_merge(array('name' => $regex), $roles),
+                    array_merge(array('email' => $regex), $roles)
+                )
+            );
+        }
+        $this->view->users = $db_users->filter($filter);
+        $this->view->form = $form;
     }
     public function createAction() {
         if(App_Auth::getInstance()->isAdmin()) {
@@ -55,28 +83,6 @@ class UsersController extends AppController
             $this->redirect_('dashboard');
         }
     }
-    public function updateRoleAction() {
-        if(App_Auth::getInstance()->isAdmin()) {
-            if($this->_request->isPost()) {
-                $id = $this->_request->getParam('param1');
-                $db_users = new Application_Model_MongoDB_User();
-                $role = (int)$this->_request->getPost('submit');
-                if($role==0) {
-                    $db_users->destroy($id);
-                    $this->redirect_('dashboard/users');
-                } else {
-                    $db_users->updateRole($id, $role);
-                    $this->showAction();
-                    $this->render('show');
-                }
-            } else {
-                $this->showAction();
-                $this->render('show');
-            }
-        } else {
-            $this->redirect_('dashboard/users');
-        }
-    }
     public function updateAction() {
         $id = $this->_request->getParam('param1');
         if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($id)) {
@@ -84,7 +90,6 @@ class UsersController extends AppController
                 $db_users = new Application_Model_MongoDB_User();
                 $name = $this->_request->getPost('name');
                 $email = $this->_request->getPost('email');
-                $db_users->update($id, $name, $email);
 
                 if(is_uploaded_file($_FILES['avatar']['tmp_name'])) {
                     $user_dir = 'assets/contents/users/'.$id;
@@ -96,9 +101,34 @@ class UsersController extends AppController
                     move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar_temp);
                     App_Methods::makeAvatar($avatar_temp, $avatar_final);
                 }
+                
+                if(App_Auth::getInstance()->isAdmin()) {
+                    $role = (int)$this->_request->getPost('role');
 
-                $this->showAction();
-                $this->render('show');
+                    if($role==0) {
+                        $db_users->destroy($id);
+                        $this->redirect_('dashboard/users');
+                    } else {
+                        $db_users->update($id, $name, $email, $role);
+                        $this->showAction();
+                        $this->render('show');
+                    }
+                } else if(App_Auth::getInstance()->isSelf($id)) {
+                    $action = (int)$this->_request->getPost('action');
+
+                    if($action==0) {
+                        $db_users->destroy($id);
+                        $this->redirect_('dashboard/users');
+                    } else {
+                        $db_users->update($id, $name, $email, $role);
+                        $this->showAction();
+                        $this->render('show');
+                    }
+                } else {
+                    $db_users->update($id, $name, $email);
+                    $this->showAction();
+                    $this->render('show');
+                }
             } else {
                 $this->showAction();
                 $this->render('show');

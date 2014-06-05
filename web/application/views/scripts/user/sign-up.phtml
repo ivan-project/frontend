@@ -1,16 +1,12 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
 <form name="register" action="<?php $this->eurl('user/sign-up'); ?>" method="post" enctype="multipart/form-data" data-remote>
-  <input type="text" name="name" placeholder="Imię i nazwisko" value="Karol Kochan<?php //$this->formVal('name');?>" required/>
-  <div class="file-browse" data-file-browse="true">
-		<input type="file" name="avatar" accept="image/gif,image/jpeg,image/png" data-file-trigger>
-		<div class="photo"><span>Dodaj avatar</span><?php $this->svg('graphics/icons/photo.svg');?></div>
-		<a></a>
-	</div>
-  <input type="email" name="email" placeholder="Adres e-mail" value="karolkochan@gmail.com<?php //$this->formVal('email');?>" required/>
-  <input type="password" name="pwd" placeholder="Hasło" value="karol" required/>
-  <input type="password" name="pwd_repeat" placeholder="Powtórz hasło" value="karol" required/>
-  <button type="submit" name="submit" value="ok">Zarejestruj</button>
+  <?php $this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp no-line', true);?>
+  <?php $this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);?>
+  <?php $this->Input('password', 'pwd', 'Hasło', '', true);?>
+  <?php $this->Input('password', 'pwd_repeat', 'Powtórz hasło', '', true);?>
+  <?php $this->Input('image', 'avatar', 'Wybierz zdjęcie');?>
+  <?php $this->Input('submit', 'submit', 'Zarejestruj', 'ok');?>
 </form>
 <p>Jeżeli posiadasz już konto w systemie <a href="<?php $this->eurl('user/sign-in');?>" data-remote>zaloguj się.</a> </p>
 

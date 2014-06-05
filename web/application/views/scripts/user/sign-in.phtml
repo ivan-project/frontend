@@ -2,38 +2,12 @@
 
 <form name="login" action="<?php $this->eurl('user/sign-in'); ?>" method="post" data-remote>
   <div class="half-input">
-    <input class="ic ic-user" type="email" name="email" placeholder="Adres e-mail" value="karolkochan@gmail.com<?php //$this->formVal('email');?>" required/>
-    <input class="ic ic-key" type="password" name="pwd" placeholder="Hasło" value="karol" required/>
+  	<?php $this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true, 'ic ic-user');?>
+  	<?php $this->Input('password', 'pwd', 'Hasło', '', true, 'ic ic-key');?>
   </div>
-  <button type="submit" name="submit" value="ok">Zaloguj</button>
+  <?php $this->Input('submit', 'submit', 'Zaloguj', 'ok');?>
 </form>
 <p>Nie posiadasz konta? <a href="<?php $this->eurl('user/sign-up'); ?>" data-remote>Poproś o udzielenie dostępu.</a> </p>
-<p>
-<?php 
-/*
-			try {
-	            $subject = "Register confirmation";
-	            $mail = new App_PHPMailer(true); // defaults to using php "mail()"
-	            $mail->CharSet = "UTF-8";
-	            $mail->IsHTML(false);
-	            $mail->IsSendmail(); // telling the class to use SendMail transport
-	            $mail->AddReplyTo('karol@kochan.com.pl','TRUE DETECTION');
-	            $mail->From = 'karol@kochan.com.pl';
-	            $mail->FromName = 'TRUE DETECTION';
-	            $mail->AddAddress('karolkochan@gmail.com','Karol Kochan');
-	            $mail->Subject = sprintf("=?utf-8?B?%s?=", base64_encode($subject));//mb_encode_mimeheader($subject,"UTF-8", "B", "\n");
-	            $mail->Body = "This is only a test that passed.";
-	            $mail->Send();
-  				echo "Message Sent OK\n";
-			} catch (phpmailerException $e) {
-		  		echo $e->errorMessage(); //Pretty error messages from PHPMailer
-			} catch (Exception $e) {
-		  		echo $e->getMessage(); //Boring error messages from anything else!
-			}
-			mail('karolkochan@gmail.com', 'My Subject', 'test test');
-*/
-?>
-</p>
 
 <?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
 

@@ -4,19 +4,19 @@
 	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
 	<p><?php echo $this->user_['name'];?> <span><a href="<?php $this->eurl('user/sign-out');?>" data-remote>wyloguj</a></span></p>
 	<div class="avatar">
-		<img src="<?php echo $this->avatar($this->user_);?>" alt="<?php echo $this->user_['name'];?>"/>
+		<a href="<?php $this->eurl('dashboard/users/show/'.$this->user_['_id']);?>" data-ttip="Przejdź do swojego konta" data-remote><img src="<?php echo $this->avatar($this->user_);?>" alt="<?php echo $this->user_['name'];?>"/></a>
 	</div>
 </div>
 <div class="group lr">
 	<h4>Dokumenty </h4>
-	<div class="left" data-ttip="Prace które są podejrzewane o plagiat">
-		<a href="<?php $this->eurl('dashboard/documents/alert');?>" data-remote></a>
-		<span>7</span>
-		<h5>Podejrzanych </h5>
+	<div class="left" data-ttip="Prace które należą do Ciebie">
+		<a href="<?php $this->eurl('dashboard/documents?owner=true&type[]=1');?>" data-remote></a>
+		<span><?php echo $this->documents_my_count;?></span>
+		<h5>Moich prac </h5>
 	</div>
-	<div class="right" data-ttip="Wszystkie prace dodane przez Ciebie do systemu">
-		<a href="<?php $this->eurl('dashboard/documents');?>" data-remote></a>
-		<span>52</span>
+	<div class="right" data-ttip="Wszystkie prace dodane do systemu przez użytkowników">
+		<a href="<?php $this->eurl('dashboard/documents?owner=false');?>" data-remote></a>
+		<span><?php echo $this->documents_all_count;?></span>
 		<h5>Wszystkich </h5>
 	</div>
 </div>
@@ -26,7 +26,7 @@
 </div>
 <?php if(App_Auth::getInstance()->isAdmin()) { ?>
 <div class="group pending-users" style="margin-top: 50px;">
-	<h3>Oczekują na akceptację</h3>
+	<h3><a class="classic" href="<?php $this->eurl('dashboard/users?role[]=1');?>" data-remote>Oczekują na akceptację</a></h3>
 	<div class="pending">
 		<ul>
 			<?php foreach($this->users_pending as $item) { ?>
@@ -41,7 +41,7 @@
 </div>
 <div class="group lr">
 	<div class="left" data-ttip="Użytkownicy posiadającymi uprawnienia administratora">
-		<a href="<?php $this->eurl('dashboard/users?role=3');?>" data-remote></a>
+		<a href="<?php $this->eurl('dashboard/users?role[]=3');?>" data-remote></a>
 		<span><?php echo $this->users_admin_count;?></span>
 		<h5>Administratorów </h5>
 	</div>

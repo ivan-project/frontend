@@ -6,28 +6,16 @@
 </div>
 <form name="register" action="<?php $this->eurl('dashboard/documents/create'); ?>" method="post" data-remote>
 <div class="group">
-	<input class="emp no-line" type="text" name="title" placeholder="Temat pracy" value="<?php $this->formVal('title');?>" required autofocus/>
-	<div class="file-browse" data-file-browse="true">
-		<input type="file" name="document" accept="application/pdf,application/msword" data-file-trigger required>
-		<div><span>Wybierz plik</span><?php $this->svg('graphics/icons/document-create.svg');?></div>
-		<a></a>
-	</div>
-	<input type="text" name="author" placeholder="Autor" value="<?php $this->formVal('author');?>" required/>
-	<input type="email" name="email" placeholder="E-mail kontaktowy" value="<?php $this->formVal('email');?>" data-ttip="Wypełnij to pole jeśli chcesz mieć możliwość szybkiego powiadamiania autora o wykryciu plagiatu"/>
-	<div class="select-radio" data-select-radio="radio" style="margin-bottom: 30px;">
-		<div class="label">Typ dokumentu:</div>
-		<ul>
-			<li>
-				<div>Książka</div>
-				<input type="radio" name="document_type" value="book">
-			</li>
-			<li>
-				<div>Praca</div>
-				<input type="radio" name="document_type" value="thesis" checked>
-			</li>
-		</ul>
-	</div>
-	<button type="submit" name="submit" value="ok">Prześlij pracę</button>
+  	<?php $this->Input('text', 'title', 'Temat pracy', $this->formVal('title'), true, 'emp no-line', true);?>
+  	<?php $this->Input('text', 'author', 'Autor', $this->formVal('author'), true);?>
+  	<?php $this->Input('email', 'email', 'E-mail autora', $this->formVal('email'));?>
+  	<?php $this->Input('document', 'document', 'Wybierz dokument', '', true);?>
+  	<!--  data-ttip="Wypełnij to pole jeśli chcesz mieć możliwość szybkiego powiadamiania autora o wykryciu plagiatu" -->
+	<?php $this->InputRadio('type', 'Typ dokumentu', array(
+			'1'=>'Praca',
+			'2'=>'Książka' 
+		),'1');?>
+  	<?php $this->Input('submit', 'submit', 'Prześlij pracę', 'ok');?>
 </div>
 </form>
 

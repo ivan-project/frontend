@@ -6,27 +6,16 @@
 </div>
 <form name="register" action="<?php $this->eurl('dashboard/users/create'); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
-	<input class="emp no-line" type="text" name="name" placeholder="Imię i nazwisko" value="<?php $this->formVal('name');?>" required autofocus/>
-	<div class="file-browse" data-file-browse="true">
-		<input type="file" name="avatar" accept="image/gif,image/jpeg,image/png" data-file-trigger>
-		<div class="photo"><span>Dodaj avatar</span><?php $this->svg('graphics/icons/photo.svg');?></div>
-		<a></a>
-	</div>
-	<input type="email" name="email" placeholder="Adres e-mail" value="<?php $this->formVal('email');?>" required/>
-	<div class="select-radio" data-select-radio="radio" style="margin-bottom: 30px;">
-		<div class="label">Uprawnienia:</div>
-		<ul>
-			<li>
-				<div>Administrator</div>
-				<input type="radio" name="role" value="3">
-			</li>
-			<li>
-				<div>Promotor</div>
-				<input type="radio" name="role" value="2" checked>
-			</li>
-		</ul>
-	</div>
-	<button type="submit" name="submit" value="ok">Dodaj użytkownika</button>
+  	<?php $this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp no-line', true);?>
+  	<?php $this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);?>
+  	<?php $this->Input('image', 'avatar', 'Wybierz zdjęcie');?>
+  	<?php $this->InputRadio('role', 'Uprawnienia', array(
+  				'3'=>'Administrator', 
+  				'2'=>'Promotor', 
+  				'1'=>'Zawieszony', 
+  				'0'=>array('Usuń konto','destroy','graphics/icons/destroy.svg')
+  			),'2');?>
+  	<?php $this->Input('submit', 'submit', 'Dodaj użytkownika', 'ok');?>
 </div>
 </form>
 

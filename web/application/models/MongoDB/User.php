@@ -23,7 +23,7 @@ class Application_Model_MongoDB_User extends Application_Model_MongoDB_Abstract
 			$hash = password_hash($pwd.$salt, PASSWORD_BCRYPT);
 
             $object = array(
-                'name' => ucwords(strtolower($name)),
+                'name' => ucwords($name),
                 'email' => strtolower($email),
                 'hash' => $hash,
                 'salt' => $salt,
@@ -47,6 +47,12 @@ class Application_Model_MongoDB_User extends Application_Model_MongoDB_Abstract
         )->sort(array('name' => 1));
         return $object;
     }
+    public function filter($filter) {
+        $object = $this->c()->find(
+            $filter
+        )->sort(array('name' => 1));
+        return $object;
+    }
     public function getByRole($role) {
         $object = $this->c()->find(
             array('role' => $role),
@@ -65,22 +71,18 @@ class Application_Model_MongoDB_User extends Application_Model_MongoDB_Abstract
         )->sort(array('created_at' => 1));
         return $object;
     }
-    public function updateRole($id, $role) {
-        $this->c()->update(
-            array('_id' => new MongoId($id)),
-            array('$set' => 
-                array('role' => new MongoInt32($role))
-            )
-        );
-    }
-    public function update($id, $name, $email) {
-        $this->c()->update(
-            array('_id' => new MongoId($id)),
-            array('$set' => 
-                array(
+    public function update($id, $name, $email, $role = null) {
+        $update = array(
                     'email' => strtolower($email),
                     'name' => $name
-                )
+                );
+        if($role!=null) {
+            $update['role'] = new MongoInt32($role);
+        }
+        $this->c()->update(
+            array('_id' => new MongoId($id)),
+            array('$set' => 
+                $update
             )
         );
     }
