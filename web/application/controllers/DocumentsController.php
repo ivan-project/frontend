@@ -18,29 +18,35 @@ class DocumentsController extends AppController
         $db_documents = new Application_Model_MongoDB_Document();
         
         $filter = array();
+        $types = array();
+        $owner = array();
         $form['owner'] = strcmp($this->_request->getParam('owner'),'true')==0 ? 'true' : 'false';
+        if(strcmp($form['owner'],'false')) {
+            $owner = array('_owner' => new MongoId($this->view->user_['_id']));
+        }
         if($this->_request->getParam('type')) {
             $form['type'] = $this->_request->getParam('type');
-            $types = array();
+            $types_tmp = array();
             foreach($form['type'] as $type) {
-                array_push($types, new MongoInt32($type));
+                array_push($types_tmp, new MongoInt32($type));
             }
-            $filter = array(
+            $types = array(
                 'type' => array(
-                    '$in' => $types
+                    '$in' => $types_tmp
                 )
             );
         }
         if($this->_request->getParam('search')) {
             $form['search'] = $this->_request->getParam('search');
             $regex = new MongoRegex("/{$form['search']}/i");
-            $types = $filter;
             $filter = array(
                 '$or' => array(
-                    array_merge(array('title' => $regex), $types),
-                    array_merge(array('author' => $regex), $types)
+                    array_merge(array('title' => $regex), $types, $owner),
+                    array_merge(array('author' => $regex), $types, $owner)
                 )
             );
+        } else {
+            $filter = array_merge($types, $owner);
         }
         $this->view->documents = $db_documents->filter($filter);
         $this->view->form = $form;
