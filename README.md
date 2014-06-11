@@ -19,7 +19,7 @@ SSH to Vagrant
 $ vagrant ssh
 ```
 
-Move to frontend directory 
+Go to frontend directory 
 ```bash
 $ cd /var/ivan/frontend
 ```
