@@ -11,25 +11,21 @@ ivan-project/frontend/design/views/*
 Known issues:
 - Not every browser supports HTML5 form validators
 
-2. DATABASE
+2. DATABASE IMPORT
 ---------
 
-Users Collection fields:
-- _id
-- email
-- name
-- role
-- hash
-- salt
-- token
-- created_at
-- updated_at
+SSH to Vagrant
+```bash
+$ vagrant ssh
+```
 
-Documents Collection fields:
-- _id
-- _owner
-- title
-- author
-- email
-- created_at
-- updated_at
+Move to frontend directory 
+```bash
+$ cd /var/ivan/frontend
+```
+
+Drop old database (optional) and import newest
+```bash
+$ mongo ivan --eval "db.dropDatabase()"
+$ mongorestore -d ivan db/ivan
+```
