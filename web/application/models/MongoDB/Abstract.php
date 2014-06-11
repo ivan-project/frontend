@@ -3,15 +3,19 @@ abstract class Application_Model_MongoDB_Abstract
 {
     public function __construct() {
     }
-    public function db() {	// database
+    public function db($dbname='dbmain') {	// database
     	$config = Zend_Controller_Front::getInstance()->getParam('bootstrap');
 		$mongo = $config->getOption('mongo');
 
 		$client = new MongoClient();
-    	return $client->{$mongo['dbname']};
+    	return $client->{$mongo[$dbname]};
     }
     public function c() {	// collection
     	return $this->db()->{$this->_name};
     }
 }
+//vagrant ssh
+//cd /var/ivan/frontend
+//mongo ivan --eval "db.dropDatabase()"
+//mongorestore -d ivan db/ivan
 ?>
