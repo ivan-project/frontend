@@ -29,3 +29,9 @@ Drop old database (optional) and import newest
 $ mongo ivan --eval "db.dropDatabase()"
 $ mongorestore -d ivan db/ivan
 ```
+
+Authentication
+```
+login: karolkochan@gmail.com
+pass:  karol
+```

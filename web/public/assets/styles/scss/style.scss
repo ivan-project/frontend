@@ -22,7 +22,7 @@ html, body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	min-width: 900px;
+	min-width: 768px;
 }
 body {
 	float: left;
@@ -273,9 +273,14 @@ a.submit {
 	@include transition(all, 0.8s, cubic-bezier(0.635, 0.005, 0.070, 1.000));
 
 	@media #{$jump1} {
-		padding: 40px 60px;
+		padding: 40px 50px;
 
 		width: calc(#{$panelSizeS});
+	}
+	@media #{$jump2} {
+		padding: 30px 30px;
+
+		width: calc(#{$panelSizeXS});
 	}
 
 	a {
@@ -1112,10 +1117,16 @@ a.submit {
 	@include transition(all, 0.8s, cubic-bezier(0.635, 0.005, 0.070, 1.000));
 
 	@media #{$jump1} {
-		padding: 40px 60px;
+		padding: 40px 50px;
 
 		left: $panelSizeS;
 		width: calc(100% - #{$panelSizeS});
+	}
+	@media #{$jump2} {
+		padding: 30px 30px;
+
+		left: $panelSizeXS;
+		width: calc(100% - #{$panelSizeXS});
 	}
 
 	// ::selection {
