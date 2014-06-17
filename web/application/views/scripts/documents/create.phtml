@@ -12,9 +12,9 @@
   	<?php $this->Input('document', 'document', 'Wybierz dokument', '', true);?>
   	<!--  data-ttip="Wypełnij to pole jeśli chcesz mieć możliwość szybkiego powiadamiania autora o wykryciu plagiatu" -->
 	<?php $this->InputRadio('type', 'Typ dokumentu', array(
-			'1'=>'Praca',
-			'2'=>'Książka' 
-		),'1');?>
+			'thesis'=>'Praca',
+			'book'=>'Książka' 
+		),'thesis');?>
   	<?php $this->Input('submit', 'submit', 'Prześlij pracę', 'ok');?>
 </div>
 </form>

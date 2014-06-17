@@ -57,7 +57,7 @@ class DocumentsController extends AppController
             $form['title'] = $this->_request->getPost('title');
             $form['author'] = $this->_request->getPost('author');
             $form['email'] = $this->_request->getPost('email');
-            $form['type'] = (int)$this->_request->getPost('type');
+            $form['type'] = $this->_request->getPost('type');
             $owner = $this->view->user_['_id'];
 
             $doc = $_FILES['document']['tmp_name'];
