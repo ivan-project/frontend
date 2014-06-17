@@ -62,10 +62,12 @@ class DocumentsController extends AppController
 
             $doc = $_FILES['document']['tmp_name'];
 
-            if(true) {//$this->isAllowedDocument($doc)) {
+            if($this->isAllowedDocument($doc)) {//true) {//
                 $db_documents = new Application_Model_MongoDB_Document();
-                $object = $db_documents->create($owner, $form['title'], $form['author'], $form['email'], $form['type']);
+                $object = $db_documents->create($owner, 'document', $form['title'], $form['author'], $form['email'], $form['type']);
                 if($object) {
+                    $queue = new App_Queue();
+                    $queue->queueFile($object['_id']);
                     $this->redirect_('dashboard/documents/show/'.$object['_id']);
                 }
             }
@@ -121,9 +123,9 @@ class DocumentsController extends AppController
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE); 
         $mime = strtolower(finfo_file($finfo, $file));
-        $fp = fopen('./a.txt','w');
+        /*$fp = fopen('./a.txt','w');
         fwrite($fp,var_dump($finfo,true));
-        fclose($fp);
+        fclose($fp);*/
         return in_array($mime, $allowed);
     }
 }

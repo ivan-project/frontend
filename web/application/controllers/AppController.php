@@ -15,6 +15,11 @@ class AppController extends Zend_Controller_Action
         $this->view->by_frame = false;
         $this->view->view_="sign-in";
         $this->view->config_['state'] = 'colapsed';
+        
+        $application_config = Zend_Controller_Front::getInstance()->getParam('bootstrap');
+        $appConfig = $application_config->getOption('appConfig');
+        $this->view->config_['appconfig_ajax'] = $appConfig['ajax'];
+
         if($this->_request->getParam('ajax') && $this->_request->getParam('ajax')==true) {
             $this->_helper->layout()->disableLayout();
             $this->view->by_ajax = true;

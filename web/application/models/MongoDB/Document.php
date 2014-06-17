@@ -7,48 +7,78 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
      * 1 = praca
      * 2 = ksiazka
      */
-    protected $_name = 'documents';
-    public function create($owner, $title, $author, $email, $type=1) {
+    protected $_collection = 'documents';
+    public function create($owner, $file, $title, $author, $email, $type=1, $status=0) {
+        $fs = $this->fs();
+        $fileID = $fs->storeUpload($file);
+
     	$object = array(
             '_owner' => new MongoId($owner),
             'title' => ucfirst($title),
             'author' => ucwords($author),
             'email' => strtolower($email),
+
             'type' => new MongoInt32($type),
+            'status' => new MongoInt32($status),
+            'fileDocument' => $fileID,
+            /*'plaintext' => '',
+            'lemmatized' => '',
+            'comparisons' => array(
+                    'completed' => new MongoInt32(0),
+                    'completed' => new MongoInt32(0)
+                ),*/
+            
             'created_at' => new MongoDate()
         );
     	$this->c()->insert($object);
         return $object;
     }
     public function destroy($id) {
+        $doc = $this->getById($id);
+
+        if($doc) {
+            $this->fs()->remove(
+                array('_id' => new MongoId($doc['fileDocument']))
+            );
+        }
+
         $this->c()->remove(
             array('_id' => new MongoId($id))
         );
     }
     public function getAll() {
-        $object = $this->c()->find()->sort(array('title' => 1));
+        $object = $this->c()->find(
+            array(),
+            array('plaintext' => 0, 'lemmatized' => 0)
+        )->sort(array('title' => 1));
         return $object;
     }
     public function filter($filter) {
         $object = $this->c()->find(
-            $filter
+            $filter, 
+            array('plaintext' => 0, 'lemmatized' => 0)
         )->sort(array('title' => 1));
         return $object;
     }
     public function getByType($type) {
         $object = $this->c()->find(
-            array('type' => $type)
+            array('type' => $type),
+            array('plaintext' => 0, 'lemmatized' => 0)
         )->sort(array('title' => 1));
         return $object;
     }
     public function getByOwner($owner) {
         $object = $this->c()->find(
-            array('_owner' => new MongoId($owner))
+            array('_owner' => new MongoId($owner)),
+            array('plaintext' => 0, 'lemmatized' => 0)
         )->sort(array('title' => 1));
         return $object;
     }
     public function getById($id) {
-        $object = $this->c()->findOne(array('_id' => new MongoId($id)));
+        $object = $this->c()->findOne(
+            array('_id' => new MongoId($id)),
+            array('plaintext' => 0, 'lemmatized' => 0)
+        );
         return $object;
     }
     public function update($id, $title, $author, $email) {

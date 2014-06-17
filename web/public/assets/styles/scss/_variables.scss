@@ -2,6 +2,9 @@
 //     VARIABLES
 // ----------------
 
+// RESP JUMPS
+$jump1: "only screen and (max-width : 1100px)";
+
 // BACKS
 $backDark: #26272b;
 
@@ -31,6 +34,7 @@ $tooltipCol2: $colWhite;//#000000;//
 
 // SIZES
 $panelSize: 500px;
+$panelSizeS: 400px;
 
 $transparentLevel: 0.05;
 

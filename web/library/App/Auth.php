@@ -4,7 +4,7 @@ class App_Auth {
 	private static $singleton = false;
 	private static $user = false;
 
-	private function App_Auth() {}
+    private function __construct() {}
 	
 	public static function getInstance() {
         if(self::$singleton == false) {

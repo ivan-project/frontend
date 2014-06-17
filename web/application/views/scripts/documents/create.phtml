@@ -4,7 +4,7 @@
 	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
 	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
 </div>
-<form name="register" action="<?php $this->eurl('dashboard/documents/create'); ?>" method="post" data-remote>
+<form name="register" action="<?php $this->eurl('dashboard/documents/create'); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
   	<?php $this->Input('text', 'title', 'Temat pracy', $this->formVal('title'), true, 'emp no-line', true);?>
   	<?php $this->Input('text', 'author', 'Autor', $this->formVal('author'), true);?>

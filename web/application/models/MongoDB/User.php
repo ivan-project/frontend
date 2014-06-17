@@ -9,7 +9,7 @@ class Application_Model_MongoDB_User extends Application_Model_MongoDB_Abstract
      * 2 = user
      * 3 = admin
      */
-    protected $_name = 'users';
+    protected $_collection = 'users';
     public function create($name, $email, $pwd, $role=1) {
         $object = $this->c()->find(
             array('email' => strtolower($email)),

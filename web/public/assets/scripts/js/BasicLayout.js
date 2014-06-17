@@ -77,8 +77,10 @@ function initReloads() {
   resizeListener();
   scrollListener();
 
-  initPostRemote();
-  initDataRemote();
+  if($('body').attr('data-ajax-enabled')=='true') {
+    initPostRemote();
+    initDataRemote();
+  }
   initRadio();
   initCheckboxes();
   initFileBrowse();
