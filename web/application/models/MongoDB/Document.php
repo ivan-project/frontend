@@ -103,7 +103,7 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
 // ases" : null, "metadata" : null, "md5" : "6a1d15e0ee9d407588522cca499e704b" } // EXAMPLE/JS
 
 
-// { "_id" : ObjectId("53a0a28bfa4634b1028b4568"), "metadata" : { "contentType" : "application/pdf" }, "filename" : "lab2.p
+// { "_id" : ObjectId("53a0a28bfa4634b1028b4568"), "contentType" : "application/pdf", "filename" : "lab2.p
 // df", "uploadDate" : ISODate("2014-06-17T20:18:19.146Z"), "length" : NumberLong(86253), "chunkSize" : NumberLong(261120),
 //  "md5" : "6a1d15e0ee9d407588522cca499e704b" } // FRONTEND/PHP
 

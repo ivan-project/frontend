@@ -266,7 +266,7 @@ a.submit {
 	top: 0px;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	width: calc(#{$panelSize});
+	width: #{$panelSize};
 	padding: 80px 100px; //70px 60px 70px 60px; //50px 40px 50px 80px;
 	@extend .full-relative;
 	@extend .sizing;
@@ -275,12 +275,12 @@ a.submit {
 	@media #{$jump1} {
 		padding: 40px 50px;
 
-		width: calc(#{$panelSizeS});
+		width: #{$panelSizeS};
 	}
 	@media #{$jump2} {
 		padding: 30px 30px;
 
-		width: calc(#{$panelSizeXS});
+		width: #{$panelSizeXS};
 	}
 
 	a {
@@ -1344,7 +1344,7 @@ a.submit {
 }
 #page-holder.colapsed {
 	/*#panel {
-		width: calc(100%);
+		width: 100%;
 		padding: 70px 35%;
 	}*/
 	#content {
