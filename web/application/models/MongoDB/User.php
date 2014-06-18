@@ -39,6 +39,11 @@ class Application_Model_MongoDB_User extends Application_Model_MongoDB_Abstract
         $db_documents = new Application_Model_MongoDB_Document();
         $db_documents->destroyByOwner($id);
 
+        $avatar = 'assets/contents/avatars/'.$id.'.png';
+        if(file_exists($avatar)) {
+            unlink($avatar);
+        }
+
         $this->c()->remove(
             array('_id' => new MongoId($id))
         );

@@ -41,11 +41,11 @@ class UserController extends AppController
                 if($object) {
                     if(is_uploaded_file($_FILES['avatar']['tmp_name'])) {
                         $id = $object['_id'];
-                        $user_dir = 'assets/contents/users/'.$id;
-                        $avatar_temp = $user_dir.'/_tmp_avatar.'.App_Methods::ext($_FILES["avatar"]["name"]);
-                        $avatar_final = $user_dir.'/avatar.png';
-                        if(!is_dir($user_dir)) {
-                            mkdir($user_dir);
+                        $avatars_dir = 'assets/contents/avatars';
+                        $avatar_temp = $avatars_dir.'/_tmp_'.$id.'.'.App_Methods::ext($_FILES["avatar"]["name"]);
+                        $avatar_final = $avatars_dir.'/'.$id.'.png';
+                        if(!is_dir($avatars_dir)) {
+                            mkdir($avatars_dir);
                         }
                         move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar_temp);
                         App_Methods::makeAvatar($avatar_temp, $avatar_final);
