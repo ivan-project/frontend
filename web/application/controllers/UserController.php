@@ -58,4 +58,7 @@ class UserController extends AppController
         }
         $this->view->form = $form;
     }
+    public function welcomeMailAction() {
+        
+    }
 }

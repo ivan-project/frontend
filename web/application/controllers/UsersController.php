@@ -66,7 +66,7 @@ class UsersController extends AppController
                         move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar_temp);
                         App_Methods::makeAvatar($avatar_temp, $avatar_final);
                     }
-                    // $db_users->passwordMail($object['email'],$tmp_pwd);
+                    App_Methods::welcomeMail($object['email'], $object['name'], $this->view->user_['email'], $this->view->user_['name'], $tmp_pwd);
                     $this->redirect_('dashboard/users/show/'.$object['_id']);
                 }
             }

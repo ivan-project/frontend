@@ -12,14 +12,6 @@ class App_Methods
 	}
 	public static function makeAvatar($img_from, $img_to, $desired = 128) {
 		$thumb = new Imagick($img_from);
-		/*$attrs = @getimagesize($img_from);
-        $w = $attrs[0];
-        $h = $attrs[1];
-		if($w>$h) {
-        	$thumb->scaleImage(0,128);
-		} else {
-        	$thumb->scaleImage(128,0);
-		}*/
 		$thumb->cropThumbnailImage($desired, $desired);
         $thumb->writeImage($img_to);
         $thumb->destroy(); 
@@ -27,6 +19,45 @@ class App_Methods
 	}
     public static function ext($file_name) {
         return strtolower(substr(strrchr($file_name,'.'),1));
+    }
+    public static function welcomeMail($email_to, $name_to, $email_by, $name_by, $tmp_pwd) {
+    	// GET HTML TEMPLATE
+		$view = new Zend_view();
+		$view->setScriptPath(APPLICATION_PATH . '/views/scripts/user');
+		$view->email_to = $email_to;
+		$view->name_to = $name_to;
+		$view->email_by = $email_by;
+		$view->name_by = $name_by;
+		$view->tmp_pwd = $tmp_pwd;
+		$htmlBody = $view->render('welcome-mail.phtml');
+
+		// SEND EMAIL
+		$send_to = array($email_to => $name_to);
+		$sent_from = array('noreplay@truedetection.com' => 'TRUE DETECTION');
+		
+		$subject = "Twoje dane autoryzacyjne";
+
+		$transport = Swift_SmtpTransport::newInstance()
+		    ->setHost('ssrs.reachmail.net')
+		    ->setPort(465)
+		    ->setUsername('KAROL\\admin')
+		    ->setPassword('DPwAjzvU')
+		    ->setEncryption('ssl');
+
+		// Create a Mailer
+		$mailer = Swift_Mailer::newInstance($transport);
+		$message = Swift_Message::newInstance()
+		    ->setSubject($subject)
+		    ->setContentType('text/html')
+		    ->setFrom($sent_from)
+		    ->setTo($send_to)
+		    ->setBody($htmlBody, 'text/html');
+
+		$headers = $message->getHeaders();  
+		$headers->addTextHeader('X-Tracking', '1');
+
+		// $result will be an integer representing the number of successful recipients
+		$result = $mailer->send($message);
     }
 }
 

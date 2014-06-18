@@ -82,7 +82,7 @@
       .article-title.with-meta {margin-bottom: 0;}
       .article-meta { font-size: 13px; line-height: 20px; color: #ccc; font-weight: bold; margin-top: 0;}
       .article-content { font-size: 13px; line-height: 18px; color: #8f8f8f; margin-top: 0px; margin-bottom: 18px; font-family: HelveticaNeue, sans-serif; }
-      .article-content a { color: #1cc58e; font-weight:bold; text-decoration:none; }
+      .article-content a { color: #1cc58e; font-weight: normal; text-decoration:none; }
       .article-content img { max-width: 100% }
       .article-content ol, .article-content ul { margin-top:0px; margin-bottom:18px; margin-left:19px; padding:0; }
       .article-content li { font-size: 13px; line-height: 18px; color: #8f8f8f; }
@@ -96,6 +96,7 @@
       #footer a { color: #ffffff; text-decoration: none; font-weight: bold; }
       #permission-reminder { white-space: normal; }
       #street-address { color: #b0b0b0; white-space: normal; }
+      #under-header {border-top: 1px solid #eeeeee;}
     </style>
     <!--[if gte mso 9]>
     <style _tmplitem="1773" >
@@ -155,12 +156,12 @@
                 <tr>
                   <td id="header" class="w640" width="640" align="center" bgcolor="#FFFFFF">
                     <div align="center" style="text-align: center">
-                      <img id="customHeaderImage" label="Header Image" width="340" src="https://i2.createsend1.com/ti/d/CC/91B/D4B/073619/images/true-detection.233402.png" class="w640" border="0" align="top" style="display: inline">
+                      <img id="customHeaderImage" label="Header Image" width="340" src="https://i2.createsend1.com/ti/d/CC/91B/D4B/073619/images/true-detection.233402.png" class="w640" border="0" align="top" style="display: inline; margin-bottom: 10px;">
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td class="w640" width="640" height="20" bgcolor="#ffffff"></td>
+                  <td id="under-header" class="w640" width="640" height="20" bgcolor="#ffffff"></td>
                 </tr>
                 <tr id="simple-content-row">
                   <td class="w640" width="640" bgcolor="#ffffff">
@@ -175,9 +176,9 @@
                                   <tbody>
                                     <tr>
                                       <td class="w580" width="580">
-                                        <p align="left" class="article-title">Cześć <a>Imię Nazwisko</a></p>
-                                        <div align="left" class="article-content">Otrzymaliśmy Twoje zgłoszenie do utworzenia konta w serwisie TRUEDETECTION. Proszę kliknij poniższy link w celu potwierdzenia adresu e-mail:</div>
-                                        <div align="left" class="article-content"><a href="http://ivan.dev/activate?u=r3u829q3cumwf98uewa893829n3r8uwa9831">http://ivan.dev/activate?u=r3u829q3cumwf98uewa893829n3r8uwa9831</a> </div>
+                                        <p align="left" class="article-title">Witaj <strong><?php echo $this->name_to;?></strong></p>
+                                        <div align="left" class="article-content">Użytkownik <?php echo $this->name_by;?> (<a href="mailto:<?php echo $this->email_by;?>"><?php echo $this->email_by;?></a>) dodał Cię do systemu antyplagiatowego <a href="http://ivan.dev/"><strong>TRUE</strong>DETECTION</a>. Twoje dane logowania do systemu: </div>
+                                        <div align="left" class="article-content">user: <strong><?php echo $this->email_to;?></strong><br/> pass: <strong><?php echo $this->tmp_pwd;?></strong> </div>
                                       </td>
                                     </tr>
                                     <tr>
@@ -212,7 +213,7 @@
                           <td class="w30" width="30"></td>
                           <td class="w580" width="360" valign="top">
                             <span class="hide">
-                              <p id="permission-reminder" align="left" class="footer-content-left"><span>Jeśli nie rejestrowałeś się w serwisie <a href="http://ivan.dev/">TRUEDETECTION</a>, pozostaw ten email bez odpowiedzi.</span></p>
+                              <p id="permission-reminder" align="left" class="footer-content-left"><span>Jeśli nie rejestrowałeś się w serwisie <a href="http://ivan.dev/"><strong>TRUE</strong>DETECTION</a>, pozostaw ten email bez odpowiedzi.</span></p>
                             </span>
                           </td>
                           <td class="hide w0" width="60"></td>

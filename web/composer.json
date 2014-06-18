@@ -1,6 +1,7 @@
 {
     "require": {
         "zendframework/zendframework1": "1.12.6",
-        "videlalvaro/php-amqplib": "2.2.*"
+        "videlalvaro/php-amqplib": "2.2.*",
+        "swiftmailer/swiftmailer": "@stable"
     }
 }
