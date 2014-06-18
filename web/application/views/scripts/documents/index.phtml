@@ -8,8 +8,8 @@
 <div class="group">
   	<?php $this->Input('text', 'search', 'Tytuł, autor lub e-mail', $this->formVal('search'), false, 'ic ic-search');?>
   	<?php $this->InputCheckbox('type','Typ:',array(
-  				'1'=>'Praca',
-				'2'=>'Książka' 
+  				'thesis'=>'Praca',
+				'book'=>'Książka' 
   			),$this->formVal('type'));?>
   	<?php $this->InputRadio('owner','Właściciel',array(
   				'true'=>'Tylko moje',

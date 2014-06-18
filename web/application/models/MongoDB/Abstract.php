@@ -11,9 +11,10 @@ abstract class Application_Model_MongoDB_Abstract
 		$client = new MongoClient();
     	return $client->{$mongo[$dbname]};
     }
-    public function c() {   // collection
+    public function c($collection=null) {   // collection
+        $collection = is_null($collection) ? $this->_collection : $collection;
         $db = isset($this->_db) ? $this->_db : 'dbmain';
-        return $this->db($db)->{$this->_collection};
+        return $this->db($db)->{$collection};
     }
     public function fs() {   // collection
         $db = isset($this->_db) ? $this->_db : 'dbmain';

@@ -36,6 +36,9 @@ class Application_Model_MongoDB_User extends Application_Model_MongoDB_Abstract
         }
     }
     public function destroy($id) {
+        $db_documents = new Application_Model_MongoDB_Document();
+        $db_documents->destroyByOwner($id);
+
         $this->c()->remove(
             array('_id' => new MongoId($id))
         );
