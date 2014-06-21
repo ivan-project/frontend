@@ -440,9 +440,15 @@ h3, .s-h3, .input-style.emp, #panel .inside > .contents form input.emp, #panel .
   margin: 20px 5px 10px 0px; }
 
 .s-h3-2, #content .inside .user h2, #content .inside .document h2 {
-  font-size: 21px;
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: 400;
+  margin: 18px 5px 9px 0px; }
+
+.s-h3-3, #content .inside .document.double h2 {
+  font-size: 20px;
   line-height: 24px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 18px 5px 9px 0px; }
 
 h4, .s-h4, #panel .inside > .contents .add > h3, #panel .file-browse > .txt {
@@ -451,7 +457,7 @@ h4, .s-h4, #panel .inside > .contents .add > h3, #panel .file-browse > .txt {
   font-weight: 600;
   margin: 16px 5px 8px 0px; }
 
-.s-h4-2, #content .inside .user h3, #content .inside .document h3, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4 {
+.s-h4-2, #content .inside .user h3, #content .inside .user span, #content .inside .document h3, #content .inside .document span, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4 {
   font-size: 18px;
   line-height: 22px;
   font-weight: 300;
@@ -494,8 +500,8 @@ a.button, #panel .inside > .contents form button, #panel .inside > .contents for
   font-weight: 500;
   display: inline-block;
   text-decoration: none;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0) inset;
-  box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0) inset; }
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0) inset;
+  box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0) inset; }
   a.button:after, #panel .inside > .contents form button:after, #panel .inside > .contents form input[type="button"]:after {
     display: none; }
   a.button:hover, #panel .inside > .contents form button:hover, #panel .inside > .contents form input[type="button"]:hover {
@@ -503,11 +509,11 @@ a.button, #panel .inside > .contents form button, #panel .inside > .contents for
     border-color: #46484e;
     color: #212226; }
   a.button:active, #panel .inside > .contents form button:active, #panel .inside > .contents form input[type="button"]:active, a.button:focus, #panel .inside > .contents form button:focus, #panel .inside > .contents form input[type="button"]:focus {
-    background: #12825e;
-    border-color: #16986e;
+    background: #367a56;
+    border-color: #3d8c63;
     color: #e6e6e6;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0.3) inset;
-    box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0.3) inset; }
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0.3) inset;
+    box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0.3) inset; }
 
 a.submit, #panel .inside > .contents form button[type="submit"] {
   width: 100%;
@@ -523,20 +529,20 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   display: inline-block;
   text-decoration: none;
   color: #ffffff;
-  background: #1cc58e;
-  border: 1px solid #1cc58e;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0) inset;
-  box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0) inset; }
+  background: #4daf7c;
+  border: 1px solid #4daf7c;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0) inset;
+  box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0) inset; }
   a.submit:hover, #panel .inside > .contents form button[type="submit"]:hover {
-    background: #19af7e;
-    border-color: #19af7e;
+    background: #459d6f;
+    border-color: #459d6f;
     color: #fafafa; }
   a.submit:active, #panel .inside > .contents form button[type="submit"]:active, a.submit:focus, #panel .inside > .contents form button[type="submit"]:focus {
-    background: #12825e;
-    border-color: #16986e;
+    background: #367a56;
+    border-color: #3d8c63;
     color: #e6e6e6;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0.3) inset;
-    box-shadow: 0px 0px 10px 0px rgba(3, 18, 13, 0.3) inset; }
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0.3) inset;
+    box-shadow: 0px 0px 10px 0px rgba(15, 33, 24, 0.3) inset; }
 
 .well {
   background: #1C1C1F;
@@ -573,19 +579,26 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   .input-style.no-line, #panel .inside > .contents form input.no-line, #panel .inside > .contents form .no-line.select-checkbox {
     border: none; }
 
-.sizing, a.button, #panel .inside > .contents form button, a.submit, .input-style, #panel .inside > .contents form input, #panel .inside > .contents form .select-checkbox, #panel, #panel .inside, #panel .inside > .contents form .select-radio, #panel .inside > .contents form .select-radio > .label, #panel .inside > .contents form .select-radio > .options, #panel .inside > .contents form .select-radio > .options > ul > li, #panel .inside > .contents .group, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .container-scroll, #panel .file-browse, #panel .file-browse > .txt, #content, #content .inside, #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status, #content .inside .user .status > svg, #content .inside .document .status > svg, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .container-scroll {
+.sizing, a.button, #panel .inside > .contents form button, a.submit, .input-style, #panel .inside > .contents form input, #panel .inside > .contents form .select-checkbox, .statuses, #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status, #content .inside .results-mini > ul > li > a > .status, .statuses > svg, #content .inside .user img > svg, #content .inside .user .status > svg, #content .inside .document img > svg, #content .inside .document .status > svg, #content .inside .results-mini > ul > li > a > .status > svg, #panel, #panel .inside, #panel .inside > .contents form .select-radio, #panel .inside > .contents form .select-radio > .label, #panel .inside > .contents form .select-radio > .options, #panel .inside > .contents form .select-radio > .options > ul > li, #panel .inside > .contents .group, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .container-scroll, #panel .file-browse, #panel .file-browse > .txt, #content, #content .inside, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .results-mini ul li > .avatar, #content .inside .similar-fragments > ul, #content .inside .similar-fragments > ul > li, #content .inside .similar-fragments > ul > li > span, #content .container-scroll {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.transition-smooth, #panel a:after, #panel .inside > .logo > svg *, #panel .inside > .contents .avatar > p > svg *, #panel .inside > .contents .avatar:hover > p > span > a, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #panel .inside > .contents .add > h3, #panel .inside > .contents .add > h3 > svg *, #panel .file-browse, #panel .file-browse > .txt, #panel .file-browse > .txt > svg *, #content a, #content .inside .user-mini ul li, #content .inside .document-mini ul li {
+.transition-smooth, .statuses > svg, #content .inside .user img > svg, #content .inside .user .status > svg, #content .inside .document img > svg, #content .inside .document .status > svg, #content .inside .results-mini > ul > li > a > .status > svg, .statuses > span, #content .inside .user img > span, #content .inside .user .status > span, #content .inside .document img > span, #content .inside .document .status > span, #content .inside .results-mini > ul > li > a > .status > span, #panel a:after, #panel .inside > .logo > svg *, #panel .inside > .contents .avatar > p > svg *, #panel .inside > .contents .avatar:hover > p > span > a, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #panel .inside > .contents .add > h3, #panel .inside > .contents .add > h3 > svg *, #panel .file-browse, #panel .file-browse > .txt, #panel .file-browse > .txt > svg *, #content a, #content .inside .user-mini ul li, #content .inside .document-mini ul li, #content .inside .results-mini ul li, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .results-mini ul li > .avatar, #content .inside .results-mini > ul > li > .doc, #content .inside .results-mini > ul > li > a > .status {
   -webkit-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -moz-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -ms-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -o-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1); }
 
-.transition-long, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .avatar > .avatar:after, #panel .inside > .contents .avatar > p, #panel .inside > .contents .avatar > p > span:not(.after) > a, #panel .container-scroll:after, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .user-mini ul li > .avatar:after, #content .inside .document-mini ul li > .avatar:after, #content .container-scroll:after {
+.transition-fast, #content .inside .similar-fragments > ul > li > span {
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  -ms-transition: all 0.15s ease-out;
+  -o-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out; }
+
+.transition-long, #panel .inside > .contents .avatar > .avatar, #panel .inside > .contents .avatar > .avatar:after, #panel .inside > .contents .avatar > p, #panel .inside > .contents .avatar > p > span:not(.after) > a, #panel .container-scroll:after, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .results-mini ul li > .avatar, #content .inside .user-mini ul li > .avatar:after, #content .inside .document-mini ul li > .avatar:after, #content .inside .results-mini ul li > .avatar:after, #content .container-scroll:after {
   -webkit-transition: all 0.4s cubic-bezier(0.2, 0.75, 0.44, 1);
   -moz-transition: all 0.4s cubic-bezier(0.2, 0.75, 0.44, 1);
   -ms-transition: all 0.4s cubic-bezier(0.2, 0.75, 0.44, 1);
@@ -599,19 +612,19 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   -o-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1); }
 
-.full-relative, #page-holder, #panel, #panel .inside, #panel .inside > .contents .pending-users > h3, #panel .inside > .contents .pending-users > .pending, #panel .inside > .contents .pending-users > .pending > ul, #panel .inside > .contents .pending-users > .pending > ul > li, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > h4, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #content, #content .inside, #content .inside .block, #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status, #content .inside .user h2, #content .inside .user h3, #content .inside .document h2, #content .inside .document h3, #content .inside .user-mini ul, #content .inside .document-mini ul, #content .inside .user-mini ul li, #content .inside .document-mini ul li, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4 {
+.full-relative, .statuses, #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status, #content .inside .results-mini > ul > li > a > .status, #page-holder, #panel, #panel .inside, #panel .inside > .contents .pending-users > h3, #panel .inside > .contents .pending-users > .pending, #panel .inside > .contents .pending-users > .pending > ul, #panel .inside > .contents .pending-users > .pending > ul > li, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > h4, #panel .inside > .contents .lr > .left, #panel .inside > .contents .lr > .right, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #content, #content .inside, #content .inside .block, #content .inside .user h2, #content .inside .user h3, #content .inside .user span, #content .inside .document h2, #content .inside .document h3, #content .inside .document span, #content .inside .user-mini ul, #content .inside .document-mini ul, #content .inside .results-mini ul, #content .inside .user-mini ul li, #content .inside .document-mini ul li, #content .inside .results-mini ul li, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4, #content .inside .results-mini, #content .inside .percent-chart, #content .inside .similar-fragments > ul, #content .inside .similar-fragments > ul > li {
   position: relative;
   float: left;
   clear: both;
   width: 100%;
   display: block; }
 
-.full-block, .s-ul, .s-ul > li, #panel .inside > .logo, #panel .inside > .logo > svg, #panel .inside > .contents, #panel .inside > .contents form, #panel .inside > .contents form .half-input, #panel .inside > .contents .avatar > .avatar img, #panel .inside > .contents .avatar > .avatar object, #panel .inside > .contents .pending-users, #panel .inside > .contents .lr, #panel .inside > .contents .add, #panel .inside > .contents .add > h3, #panel .container-scroll:after, #panel .file-browse, #panel .file-browse > .txt, #content .inside .user-mini ul li > .avatar img, #content .inside .user-mini ul li > .avatar object, #content .inside .document-mini ul li > .avatar img, #content .inside .document-mini ul li > .avatar object, #content .container-scroll:after {
+.full-block, .s-ul, .s-ul > li, #panel .inside > .logo, #panel .inside > .logo > svg, #panel .inside > .contents, #panel .inside > .contents form, #panel .inside > .contents form .half-input, #panel .inside > .contents .avatar > .avatar img, #panel .inside > .contents .avatar > .avatar object, #panel .inside > .contents .pending-users, #panel .inside > .contents .lr, #panel .inside > .contents .add, #panel .inside > .contents .add > h3, #panel .container-scroll:after, #panel .file-browse, #panel .file-browse > .txt, #content .inside .user-mini ul li > .avatar img, #content .inside .user-mini ul li > .avatar object, #content .inside .document-mini ul li > .avatar img, #content .inside .document-mini ul li > .avatar object, #content .inside .results-mini ul li > .avatar img, #content .inside .results-mini ul li > .avatar object, #content .container-scroll:after {
   position: relative;
   width: 100%;
   display: block; }
 
-.a-absolute, #panel .inside > .logo > a, #panel .inside > .contents .avatar > a, #panel .inside > .contents .pending-users > .pending > ul > li > a, #panel .inside > .contents .lr > .left > a, #panel .inside > .contents .lr > .right > a, #panel .inside > .contents .add > a, #panel .file-browse > a, #content .inside .user-mini ul li > a, #content .inside .document-mini ul li > a {
+.a-absolute, #panel .inside > .logo > a, #panel .inside > .contents .avatar > a, #panel .inside > .contents .pending-users > .pending > ul > li > a, #panel .inside > .contents .lr > .left > a, #panel .inside > .contents .lr > .right > a, #panel .inside > .contents .add > a, #panel .file-browse > a, #content .inside .user-mini ul li > a, #content .inside .document-mini ul li > a, #content .inside .results-mini ul li > a {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -621,7 +634,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   background: rgba(0, 0, 0, 0);
   z-index: 5;
   cursor: pointer; }
-  .a-absolute:after, #panel .inside > .logo > a:after, #panel .inside > .contents .avatar > a:after, #panel .inside > .contents .pending-users > .pending > ul > li > a:after, #panel .inside > .contents .lr > .left > a:after, #panel .inside > .contents .lr > .right > a:after, #panel .inside > .contents .add > a:after, #panel .file-browse > a:after, #content .inside .user-mini ul li > a:after, #content .inside .document-mini ul li > a:after {
+  .a-absolute:after, #panel .inside > .logo > a:after, #panel .inside > .contents .avatar > a:after, #panel .inside > .contents .pending-users > .pending > ul > li > a:after, #panel .inside > .contents .lr > .left > a:after, #panel .inside > .contents .lr > .right > a:after, #panel .inside > .contents .add > a:after, #panel .file-browse > a:after, #content .inside .user-mini ul li > a:after, #content .inside .document-mini ul li > a:after, #content .inside .results-mini ul li > a:after {
     display: none; }
 
 .no-touch, #page-holder.no-touch, #panel .inside > .contents form .select-checkbox > ul > li, #panel .inside > .contents form .select-radio, #panel .container-scroll, #content .container-scroll, #tooltips {
@@ -631,6 +644,65 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
+
+.statuses, #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status, #content .inside .results-mini > ul > li > a > .status {
+  width: 70px;
+  height: 70px;
+  border: 6px solid white;
+  background: white;
+  border-radius: 35px;
+  clear: none;
+  float: right;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  margin-right: -6px;
+  overflow: hidden;
+  cursor: inherit; }
+  .statuses > svg, #content .inside .user img > svg, #content .inside .user .status > svg, #content .inside .document img > svg, #content .inside .document .status > svg, #content .inside .results-mini > ul > li > a > .status > svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 14px;
+    top: 0%; }
+    .statuses > svg *, #content .inside .user img > svg *, #content .inside .user .status > svg *, #content .inside .document img > svg *, #content .inside .document .status > svg *, #content .inside .results-mini > ul > li > a > .status > svg * {
+      fill: white; }
+  .statuses.ok, #content .inside .user img.ok, #content .inside .user .ok.status, #content .inside .document img.ok, #content .inside .document .ok.status, #content .inside .results-mini > ul > li > a > .ok.status {
+    background: #4daf7c; }
+  .statuses.warning, #content .inside .user img.warning, #content .inside .user .warning.status, #content .inside .document img.warning, #content .inside .document .warning.status, #content .inside .results-mini > ul > li > a > .warning.status {
+    background: #ebc95e; }
+  .statuses.alert, #content .inside .user img.alert, #content .inside .user .alert.status, #content .inside .document img.alert, #content .inside .document .alert.status, #content .inside .results-mini > ul > li > a > .alert.status {
+    background: #e55f3a; }
+  .statuses > span, #content .inside .user img > span, #content .inside .user .status > span, #content .inside .document img > span, #content .inside .document .status > span, #content .inside .results-mini > ul > li > a > .status > span {
+    top: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 58px;
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-indent: 6px; }
+    .statuses > span:after, #content .inside .user img > span:after, #content .inside .user .status > span:after, #content .inside .document img > span:after, #content .inside .document .status > span:after, #content .inside .results-mini > ul > li > a > .status > span:after {
+      content: "%";
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.4); }
+  .statuses.state2 > svg, #content .inside .user img.state2 > svg, #content .inside .user .state2.status > svg, #content .inside .document img.state2 > svg, #content .inside .document .state2.status > svg, #content .inside .results-mini > ul > li > a > .state2.status > svg {
+    top: -100%; }
+  .statuses.state2 > span, #content .inside .user img.state2 > span, #content .inside .user .state2.status > span, #content .inside .document img.state2 > span, #content .inside .document .state2.status > span, #content .inside .results-mini > ul > li > a > .state2.status > span {
+    top: 0%; }
+
+#conf-css .color-ok {
+  color: #4daf7c; }
+#conf-css .color-warning {
+  color: #ebc95e; }
+#conf-css .color-alert {
+  color: #e55f3a; }
+#conf-css .color-left {
+  color: #eeeeee; }
 
 #page-holder {
   float: left;
@@ -667,7 +739,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   #panel a {
     position: relative;
     text-decoration: none;
-    color: #32745e;
+    color: #3d9e69;
     white-space: nowrap; }
     #panel a.classic {
       color: inherit; }
@@ -678,7 +750,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
       position: absolute;
       display: block;
       height: calc(100% + 2px);
-      border-bottom: 1px solid #32745e;
+      border-bottom: 1px solid #3d9e69;
       bottom: -1px;
       left: 50%;
       width: 100%;
@@ -846,11 +918,11 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
             border-color: #38393f;
             color: white; }
             #panel .inside > .contents form .select-radio > .label:hover > svg > * {
-              fill: #e24f33; }
+              fill: #e55f3a; }
           #panel .inside > .contents form .select-radio > .label.destroy {
-            color: #e24f33; }
+            color: #e55f3a; }
             #panel .inside > .contents form .select-radio > .label.destroy > svg > * {
-              fill: #e24f33; }
+              fill: #e55f3a; }
         #panel .inside > .contents form .select-radio > .options {
           opacity: 0;
           position: absolute;
@@ -901,9 +973,9 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
               #panel .inside > .contents form .select-radio > .options > ul > li:hover {
                 color: white; }
                 #panel .inside > .contents form .select-radio > .options > ul > li:hover.destroy {
-                  color: #e24f33; }
+                  color: #e55f3a; }
                   #panel .inside > .contents form .select-radio > .options > ul > li:hover.destroy > div > svg * {
-                    fill: #e24f33; }
+                    fill: #e55f3a; }
         #panel .inside > .contents form .select-radio.opened > .label {
           border-color: #38393f;
           color: white; }
@@ -913,7 +985,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
             -ms-transform: rotate(0deg);
             transform: rotate(0deg); }
             #panel .inside > .contents form .select-radio.opened > .label > svg > * {
-              fill: #e24f33; }
+              fill: #e55f3a; }
         #panel .inside > .contents form .select-radio.opened > .options {
           opacity: 1;
           margin-top: 38px; }
@@ -971,7 +1043,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
               #panel .inside > .contents .avatar > p > span:not(.after) > a:after {
                 display: none; }
               #panel .inside > .contents .avatar > p > span:not(.after) > a:hover {
-                color: #1cc58e; }
+                color: #4daf7c; }
           #panel .inside > .contents .avatar > p > svg {
             width: 30px;
             height: 30px;
@@ -991,7 +1063,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
           #panel .inside > .contents .avatar:hover > p > span > a {
             color: #797a7e; }
             #panel .inside > .contents .avatar:hover > p > span > a:hover {
-              color: #1cc58e; }
+              color: #4daf7c; }
           #panel .inside > .contents .avatar:hover > p > svg * {
             fill: white; }
       #panel .inside > .contents .pending-users {
@@ -1070,7 +1142,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
       #panel .inside > .contents .add:hover > h3 {
         color: white; }
         #panel .inside > .contents .add:hover > h3 > svg > * {
-          fill: #1cc58e; }
+          fill: #4daf7c; }
   #panel .container-scroll {
     position: absolute;
     top: 0px;
@@ -1158,7 +1230,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
       color: white;
       border-color: #38393f; }
       #panel .file-browse:hover > .txt > svg > * {
-        fill: #e24f33; }
+        fill: #e55f3a; }
 
 #content {
   width: calc(100% - 500px);
@@ -1191,7 +1263,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
     text-decoration: none;
     color: inherit; }
     #content a:hover {
-      color: #1cc58e; }
+      color: #4daf7c; }
   #content .inside {
     width: 100%;
     min-height: 100%;
@@ -1211,69 +1283,76 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
     #content .inside .user, #content .inside .document {
       border-bottom: 2px solid #eeeeee;
       margin-bottom: 30px; }
-      #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status {
-        width: 70px;
-        height: 70px;
-        border: 6px solid white;
-        background: white;
-        border-radius: 35px;
-        clear: none;
-        float: right;
-        margin-top: -10px;
-        margin-bottom: 20px;
-        margin-right: -6px; }
-      #content .inside .user .status > svg, #content .inside .document .status > svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-        padding: 14px; }
-        #content .inside .user .status > svg *, #content .inside .document .status > svg * {
-          fill: white; }
-      #content .inside .user .status.ok, #content .inside .document .status.ok {
-        background: #1cc58e; }
-      #content .inside .user .status.warning, #content .inside .document .status.warning {
-        background: #e24f33; }
-      #content .inside .user h2, #content .inside .user h3, #content .inside .document h2, #content .inside .document h3 {
+      #content .inside .user h2, #content .inside .user h3, #content .inside .user span, #content .inside .document h2, #content .inside .document h3, #content .inside .document span {
         width: calc(100% - 92px);
         text-align: left;
         clear: none;
         margin: 0px; }
-    #content .inside .user-mini, #content .inside .document-mini {
+      #content .inside .user h3, #content .inside .user span, #content .inside .document h3, #content .inside .document span {
+        margin-bottom: 20px; }
+    #content .inside .user h2 {
+      margin-bottom: 0px; }
+    #content .inside .user h3 {
+      margin-bottom: 20px; }
+    #content .inside .user img {
+      margin-top: -10px; }
+    #content .inside .document.double h2 {
+      width: calc(50% - 35px);
+      margin: 0px;
+      margin-bottom: 20px; }
+      #content .inside .document.double h2 > span {
+        width: 100%;
+        display: block; }
+    #content .inside .document.double h2:nth-child(1) {
+      text-align: left; }
+    #content .inside .document.double h2:nth-child(2) {
+      float: right;
+      text-align: right; }
+      #content .inside .document.double h2:nth-child(2) > span {
+        text-align: right; }
+    #content .inside .document.double .status {
+      float: left;
+      position: relative;
+      margin-right: 0px; }
+    #content .inside .user-mini, #content .inside .document-mini, #content .inside .results-mini {
       margin-bottom: 30px; }
-      #content .inside .user-mini ul, #content .inside .document-mini ul {
+      #content .inside .user-mini ul, #content .inside .document-mini ul, #content .inside .results-mini ul {
         margin: 0px;
         padding: 0px;
         list-style: none; }
-        #content .inside .user-mini ul li, #content .inside .document-mini ul li {
+        #content .inside .user-mini ul li, #content .inside .document-mini ul li, #content .inside .results-mini ul li {
           clear: none;
           width: 100%;
           border-bottom: 2px solid #eeeeee;
-          margin: 10px 0px; }
-          #content .inside .user-mini ul li:first-child, #content .inside .document-mini ul li:first-child {
+          margin: 0px;
+          padding: 5px 0px; }
+          #content .inside .user-mini ul li:first-child, #content .inside .document-mini ul li:first-child, #content .inside .results-mini ul li:first-child {
             margin-top: 0px; }
-          #content .inside .user-mini ul li:last-child, #content .inside .document-mini ul li:last-child {
+          #content .inside .user-mini ul li:last-child, #content .inside .document-mini ul li:last-child, #content .inside .results-mini ul li:last-child {
             margin-bottom: 0px; }
-          #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4 {
+          #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4 {
             text-align: left;
             clear: none;
-            margin: 4px 0px;
-            width: calc(100% - 30px); }
-            #content .inside .user-mini ul li > h4 span, #content .inside .document-mini ul li > h4 span {
+            margin: 8px 0px 8px;
+            width: calc(100% - 30px);
+            left: 10px; }
+            #content .inside .user-mini ul li > h4 span, #content .inside .document-mini ul li > h4 span, #content .inside .results-mini ul li > h4 span {
               display: none; }
-          #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar {
+          #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .results-mini ul li > .avatar {
             position: relative;
             width: 36px;
             height: 36px;
-            margin: -3px;
+            margin: 1px -20px -7px -2px;
             border-radius: 18px;
             border: 3px solid white;
             background-color: white;
             display: inline-block;
-            overflow: hidden; }
-            #content .inside .user-mini ul li > .avatar img, #content .inside .user-mini ul li > .avatar object, #content .inside .document-mini ul li > .avatar img, #content .inside .document-mini ul li > .avatar object {
+            overflow: hidden;
+            right: 10px; }
+            #content .inside .user-mini ul li > .avatar img, #content .inside .user-mini ul li > .avatar object, #content .inside .document-mini ul li > .avatar img, #content .inside .document-mini ul li > .avatar object, #content .inside .results-mini ul li > .avatar img, #content .inside .results-mini ul li > .avatar object {
               max-width: 100%;
               max-height: 100%; }
-            #content .inside .user-mini ul li > .avatar:after, #content .inside .document-mini ul li > .avatar:after {
+            #content .inside .user-mini ul li > .avatar:after, #content .inside .document-mini ul li > .avatar:after, #content .inside .results-mini ul li > .avatar:after {
               content: "";
               position: absolute;
               width: 100%;
@@ -1284,11 +1363,114 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
               background: rgba(0, 0, 0, 0);
               border-radius: 25px;
               box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) inset; }
-          #content .inside .user-mini ul li:hover > .avatar, #content .inside .document-mini ul li:hover > .avatar {
-            border-color: #eeeeee;
+          #content .inside .user-mini ul li:hover:not(.empty), #content .inside .document-mini ul li:hover:not(.empty), #content .inside .results-mini ul li:hover:not(.empty) {
             background-color: #eeeeee; }
-            #content .inside .user-mini ul li:hover > .avatar:after, #content .inside .document-mini ul li:hover > .avatar:after {
-              box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset; }
+    #content .inside .results-mini {
+      clear: none;
+      float: right;
+      width: calc(100% - 220px); }
+      #content .inside .results-mini > ul > li {
+        margin: 0px 0px;
+        padding: 4px 0px; }
+        #content .inside .results-mini > ul > li > .doc {
+          margin: 3px 0px;
+          float: left;
+          width: calc(100% - 50px);
+          position: relative;
+          left: 0px; }
+        #content .inside .results-mini > ul > li > a {
+          height: calc(100% + 3px); }
+          #content .inside .results-mini > ul > li > a > .status {
+            float: right;
+            width: 28px;
+            height: 28px;
+            margin-bottom: 0px;
+            top: 4px;
+            margin: 0px;
+            border: none;
+            right: 0px; }
+            #content .inside .results-mini > ul > li > a > .status > svg {
+              padding: 8px; }
+            #content .inside .results-mini > ul > li > a > .status.ok {
+              background: #dadada; }
+        #content .inside .results-mini > ul > li > .doc {
+          left: 10px; }
+        #content .inside .results-mini > ul > li > a > .status {
+          right: 6px; }
+        #content .inside .results-mini > ul > li:hover:not(.empty) {
+          background: #eeeeee; }
+    #content .inside .header h3 {
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 600; }
+    #content .inside .header.line > * {
+      margin-right: 0px;
+      margin-bottom: 30px;
+      padding-top: 5px;
+      border-bottom: 2px solid #eeeeee; }
+    #content .inside .header.center {
+      margin-top: -20px;
+      margin-bottom: 30px;
+      text-align: center; }
+      #content .inside .header.center h3 {
+        margin: 0px;
+        padding-bottom: 14px; }
+    #content .inside .percent-chart {
+      width: 180px;
+      height: 180px; }
+      #content .inside .percent-chart > .chart {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative; }
+        #content .inside .percent-chart > .chart > canvas {
+          /*width: 100%;
+          height: 100%;*/
+          display: block; }
+      #content .inside .percent-chart > h4 {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        line-height: 180px;
+        margin: 0px;
+        font-size: 30px;
+        font-weight: 600;
+        color: #5c5c5c; }
+        #content .inside .percent-chart > h4.percent:after {
+          content: "%";
+          font-size: 18px;
+          font-weight: 400; }
+    #content .inside .similar-fragments > ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      margin: 0px 0px 20px;
+      padding: 0px;
+      color: #5c5c5c; }
+      #content .inside .similar-fragments > ul > li {
+        margin: 0px;
+        padding: 2px 0px 2px;
+        cursor: pointer; }
+        #content .inside .similar-fragments > ul > li > span {
+          width: calc(50% + 10px);
+          padding: 10px 15px;
+          border-radius: 4px;
+          background: rgba(238, 238, 238, 0); }
+          #content .inside .similar-fragments > ul > li > span:nth-child(1) {
+            position: relative;
+            float: left;
+            margin-left: -12px; }
+          #content .inside .similar-fragments > ul > li > span:nth-child(2) {
+            position: relative;
+            float: right;
+            margin-right: -12px; }
+      #content .inside .similar-fragments > ul:hover > li:not(:hover) {
+        color: darkgrey; }
+      #content .inside .similar-fragments > ul > li:hover > span {
+        background: #eeeeee; }
   #content .container-scroll {
     position: absolute;
     top: 0px;
@@ -1325,6 +1507,25 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   #page-holder.colapsed #content {
     left: 100%; }
 
+#page-holder.expanded #panel {
+  padding: 80px 50px;
+  width: calc(360px - 30px); }
+  @media only screen and (max-width: 1100px) {
+    #page-holder.expanded #panel {
+      padding: 40px 50px; } }
+  @media only screen and (max-width: 900px) {
+    #page-holder.expanded #panel {
+      padding: 30px 30px; } }
+#page-holder.expanded #content {
+  left: calc(360px - 30px);
+  width: calc(100% - 360px + 30px); }
+  @media only screen and (max-width: 1100px) {
+    #page-holder.expanded #content {
+      padding: 40px 50px; } }
+  @media only screen and (max-width: 900px) {
+    #page-holder.expanded #content {
+      padding: 30px 30px; } }
+
 #tooltips {
   position: fixed;
   top: 0px;
@@ -1342,7 +1543,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
       position: absolute;
       display: block;
       z-index: 999;
-      background: rgba(226, 79, 51, 0.9);
+      background: rgba(229, 95, 58, 0.9);
       border-radius: 2px;
       margin-top: 0px;
       opacity: 0;
@@ -1373,7 +1574,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-top: 8px solid rgba(226, 79, 51, 0.9); }
+        border-top: 8px solid rgba(229, 95, 58, 0.9); }
       #tooltips > div > div > p {
         color: white;
         margin: 0px;

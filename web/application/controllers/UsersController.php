@@ -79,6 +79,29 @@ class UsersController extends AppController
         $id = $this->_request->getParam('param1');
         $db_users = new Application_Model_MongoDB_User();
         $this->view->user = $db_users->getById($id);
+
+        $db_documents = new Application_Model_MongoDB_Document();
+        $this->view->documents = iterator_to_array($db_documents->getByOwner($id), true);
+        $this->view->documents_count_alert = 0;
+        $this->view->documents_count_warning = 0;
+        $this->view->documents_count_clean = 0;
+        $db_comparisons = new Application_Model_MongoDB_Comparison();
+        foreach($this->view->documents as &$document) {
+            $max = $db_comparisons->getByDocument($document['_id'].'', true);
+            if(isset($max['result']['percentageSimilarity'])) {
+                $document['maxSimilarity'] = (int)$max['result']['percentageSimilarity'];
+            } else {
+                $document['maxSimilarity'] = 0;
+            }
+            if($document['maxSimilarity']>=$this->view->config_['appconfig_alert']) {
+                $this->view->documents_count_alert++;
+            } else if($document['maxSimilarity']>=$this->view->config_['appconfig_warning']) {
+                $this->view->documents_count_warning++;
+            } else {
+                $this->view->documents_count_clean++;
+            }
+        }
+
         if(!$this->view->user) {
             $this->redirect_('dashboard');
         }

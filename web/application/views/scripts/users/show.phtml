@@ -44,4 +44,34 @@
 	<h3><a href="mailto:<?php echo $this->user['email'];?>"><?php echo $this->user['email'];?></a> </h3>
 </div>
 
+<div class="block header line"><h3>Dokumenty użytkownika </h3></div>
+<div class="block percent-chart">
+  <div class="chart" data-chart data-percent-connected-off="comparisons" data-percent='[
+    {"label":"Alert","value":<?php echo $this->documents_count_alert;?>,"color":"alert"},
+    {"label":"Warning","value":<?php echo $this->documents_count_warning;?>,"color":"warning"},
+    {"label":"Clean","value":<?php echo $this->documents_count_clean;?>,"color":"ok"}]'>
+  </div>
+  <h4 data-connected="comparisons"><?php echo $this->documents_count_alert+$this->documents_count_warning+$this->documents_count_clean; ?></h4>
+</div>
+<div class="block results-mini">
+  <ul>
+    <?php if(count($this->documents)>0) { foreach($this->documents as $document) { 
+      $level = $document['maxSimilarity'];//isset($comparison['result']['percentageSimilarity']) ? $comparison['result']['percentageSimilarity'] : 0;
+    ?>
+    <li>
+      <a href="<?php $this->eurl('/dashboard/documents/show/'.$document['_id']);?>" data-remote>
+        <?php $this->statusInfo($level, true, true); ?>
+      </a>
+      <div class="doc">
+        <span><?php echo $document['title'];?></span>
+      </div>
+    </li>
+    <?php } } else { ?>
+    <li class="empty">
+      <h4>Brak dokumentów</h4>
+    </li>
+    <?php } ?>
+  </ul>
+</div>
+
 <?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

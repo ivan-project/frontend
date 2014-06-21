@@ -85,6 +85,8 @@ function initReloads() {
   initCheckboxes();
   initFileBrowse();
   initTooltips();
+  initPercentages();
+  initStatuses();
   $('#page-holder *[autofocus]').first().focus();
 }
 // CUSTOMS ####################################################
@@ -92,6 +94,7 @@ function initReloads() {
 // REMOTE #####################################################
 var remote_block = false;
 var reloadByIframe;
+var stat_timeout;
 function redirect(redirect, unblock) {
   //window.location.href=redirect;
   if(unblock) remote_block = false;
@@ -391,6 +394,128 @@ function initTooltips() {
     }
   }
   ttips.mouseenter(tooltipEnter);
+}
+// PERCENTAGES ################################################
+function initPercentages() {
+  $('[data-chart]').each(function() {
+    var th = $(this);
+    var perc = JSON.parse(th.attr('data-percent'));
+    th.append('<canvas width="100%" height="100%"></canvas>');
+    var canvas = th.find('canvas');
+    canvas[0].style.width ='100%';
+    canvas[0].style.height='100%';
+    canvas[0].width  = th.width();
+    canvas[0].height = th.height();
+    var draw = canvas[0].getContext('2d');
+    var wid = canvas.width();
+    var hei = canvas.height();
+    var dim = Math.min(wid, hei);
+    var thick = 40;
+    var thick_half = thick/2;
+    var x = dim/2;
+    var y = dim/2;
+    var rad = dim/2-thick/2-1;
+    var sum=0;
+    var connected;
+    var connected_val;
+    if(th.attr('data-percent-connected')) {
+      connected = $('[data-connected="'+th.attr('data-percent-connected')+'"]');
+      connected_val = parseFloat(connected.text());
+      connected.text('0');
+    }
+    $.each(perc, function(key, value) {
+      sum += value.value;
+    });
+    var colors = {};
+    colors["ok"] = $('#conf-css .color-ok').css('color');
+    colors["warning"] = $('#conf-css .color-warning').css('color');
+    colors["alert"] = $('#conf-css .color-alert').css('color');
+    colors["left"] = $('#conf-css .color-left').css('color');
+
+    var drawArc = function(draw, from, to, color) {
+      draw.beginPath();
+      draw.arc(x, y, rad, from, to, false);
+      draw.strokeStyle = color;
+      draw.lineWidth = thick;
+      draw.stroke();
+
+      from/360*2*Math.PI+1.5*Math.PI
+    }
+    var drawDivisions = function(draw, divisions, color) {
+      var x1, x2, y1, y2, divis;
+      for(var i = 0; i < divisions; i++) {
+        divis = (1.5 + i/divisions*2) * Math.PI;
+        x1 = x + (rad-thick_half-1) * Math.cos(divis);
+        y1 = y + (rad-thick_half-1) * Math.sin(divis);
+        x2 = x + (rad+thick_half+1) * Math.cos(divis);
+        y2 = y + (rad+thick_half+1) * Math.sin(divis);
+        draw.beginPath();
+        draw.moveTo(x1, y1);
+        draw.lineTo(x2, y2);
+        draw.strokeStyle = color;
+        draw.lineWidth = 1.2;
+        draw.stroke();
+      }
+    }
+
+    
+
+    //drawArc(draw, 100, 'rgba(210,200,191,1)');
+    var initShow = function() {
+      var time_now = 0;
+      var time_delay = 10;
+      var time_counter = 200;
+      var now_perc;
+      var interval = setInterval(function() {
+        time_now++;
+        if(time_now>=time_counter) {
+          clearInterval(interval);
+        }
+        now_perc = $.easing.easeOutQuad(null, time_now, 0, 1, time_counter);
+        draw.clearRect(0, 0, wid, hei);
+        //drawArc(draw, 100, 'rgba(210,200,191,1)');
+        //drawArc(draw, now_perc, 'rgba(61,195,98,1)');
+
+        var from = 1.5*Math.PI;
+        drawArc(draw, from, from+2*Math.PI, colors['left']);
+        console.log(now_perc);
+        $.each(perc, function(key, value) {
+          var to = from + now_perc*value.value/sum*2*Math.PI;
+          drawArc(draw, from, to+0.001, colors[value.color]);
+          from = to;
+        });
+        if(connected) {
+          connected.text(Math.round(now_perc*connected_val));
+        }
+      }, time_delay);
+    }
+    initShow();
+    //setTimeout(initShow,ind*200);
+    /*var checkVisibility = function(e) {
+      var st = $(window).scrollTop()+window_h;
+      var my_t = th.offset().top+hei;
+      if(st-my_t>0) {
+        initShow();
+        scrollRemoveFun(checkVisibility);
+      }
+    }*/
+    //scrollAddFun(checkVisibility);
+  });
+}
+// STATUSES ###################################################
+function initStatuses() {
+  function show() {
+    clearTimeout(stat_timeout);
+    $('.status > span').parent().addClass('state2');
+    stat_timeout = setTimeout(hide, 1500);
+  }
+  function hide() {
+    clearTimeout(stat_timeout);
+    $('.status > span').parent().removeClass('state2');
+    stat_timeout = setTimeout(show, 3500);
+  }
+  clearTimeout(stat_timeout);
+  stat_timeout = setTimeout(show, 500);
 }
 // SCROLL #####################################################
 function initContainerScroll(target) {

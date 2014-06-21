@@ -66,6 +66,17 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
         )->sort(array('title' => 1));
         return $object;
     }
+    public function getShorts() {
+        $object = $this->c()->find(
+            array(),
+            array('_id' => 1, 'title' => 1)
+        )->sort(array('_id' => 1));
+        $shorts = array();
+        foreach($object as $item) {
+            $shorts[$item['_id'].""] = $item['title'];
+        }
+        return $shorts;
+    }
     public function filter($filter) {
         $object = $this->c()->find(
             $filter, 
@@ -89,8 +100,7 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
     }
     public function getById($id) {
         $object = $this->c()->findOne(
-            array('_id' => new MongoId($id)),
-            array('plaintext' => 0, 'lemmatized' => 0)
+            array('_id' => new MongoId($id))
         );
         return $object;
     }

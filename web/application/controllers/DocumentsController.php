@@ -21,14 +21,14 @@ class DocumentsController extends AppController
         $types = array();
         $owner = array();
         $form['owner'] = strcmp($this->_request->getParam('owner'),'true')==0 ? 'true' : 'false';
-        if(strcmp($form['owner'],'false')) {
+        if(strcmp($form['owner'],'false')!=0) {
             $owner = array('_owner' => new MongoId($this->view->user_['_id']));
         }
         if($this->_request->getParam('type')) {
             $form['type'] = $this->_request->getParam('type');
             $types_tmp = array();
             foreach($form['type'] as $type) {
-                array_push($types_tmp, new MongoInt32($type));
+                array_push($types_tmp, $type);
             }
             $types = array(
                 'type' => array(
@@ -76,11 +76,38 @@ class DocumentsController extends AppController
     }
     public function showAction() {
         $id = $this->_request->getParam('param1');
+
         $db_documents = new Application_Model_MongoDB_Document();
         $this->view->document = $db_documents->getById($id);
+        $this->view->document_shorts = $db_documents->getShorts();
+
+        $db_comparisons = new Application_Model_MongoDB_Comparison();
+        $this->view->comparisons = $db_comparisons->getByDocument($this->view->document['_id']);
+        $this->view->comparisons_count_alert = $db_comparisons->getStatsDocument($id, $this->view->config_['appconfig_alert']);
+        $this->view->comparisons_count_warning = $db_comparisons->getStatsDocument($id, $this->view->config_['appconfig_warning']) - $this->view->comparisons_count_alert;
+        $this->view->comparisons_count_clean = $db_comparisons->getStatsDocument($id, $this->view->config_['appconfig_warning'], true);
+        $this->view->comparisons_count_left = $this->view->document['comparison']['total']-$this->view->document['comparison']['completed'];
+
         if(!$this->view->document) {
             $this->redirect_('dashboard');
         }
+    }
+    public function compareAction() {
+        $id = $this->_request->getParam('doc');
+        $id_c = $this->_request->getParam('compare');
+
+        $db_documents = new Application_Model_MongoDB_Document();
+        $this->view->document = $db_documents->getById($id);
+        $this->view->document_c = $db_documents->getById($id_c);
+
+        $db_comparisons = new Application_Model_MongoDB_Comparison();
+        $this->view->comparisons = $db_comparisons->getByDocumentsFull($this->view->document['_id'], $this->view->document_c['_id']);
+
+        if(!$this->view->comparisons) {
+            $this->redirect_('dashboard');
+        }
+
+        $this->view->config_['state'] = 'expanded';
     }
     public function updateAction() {
         $id = $this->_request->getParam('param1');

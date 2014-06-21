@@ -1,0 +1,44 @@
+<?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
+
+<div class="group avatar">
+	<a href="<?php $this->eurl('dashboard/documents/show/'.$this->document['_id']);?>" data-remote></a>
+	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Statystyki dokumentu</span></p>
+</div>
+
+<?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<?php 
+	$level_doc = isset($this->comparisons['result']['percentageSimilarity']) ? $this->comparisons['result']['percentageSimilarity'] : 0; 
+?>
+<div class="block document double">
+	<h2><?php echo $this->document['title'];?> <span><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></span></h2>
+	<h2><?php echo $this->document_c['title'];?> <span><?php echo date('Y-m-d H:i:s', $this->document_c['created_at']->sec);?></span></h2>
+	<?php $this->statusInfo($level_doc, false, true); ?>
+</div>
+<?php if(isset($this->comparisons['result']['lines']) && count($this->comparisons['result']['lines'])>0) { ?>
+<div class="block header line center"><h3>Podobne fragmenty </h3></div>
+<div class="block similar-fragments">
+	<?php 
+		$plain = explode("\n", $this->document['plaintext']);
+		$plain_c = explode("\n", $this->document_c['plaintext']);
+
+	    if(strcmp($this->comparisons['compared'][0].'', $this->document_c['_id'].'')==0) {
+	    	$tmp = $plain_c;
+	    	$plain_c = $plain;
+	    	$plain = $tmp;
+	    }
+	?>
+	<ul>
+		<?php foreach($this->comparisons['result']['lines'] as $line) { ?>
+		<li>
+			<span data-line="<?php echo $line['sourceLineId'];?>"><?php echo $plain[$line['sourceLineId']-1]; ?></span>
+			<span data-line="<?php echo $line['similarLineId'];?>"><?php echo $plain_c[$line['similarLineId']-1]; ?></span>
+		</li>
+		<?php } ?>
+	</ul>
+</div>
+<?php } else { ?>
+<div class="block header line center"><h3>Nie wykryto podobnych fragmentów </h3></div>
+<?php } ?>
+
+<?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

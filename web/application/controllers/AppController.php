@@ -19,6 +19,8 @@ class AppController extends Zend_Controller_Action
         $application_config = Zend_Controller_Front::getInstance()->getParam('bootstrap');
         $appConfig = $application_config->getOption('appConfig');
         $this->view->config_['appconfig_ajax'] = $appConfig['ajax'];
+        $this->view->config_['appconfig_warning'] = $appConfig['warning'];
+        $this->view->config_['appconfig_alert'] = $appConfig['alert'];
 
         if($this->_request->getParam('ajax') && $this->_request->getParam('ajax')==true) {
             $this->_helper->layout()->disableLayout();

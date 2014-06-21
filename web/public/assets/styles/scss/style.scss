@@ -48,9 +48,18 @@ h3, .s-h3 {
 	margin: 20px 5px 10px 0px;
 }
 .s-h3-2 {
-	font-size: 21px;
+	// font-size: 21px;
+	// line-height: 24px;
+	// font-weight: 600;
+	font-size: 30px;
+	line-height: 32px;
+	font-weight: 400;
+	margin: 18px 5px 9px 0px;
+}
+.s-h3-3 {
+	font-size: 20px;
 	line-height: 24px;
-	font-weight: 600;
+	font-weight: 400;
 	margin: 18px 5px 9px 0px;
 }
 h4, .s-h4 {
@@ -207,6 +216,9 @@ a.submit {
 .transition-smooth {
 	@include transition(all, 0.25s, cubic-bezier(0.165, 0.840, 0.440, 1.000));
 }
+.transition-fast {
+	@include transition(all, 0.15s, ease-out);
+}
 .transition-long {
 	@include transition(all, 0.4s, cubic-bezier(0.2, 0.750, 0.440, 1.000));
 }
@@ -242,6 +254,89 @@ a.submit {
 }
 .no-touch {
 	@include touchNone();
+}
+.statuses {
+	width: 70px;
+	height: 70px;
+	border: 6px solid $colWhite;
+	background: $colWhite;
+	border-radius: 35px;
+	clear: none;
+	float: right;
+	margin-top: -20px;
+	margin-bottom: 20px;
+	margin-right: -6px;
+	overflow: hidden;
+	cursor: inherit;
+	@extend .sizing;
+	@extend .full-relative;
+
+	& > svg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		display: block;
+		padding: 14px;
+		top: 0%;
+		@extend .transition-smooth;
+		@extend .sizing;
+
+		& * {
+			fill: $colWhite;
+		}
+	}
+	&.ok {
+		background: $colAccent;
+	}
+	&.warning {
+		background: $colAccent4;
+	}
+	&.alert {
+		background: $colAccent3;
+	}
+	& > span {
+		top: 100%;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		line-height: 58px;
+		display: block;
+		font-size: 24px;
+		font-weight: 600;
+		color: $colWhite;
+		text-indent: 6px;
+		@extend .transition-smooth;
+
+		&:after {
+			content: "%";
+			font-size: 14px;
+			font-weight: 400;
+			color: rgba(255,255,255,0.4);
+		}
+	}
+	&.state2 {
+		& > svg {
+			top: -100%;
+		}
+		& > span {
+			top: 0%;
+		}
+	}
+}
+#conf-css {
+	.color-ok {
+		color: $colAccent;
+	}
+	.color-warning {
+		color: $colAccent4;
+	}
+	.color-alert {
+		color: $colAccent3;
+	}
+	.color-left {
+		color: $lineDark;
+	}
 }
 // CLASSES
 #page-holder {
@@ -1170,39 +1265,9 @@ a.submit {
 			margin-bottom: 30px;
 
 			img, .status {
-				width: 70px;
-				height: 70px;
-				border: 6px solid $colWhite;
-				background: $colWhite;
-				border-radius: 35px;
-				clear: none;
-				float: right;
-				margin-top: -10px;
-				margin-bottom: 20px;
-				margin-right: -6px;
-				@extend .sizing;
-				@extend .full-relative;
+				@extend .statuses;
 			}
-			.status {
-				& > svg {
-					width: 100%;
-					height: 100%;
-					display: block;
-					padding: 14px;
-					@extend .sizing;
-
-					& * {
-						fill: $colWhite;
-					}
-				}
-				&.ok {
-					background: $colAccent;
-				}
-				&.warning {
-					background: $colAccent3;
-				}
-			}
-			h2, h3 {
+			h2, h3, span {
 				width: calc(100% - 92px);
 				text-align: left;
 				clear: none;
@@ -1212,11 +1277,52 @@ a.submit {
 			h2 {
 				@extend .s-h3-2;
 			}
-			h3 {
+			h3, span {
+				margin-bottom: 20px;
 				@extend .s-h4-2;
 			}
 		}
-		.user-mini, .document-mini {
+		.user {
+			h2 {
+				margin-bottom: 0px;
+			}
+			h3 {
+				margin-bottom: 20px;
+			}
+			img {
+				margin-top: -10px;
+			}
+		}
+		.document.double {
+			h2 {
+				width: calc(50% - 35px);
+				margin: 0px;
+				margin-bottom: 20px;
+				@extend .s-h3-3;
+
+				& > span {
+					width: 100%;
+					display: block;
+				}
+			}
+			h2:nth-child(1) {
+				text-align: left;
+			}
+			h2:nth-child(2) {
+				float: right;
+				text-align: right;
+
+				& > span {
+					text-align: right;
+				}
+			}
+			.status {
+				float: left;
+				position: relative;
+				margin-right: 0px;
+			}
+		}
+		.user-mini, .document-mini, .results-mini {
 			margin-bottom: 30px;
 
 			ul {
@@ -1229,7 +1335,8 @@ a.submit {
 					clear: none;
 					width: 100%;
 					border-bottom: 2px solid $lineDark;
-					margin: 10px 0px;
+					margin: 0px;
+					padding: 5px 0px;
 					@extend .full-relative;
 					@extend .transition-smooth;
 					
@@ -1245,10 +1352,12 @@ a.submit {
 					& > h4 {
 						text-align: left;
 						clear: none;
-						margin: 4px 0px;
+						margin: 8px 0px 8px;
 						width: calc(100% - 30px);
+						left: 10px;
 						@extend .s-h4-2;
 						@extend .full-relative;
+						@extend .transition-smooth;
 
 						span {
 							display: none;
@@ -1258,15 +1367,16 @@ a.submit {
 						position: relative;
 						width: 36px;
 						height: 36px;
-						margin: -3px;
+						margin: 1px -20px -7px -2px;
 						border-radius: 18px;
 						border: 3px solid $colWhite;
 						background-color: $colWhite;
 						display: inline-block;
 						overflow: hidden;
-
+						right: 10px;
 						@extend .sizing;
 						@extend .transition-long;
+						@extend .transition-smooth;
 
 						& img, & object {
 							max-width: 100%;
@@ -1290,15 +1400,188 @@ a.submit {
 							@extend .transition-long;
 						}
 					}
-					&:hover {
-						& > .avatar {
-							border-color: $lineDark;
-							background-color: $lineDark;
+					&:hover:not(.empty) {
+						background-color: $lineDark;
+						// & > .avatar {
+						// 	border-color: $lineDark;
+						// 	background-color: $lineDark;
 
-							&:after {
-								box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset;
-							}
+						// 	&:after {
+						// 		box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2) inset;
+						// 	}
+						// }
+					}
+				}
+			}
+		}
+		.results-mini {
+			clear: none;
+			float: right;
+			width: calc(100% - 220px);
+			@extend .full-relative;
+
+			& > ul {
+				& > li {
+					margin: 0px 0px;
+					padding: 4px 0px;
+
+					& > .doc {
+						margin: 3px 0px;
+						float: left;
+						width: calc(100% - 50px);
+						position: relative;
+						left: 0px;
+						@extend .transition-smooth;
+
+						& > span {
+							
 						}
+					}
+					& > a {
+						height: calc(100% + 3px);
+
+						& > .status {
+							float: right;
+							width: 28px;
+							height: 28px;
+							margin-bottom: 0px;
+							top: 4px;
+							margin: 0px;
+							border: none;
+							right: 0px;
+							@extend .transition-smooth;
+
+							& > svg {
+								padding: 8px;
+							}
+							&.ok {
+								background: darken($lineDark, 8%);
+							}
+
+							@extend .statuses;
+						}
+					}
+
+					& > .doc {
+						left: 10px;
+					}
+					& > a > .status {
+						right: 6px;
+					}
+					&:hover:not(.empty) {
+						background: $lineDark;
+					}
+				}
+			}
+		}
+		.header {
+			h3 {
+				text-transform: uppercase;
+				font-size: 16px;
+				font-weight: 600;
+			}
+			&.line > * {
+				// margin-right: 0px;
+				// padding-top: 8px;
+				// border-top: 2px solid $lineDark;
+				margin-right: 0px;
+				margin-bottom: 30px;
+				padding-top: 5px;
+				border-bottom: 2px solid #eeeeee;
+			}
+			&.center {
+				margin-top: -20px;
+				margin-bottom: 30px;
+				text-align: center;
+
+				h3 {
+					margin: 0px;
+					padding-bottom: 14px;
+				}
+			}
+		}
+		.percent-chart {
+			width: 180px;
+			height: 180px;
+			@extend .full-relative;
+
+			& > .chart {
+				width: 100%;
+				height: 100%;
+				display: block;
+				position: relative;
+
+				& > canvas {
+					/*width: 100%;
+					height: 100%;*/
+					display: block;
+				}
+			}
+			& > h4 {
+				text-align: center;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				line-height: 180px;
+				margin: 0px;
+				font-size: 30px;
+				font-weight: 600;
+				color: $colDef3;
+				&.percent:after {
+					// font-weight: 700;
+					content: "%";
+					font-size: 18px;
+					font-weight: 400;
+				}
+			}
+		}
+		.similar-fragments {
+			& > ul {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+				margin: 0px 0px 20px;
+				padding: 0px;
+				color: $colDef3;
+				@extend .full-relative;
+				@extend .sizing;
+
+				& > li {
+					margin: 0px;
+					padding: 2px 0px 2px;
+					cursor: pointer;
+					@extend .full-relative;
+					@extend .sizing;
+
+					& > span {
+						width: calc(50% + 10px);
+						padding: 10px 15px;
+						border-radius: 4px;
+						background: transparentize($lineDark, 1);
+						@extend .transition-fast;
+						@extend .sizing;
+
+						&:nth-child(1) {
+							position: relative;
+							float: left;
+							margin-left: -12px;
+						}
+						&:nth-child(2) {
+							position: relative;
+							float: right;
+							margin-right: -12px;
+						}
+					}
+				}
+				&:hover > li:not(:hover) {
+					color: lighten($colDef3, 30%);
+				}
+				& > li:hover {
+
+					& > span {
+						background: $lineDark;
 					}
 				}
 			}
@@ -1349,6 +1632,30 @@ a.submit {
 	}*/
 	#content {
 		left: 100%;
+	}
+}
+#page-holder.expanded {
+	#panel {
+		padding: 80px 50px;
+		width: calc(#{$panelSizeXS} - 30px);
+
+		@media #{$jump1} {
+			padding: 40px 50px;
+		}
+		@media #{$jump2} {
+			padding: 30px 30px;
+		}
+	}
+	#content {
+		left: calc(#{$panelSizeXS} - 30px);
+		width: calc(100% - #{$panelSizeXS} + 30px);
+
+		@media #{$jump1} {
+			padding: 40px 50px;
+		}
+		@media #{$jump2} {
+			padding: 30px 30px;
+		}
 	}
 }
 #tooltips {

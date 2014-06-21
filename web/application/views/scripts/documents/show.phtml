@@ -25,10 +25,55 @@
 
 <?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
 
+<?php 
+	$level_doc = 0;
+	if($this->comparisons->count()>0) {
+		$this->comparisons->next();
+	    $first = $this->comparisons->current();
+		$level_doc = isset($first['result']['percentageSimilarity']) ? $first['result']['percentageSimilarity'] : 0; 
+	}
+?>
 <div class="block document">
-	<div class="status ok"><?php $this->svg('graphics/icons/document-ok.svg');?></div>
+	<?php $this->statusInfo($level_doc, false, true); ?>
 	<h2><?php echo $this->document['title'];?> </h2>
-	<h3><a href="mailto:<?php echo $this->document['email'];?>"><?php echo $this->document['author'];?></a> </h3>
+	<h3><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></h3>
+</div>
+<div class="block header line"><h3>Porównane dokumenty </h3></div>
+<div class="block percent-chart">
+	<div class="chart" data-chart data-percent-connected-off="comparisons" data-percent='[
+		{"label":"Alert","value":<?php echo $this->comparisons_count_alert;?>,"color":"alert"},
+		{"label":"Warning","value":<?php echo $this->comparisons_count_warning;?>,"color":"warning"},
+		{"label":"Clean","value":<?php echo $this->comparisons_count_clean;?>,"color":"ok"},
+		{"label":"Left","value":<?php echo $this->comparisons_count_left;?>,"color":"left"}]'>
+	</div>
+	<h4 class="percent" data-connected="comparisons"><?php echo round(100*$this->document['comparison']['completed']/$this->document['comparison']['total']); ?></h4>
+</div>
+<div class="block results-mini">
+	<ul>
+		<?php if($this->comparisons->count()>0) { foreach($this->comparisons as $comparison) { 
+			$level = isset($comparison['result']['percentageSimilarity']) ? $comparison['result']['percentageSimilarity'] : 0;
+		?>
+		<li>
+			<?php $compared;?>
+			<?php if($comparison['compared'][0]==$this->document['_id']) { 
+					$compared = $comparison['compared'][1];
+				} else {
+					$compared = $comparison['compared'][0];
+				}
+			?>
+			<a href="<?php $this->eurl('/dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$compared);?>" data-remote>
+				<?php $this->statusInfo($level, true, true); ?>
+			</a>
+			<div class="doc">
+				<span><?php echo $this->document_shorts[$compared.""];?></span>
+			</div>
+		</li>
+		<?php } } else { ?>
+		<li class="empty">
+			<h4>Brak wyników</h4>
+		</li>
+		<?php } ?>
+	</ul>
 </div>
 
 <?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>
