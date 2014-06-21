@@ -1,9 +1,11 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
 <form name="login" action="<?php $this->eurl('user/sign-in'); ?>" method="post" data-remote>
-  <?php $this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true, 'ic ic-user');?>
-  <?php $this->Input('password', 'pwd', 'Hasło', '', true, 'ic ic-key');?>
-  <?php $this->Input('submit', 'submit', 'Zaloguj', 'ok');?>
+	<?php 
+		$this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true, 'ic ic-user');
+		$this->Input('password', 'pwd', 'Hasło', '', true, 'ic ic-key');
+		$this->Input('submit', 'submit', 'Zaloguj', 'ok');
+	?>
 </form>
 <p>Nie posiadasz konta? <a href="<?php $this->eurl('user/sign-up'); ?>" data-remote>Poproś o udzielenie dostępu.</a> </p>
 

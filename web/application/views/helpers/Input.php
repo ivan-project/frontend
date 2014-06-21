@@ -7,7 +7,7 @@ class Zend_View_Helper_Input {
         switch($type) {
         	case "document":
 		        echo "<div class='file-browse' data-file-browse='true'>
-					<input type='file' name='{$name}' accept='application/pdf,application/msword' data-file-trigger {$required}>
+					<input type='file' name='{$name}' accept='application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document' data-file-trigger {$required}>
 				    <div class='txt' data-placeholder='{$placeholder}'><span>{$placeholder}</span>{$view->svg('graphics/icons/document-create.svg',true)}</div>
 				    <div class='overview document'></div>
 				    <a></a>

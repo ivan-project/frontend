@@ -1,37 +1,30 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard/users');?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Spis użytkowników</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <?php if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->user['_id'])) { ?>
 <form name="user_data_change" action="<?php $this->eurl('dashboard/users/update/'.$this->user['_id']); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
-  	<?php $this->Input('text', 'name', 'Imię i nazwisko', $this->user['name'], true, 'emp');?>
-  	<?php $this->Input('email', 'email', 'E-mail', $this->user['email'], true);?>
-  	<?php $this->Input('image', 'avatar', 'Wybierz zdjęcie');?>
-	
+	<?php 
+    $this->Input('text', 'name', 'Imię i nazwisko', $this->user['name'], true, 'emp');
+    $this->Input('email', 'email', 'E-mail', $this->user['email'], true);
+    $this->Input('image', 'avatar', 'Wybierz zdjęcie');
 
-    <?php if(App_Auth::getInstance()->isAdmin()) { ?>
-
-  	<?php $this->InputRadio('role', 'Uprawnienia', array(
-  				'3'=>'Administrator', 
-  				'2'=>'Promotor', 
-  				'1'=>'Zawieszony', 
-  				'0'=>array('Usuń konto','destroy','graphics/icons/destroy.svg')
-  			),$this->user['role']);?>
-
-    <?php } else if(App_Auth::getInstance()->isSelf($this->user['_id'])) { ?>
-
-    <?php $this->InputRadio('action', 'Akcja', array(
+    if(App_Auth::getInstance()->isAdmin()) {
+      $this->InputRadio('role', 'Uprawnienia', array(
+          '3'=>'Administrator', 
+          '2'=>'Promotor', 
+          '1'=>'Zawieszony', 
+          '0'=>array('Usuń konto','destroy','graphics/icons/destroy.svg')
+        ),$this->user['role']);
+    } else if(App_Auth::getInstance()->isSelf($this->user['_id'])) {
+      $this->InputRadio('action', 'Akcja', array(
           '1'=>'-', 
           '0'=>array('Usuń konto','destroy','graphics/icons/destroy.svg')
-        ),'1');?>
-
-    <?php } ?>
-
-
-  	<?php $this->Input('submit', 'submit', 'Zapisz zmiany', 'ok');?>
+        ),'1');
+    }
+    $this->Input('submit', 'submit', 'Zapisz zmiany', 'ok');
+  ?>
 </div>
 </form>
 <?php } ?>
@@ -59,7 +52,7 @@
       $level = $document['maxSimilarity'];//isset($comparison['result']['percentageSimilarity']) ? $comparison['result']['percentageSimilarity'] : 0;
     ?>
     <li>
-      <a href="<?php $this->eurl('/dashboard/documents/show/'.$document['_id']);?>" data-remote>
+      <a href="<?php $this->eurl('dashboard/documents/show/'.$document['_id']);?>" data-remote>
         <?php $this->statusInfo($level, true, true); ?>
       </a>
       <div class="doc">

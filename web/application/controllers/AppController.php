@@ -21,6 +21,7 @@ class AppController extends Zend_Controller_Action
         $this->view->config_['appconfig_ajax'] = $appConfig['ajax'];
         $this->view->config_['appconfig_warning'] = $appConfig['warning'];
         $this->view->config_['appconfig_alert'] = $appConfig['alert'];
+        $this->view->config_['back'] = array("/dashboard", "Powrót do panelu");
 
         if($this->_request->getParam('ajax') && $this->_request->getParam('ajax')==true) {
             $this->_helper->layout()->disableLayout();

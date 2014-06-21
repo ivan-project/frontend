@@ -12,6 +12,7 @@ class DashboardController extends AppController
         }
     }
     public function indexAction() {
+        $this->view->title = 'Panel użytkownika';
         $this->view->config_['state']='';
 
         $db_users = new Application_Model_MongoDB_User();

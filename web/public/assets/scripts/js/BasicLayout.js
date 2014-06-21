@@ -94,11 +94,30 @@ function initReloads() {
 // REMOTE #####################################################
 var remote_block = false;
 var reloadByIframe;
+var pop_state = false;
 var stat_timeout;
+window.addEventListener('popstate', function(event) {
+  if($('body').attr('data-ajax-enabled','true')) {
+    pop_state = window.location.href;
+    console.log(window.location.href);
+    loadContents(window.location.href);
+  }
+});
+function historyBack() {
+  if(false) {//document.referrer=="") {
+    redirect('/');
+  } else {
+    history.back();
+  }
+}
 function redirect(redirect, unblock) {
-  //window.location.href=redirect;
-  if(unblock) remote_block = false;
-  loadContents(redirect);
+  if($('body').attr('data-ajax-enabled','true')) {
+    //window.location.href=redirect;
+    if(unblock) remote_block = false;
+    loadContents(redirect);
+  } else {
+    window.location.href = redirect;
+  }
 }
 function initPostRemote() {
   $('form[data-remote]:not(form[data-remote="true"])').each(function() {
@@ -180,21 +199,30 @@ function updateContents(contents, url) {
   contents_holder.animate({'opacity':0}, 250, 'easeInQuad').promise().done(function () {
     contents_holder.empty();
     contents_holder.css({'top':0});
-    panel.find('> .inside, > .container-scroll').stop().css({'top':0});
-    $('#panel > .inside').append($(contents).find('#panel > .inside').html());
-    $('#content > .inside').append($(contents).find('#content > .inside').html());
-    initReloads();
-    if(url!=null) {
-      history.replaceState(
-        {},                 // HISTORY DATA
-        $('title').text(),  // HISTORY TITLE
-        url                 // HISTORY URL
-      );
+    //console.log(pop_state+" & "+url);
+    if(pop_state==false || pop_state==url || url==null) {
+      panel.find('> .inside, > .container-scroll').stop().css({'top':0});
+      $('#panel > .inside').append($(contents).find('#panel > .inside').html());
+      $('#content > .inside').append($(contents).find('#content > .inside').html());
+      initReloads();
+      if(url!=null && pop_state==false) {
+        history.pushState(
+          {'url':window.location.href},                 // HISTORY DATA
+          $('title').text(),  // HISTORY TITLE
+          url                 // HISTORY URL
+        );
+      }
+      $('title').text($($(contents).attr('data-title')).text());
+      $(contents).attr('data-title','');
+      contents_holder.animate({'opacity':1,'top':0}, 400, 'easeOutQuart');
+      contents_holder.removeClass('hide');
+      remote_block = false;
+      busy(false);
+      pop_state = false;
+    } else {
+      remote_block = false;
+      loadContents(pop_state);
     }
-    contents_holder.animate({'opacity':1,'top':0}, 400, 'easeOutQuart');
-    contents_holder.removeClass('hide');
-    remote_block = false;
-    busy(false);
   });
 }
 // INPUTS #####################################################
@@ -478,7 +506,7 @@ function initPercentages() {
 
         var from = 1.5*Math.PI;
         drawArc(draw, from, from+2*Math.PI, colors['left']);
-        console.log(now_perc);
+        //console.log(now_perc);
         $.each(perc, function(key, value) {
           var to = from + now_perc*value.value/sum*2*Math.PI;
           drawArc(draw, from, to+0.001, colors[value.color]);

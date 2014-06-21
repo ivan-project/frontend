@@ -1,18 +1,18 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <form name="users_filter" action="<?php $this->eurl('dashboard/users'); ?>" method="get" data-remote>
 <div class="group">
-  	<?php $this->Input('text', 'search', 'Imię, nazwisko lub e-mail', $this->formVal('search'), false, 'ic ic-search');?>
-  	<?php $this->InputCheckbox('role','Typ:',array(
+  	<?php 
+  		$this->Input('text', 'search', 'Imię, nazwisko lub e-mail', $this->formVal('search'), false, 'ic ic-search');
+  		$this->InputCheckbox('role','Typ:',array(
   				'3'=>'Administrator', 
   				'2'=>'Promotor',
   				'1'=>'Zawieszony'
-  			),$this->formVal('role'));?>
-  	<?php $this->Input('submit', 'submit', 'Filtruj wyniki', 'ok');?>
+  			),$this->formVal('role'));
+  		$this->Input('submit', 'submit', 'Filtruj wyniki', 'ok');
+  	?>
 </div>
 </form>
 

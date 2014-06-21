@@ -1,9 +1,6 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard/documents/show/'.$this->document['_id']);?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Statystyki dokumentu</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
 
 <?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
 
@@ -29,6 +26,12 @@
 	    }
 	?>
 	<ul>
+		<?php if(false) { ?>
+		<li>
+			<span><?php echo str_replace("\n", "<br>", $this->document['plaintext']);?></span>
+			<span><?php echo str_replace("\n", "<br>", $this->document_c['plaintext']);?></span>
+		</li>
+		<?php } ?>
 		<?php foreach($this->comparisons['result']['lines'] as $line) { ?>
 		<li>
 			<span data-line="<?php echo $line['sourceLineId'];?>"><?php echo $plain[$line['sourceLineId']-1]; ?></span>

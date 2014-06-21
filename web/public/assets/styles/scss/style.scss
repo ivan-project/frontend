@@ -1239,7 +1239,7 @@ a.submit {
 		color: inherit;
 		@extend .transition-smooth;
 
-		&:hover {
+		&[href]:hover {
 			color: $colAccent;
 		}
 	}
@@ -1583,6 +1583,30 @@ a.submit {
 					& > span {
 						background: $lineDark;
 					}
+				}
+			}
+		}
+		.info {
+			& > .left {
+				float: left;
+				width: 180px;
+			}
+			& > .right {
+				float: right;
+				width: calc(100% - 180px - 40px);
+			}
+			& > * {
+				margin-bottom: 30px;
+				& > .header > h3 {
+					margin: 0px;
+				}
+				& > h4 {
+					margin: 0px;
+					@extend .s-h4-2;
+				}
+				& > h5 {
+					margin: 0px;
+					@extend .s-h4-2;
 				}
 			}
 		}

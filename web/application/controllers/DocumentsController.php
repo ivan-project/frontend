@@ -13,6 +13,7 @@ class DocumentsController extends AppController
         }
     }
     public function indexAction() {
+        $this->view->title = 'Dokumenty';
         $form = array();
 
         $db_documents = new Application_Model_MongoDB_Document();
@@ -52,6 +53,8 @@ class DocumentsController extends AppController
         $this->view->form = $form;
     }
     public function createAction() {
+        $this->view->title = 'Dokumenty - Nowy dokument';
+        $this->view->config_['back'] = array("/dashboard/documents", "Spis dokumentów");
         $form = array();
         if($this->_request->isPost()) {
             $form['title'] = $this->_request->getPost('title');
@@ -61,10 +64,11 @@ class DocumentsController extends AppController
             $owner = $this->view->user_['_id'];
 
             $doc = $_FILES['document']['tmp_name'];
+            $mime = $this->isAllowedDocument($doc);
 
-            if($this->isAllowedDocument($doc)) {//true) {//
+            if($mime) {//true) {//
                 $db_documents = new Application_Model_MongoDB_Document();
-                $object = $db_documents->create($owner, 'document', $form['title'], $form['author'], $form['email'], $form['type']);
+                $object = $db_documents->create($owner, 'document', $mime, $form['title'], $form['author'], $form['email'], $form['type']);
                 if($object) {
                     $queue = new App_Queue();
                     $queue->queueFile($object['_id']);
@@ -75,18 +79,27 @@ class DocumentsController extends AppController
         $this->view->form = $form;
     }
     public function showAction() {
+        $this->view->config_['back'] = array("/dashboard/documents", "Spis dokumentów");
         $id = $this->_request->getParam('param1');
 
         $db_documents = new Application_Model_MongoDB_Document();
         $this->view->document = $db_documents->getById($id);
         $this->view->document_shorts = $db_documents->getShorts();
+        $this->view->title = 'Dokumenty - '.$this->view->document['title'];
 
         $db_comparisons = new Application_Model_MongoDB_Comparison();
         $this->view->comparisons = $db_comparisons->getByDocument($this->view->document['_id']);
         $this->view->comparisons_count_alert = $db_comparisons->getStatsDocument($id, $this->view->config_['appconfig_alert']);
         $this->view->comparisons_count_warning = $db_comparisons->getStatsDocument($id, $this->view->config_['appconfig_warning']) - $this->view->comparisons_count_alert;
         $this->view->comparisons_count_clean = $db_comparisons->getStatsDocument($id, $this->view->config_['appconfig_warning'], true);
-        $this->view->comparisons_count_left = $this->view->document['comparison']['total']-$this->view->document['comparison']['completed'];
+        if(isset($this->view->document['comparison'])) {
+            $this->view->comparisons_count_left = $this->view->document['comparison']['total']-$this->view->document['comparison']['completed'];
+        } else {
+            $this->view->comparisons_count_left = 0;
+        }
+
+        $db_users = new Application_Model_MongoDB_User();
+        $this->view->owner = $db_users->getById($this->view->document['_owner']);
 
         if(!$this->view->document) {
             $this->redirect_('dashboard');
@@ -99,6 +112,8 @@ class DocumentsController extends AppController
         $db_documents = new Application_Model_MongoDB_Document();
         $this->view->document = $db_documents->getById($id);
         $this->view->document_c = $db_documents->getById($id_c);
+        $this->view->title = 'Dokumenty - Porównaj '.$this->view->document['title'];
+        $this->view->config_['back'] = array("/dashboard/documents/show/".$id, "Statystyki dokumentu");
 
         $db_comparisons = new Application_Model_MongoDB_Comparison();
         $this->view->comparisons = $db_comparisons->getByDocumentsFull($this->view->document['_id'], $this->view->document_c['_id']);
@@ -146,13 +161,13 @@ class DocumentsController extends AppController
     }
 
     private function isAllowedDocument($file) {
-        $allowed = array("application/pdf", "application/msword");
+        $allowed = array("application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE); 
         $mime = strtolower(finfo_file($finfo, $file));
-        /*$fp = fopen('./a.txt','w');
-        fwrite($fp,var_dump($finfo,true));
-        fclose($fp);*/
-        return in_array($mime, $allowed);
+        $fp = fopen('./a.txt','w');
+        fwrite($fp, $mime);
+        fclose($fp);
+        return in_array($mime, $allowed) ? $mime : false;
     }
 }

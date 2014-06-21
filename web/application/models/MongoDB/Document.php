@@ -9,9 +9,9 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
      */
     protected $_collection = 'documents';
     protected $_comparisons = 'comparisons';
-    public function create($owner, $file, $title, $author, $email, $type='thesis', $status=0) {
+    public function create($owner, $file, $mime, $title, $author, $email, $type='thesis', $status=0) {
         $fs = $this->fs();
-        $fileID = $fs->storeUpload($file, array("contentType" => "application/pdf"));
+        $fileID = $fs->storeUpload($file, array("contentType" => $mime));
 
     	$object = array(
             '_owner' => new MongoId($owner),

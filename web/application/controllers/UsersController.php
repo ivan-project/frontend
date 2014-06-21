@@ -13,6 +13,7 @@ class UsersController extends AppController
         }
     }
     public function indexAction() {
+        $this->view->title = 'Użytkownicy';
         $form = array();
 
         $db_users = new Application_Model_MongoDB_User();
@@ -45,6 +46,8 @@ class UsersController extends AppController
         $this->view->form = $form;
     }
     public function createAction() {
+        $this->view->title = 'Użytkownicy - Dodaj użytkownika';
+        $this->view->config_['back'] = array("/dashboard/users", "Lista użytkowników");
         if(App_Auth::getInstance()->isAdmin()) {
             $form = array();
             if($this->_request->isPost()) {
@@ -76,9 +79,11 @@ class UsersController extends AppController
         }
     }
     public function showAction() {
+        $this->view->config_['back'] = array("/dashboard/users", "Lista użytkowników");
         $id = $this->_request->getParam('param1');
         $db_users = new Application_Model_MongoDB_User();
         $this->view->user = $db_users->getById($id);
+        $this->view->title = 'Użytkownicy - '.$this->view->user['name'];
 
         $db_documents = new Application_Model_MongoDB_Document();
         $this->view->documents = iterator_to_array($db_documents->getByOwner($id), true);

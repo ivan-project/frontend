@@ -1,20 +1,20 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <form name="register" action="<?php $this->eurl('dashboard/users/create'); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
-  	<?php $this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp no-line', true);?>
-  	<?php $this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);?>
-  	<?php $this->Input('image', 'avatar', 'Wybierz zdjęcie');?>
-  	<?php $this->InputRadio('role', 'Uprawnienia', array(
-  				'3'=>'Administrator', 
-  				'2'=>'Promotor', 
-  				'1'=>'Zawieszony', 
-  			),'2');?>
-  	<?php $this->Input('submit', 'submit', 'Dodaj użytkownika', 'ok');?>
+  	<?php 
+  		$this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp', true);
+  		$this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);
+  		$this->Input('image', 'avatar', 'Wybierz zdjęcie');
+  		$this->InputRadio('role', 'Uprawnienia', array(
+				'3'=>'Administrator', 
+				'2'=>'Promotor', 
+				'1'=>'Zawieszony', 
+			),'2');
+  		$this->Input('submit', 'submit', 'Dodaj użytkownika', 'ok');
+  	?>
 </div>
 </form>
 

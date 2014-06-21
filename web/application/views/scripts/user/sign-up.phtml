@@ -1,12 +1,16 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <form name="register" action="<?php $this->eurl('user/sign-up'); ?>" method="post" enctype="multipart/form-data" data-remote>
-  <?php $this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp no-line', true);?>
-  <?php $this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);?>
-  <?php $this->Input('password', 'pwd', 'Hasło', '', true);?>
-  <?php $this->Input('password', 'pwd_repeat', 'Powtórz hasło', '', true);?>
-  <?php $this->Input('image', 'avatar', 'Wybierz zdjęcie');?>
-  <?php $this->Input('submit', 'submit', 'Zarejestruj', 'ok');?>
+	<?php 
+		$this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp no-line', true);
+		$this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);
+		$this->Input('password', 'pwd', 'Hasło', '', true);
+		$this->Input('password', 'pwd_repeat', 'Powtórz hasło', '', true);
+		$this->Input('image', 'avatar', 'Wybierz zdjęcie');
+		$this->Input('submit', 'submit', 'Zarejestruj', 'ok');
+	?>
 </form>
 <p>Jeżeli posiadasz już konto w systemie <a href="<?php $this->eurl('user/sign-in');?>" data-remote>zaloguj się.</a> </p>
 

@@ -1,24 +1,22 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard/documents');?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Spis dokumentów</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <?php if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->document['_owner'])) { ?>
 <form name="document_data_change" action="<?php $this->eurl('dashboard/documents/update/'.$this->document['_id']); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
-    <?php $this->Input('text', 'title', 'Tytuł pracy', $this->document['title'], true, 'emp');?>
-  	<?php $this->Input('text', 'author', 'Autor', $this->document['author'], true);?>
-  	<?php $this->Input('email', 'email', 'E-mail', $this->document['email']);?>
-	
-	<?php if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->document['_owner'])) { ?>
-  	<?php $this->InputRadio('action', 'Akcja', array(
-  				'1'=>'-', 
-  				'0'=>array('Usuń dokument','destroy','graphics/icons/destroy.svg')
-  			),'1');?>
-	<?php } ?>
-
-  	<?php $this->Input('submit', 'submit', 'Zapisz zmiany', 'ok');?>
+    <?php 
+    	$this->Input('text', 'title', 'Tytuł pracy', $this->document['title'], true, 'emp');
+		$this->Input('text', 'author', 'Autor', $this->document['author'], true);
+		$this->Input('email', 'email', 'E-mail', $this->document['email']);
+		if(App_Auth::getInstance()->isAdmin() || App_Auth::getInstance()->isSelf($this->document['_owner'])) {
+			$this->InputRadio('action', 'Akcja', array(
+	  				'1'=>'-', 
+	  				'0'=>array('Usuń dokument','destroy','graphics/icons/destroy.svg')
+	  			),'1');
+		}
+		$this->Input('submit', 'submit', 'Zapisz zmiany', 'ok');
+	?>
 </div>
 </form>
 <?php } ?>
@@ -27,16 +25,32 @@
 
 <?php 
 	$level_doc = 0;
+	$max_id = false;
 	if($this->comparisons->count()>0) {
 		$this->comparisons->next();
 	    $first = $this->comparisons->current();
+	    if(strcmp($first['compared'][0].'',$this->document['_id'])==0) {
+	    	$max_id = $first['compared'][1];
+	    } else {
+	    	$max_id = $first['compared'][0];
+	    }
 		$level_doc = isset($first['result']['percentageSimilarity']) ? $first['result']['percentageSimilarity'] : 0; 
 	}
 ?>
 <div class="block document">
-	<?php $this->statusInfo($level_doc, false, true); ?>
+	<a <?php if($max_id) echo 'href="'.$this->url('dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$max_id).'"';?> data-remote><?php $this->statusInfo($level_doc, false, true); ?></a>
 	<h2><?php echo $this->document['title'];?> </h2>
 	<h3><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></h3>
+</div>
+<div class="block info">
+	<div class="left">
+		<div class="block header line"><h3>Autor </h3></div>
+		<h4><a <?php echo $this->document['email'] ? 'href="mailto:'.$this->document['email'].'"' : '';?>><?php echo $this->document['author'];?></a></h4>
+	</div>
+	<div class="right">
+		<div class="block header line"><h3>Dodający </h3></div>
+		<h4><a href="<?php $this->eurl('dashboard/users/show/'.$this->owner['_id']);?>" data-remote><?php echo $this->owner['name'];?></a></h4>
+	</div>
 </div>
 <div class="block header line"><h3>Porównane dokumenty </h3></div>
 <div class="block percent-chart">
@@ -46,7 +60,15 @@
 		{"label":"Clean","value":<?php echo $this->comparisons_count_clean;?>,"color":"ok"},
 		{"label":"Left","value":<?php echo $this->comparisons_count_left;?>,"color":"left"}]'>
 	</div>
-	<h4 class="percent" data-connected="comparisons"><?php echo round(100*$this->document['comparison']['completed']/$this->document['comparison']['total']); ?></h4>
+	<h4 class="percent" data-connected="comparisons">
+		<?php 
+			if(isset($this->document['comparison'])) {
+				echo round(100*$this->document['comparison']['completed']/$this->document['comparison']['total']); 
+			} else {
+				echo 0;
+			}
+		?>
+	</h4>
 </div>
 <div class="block results-mini">
 	<ul>
@@ -61,7 +83,7 @@
 					$compared = $comparison['compared'][0];
 				}
 			?>
-			<a href="<?php $this->eurl('/dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$compared);?>" data-remote>
+			<a href="<?php $this->eurl('dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$compared);?>" data-remote>
 				<?php $this->statusInfo($level, true, true); ?>
 			</a>
 			<div class="doc">

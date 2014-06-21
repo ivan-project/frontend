@@ -12,6 +12,7 @@ class UserController extends AppController
         }
     }
     public function signInAction() {
+        $this->view->title = 'Logowanie';
         $form = array();
         if($this->_request->isPost() && $this->_request->getPost('email')) {
             $form['email'] = $this->_request->getPost('email');
@@ -25,10 +26,13 @@ class UserController extends AppController
         $this->view->form = $form;
     }
     public function signOutAction() {
+        $this->view->title = 'Wyloguj';
         App_Auth::getInstance()->signOut();
         $this->redirect_('user/sign-in');
     }
     public function signUpAction() {
+        $this->view->title = 'Rejestracja';
+        $this->view->config_['back'] = array("/user/sign-in", "Powrót do logowania");
         $form = array();
         if($this->_request->isPost()) {
             $form['name'] = $this->_request->getPost('name');
@@ -59,6 +63,5 @@ class UserController extends AppController
         $this->view->form = $form;
     }
     public function welcomeMailAction() {
-        
     }
 }

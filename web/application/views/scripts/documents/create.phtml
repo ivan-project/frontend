@@ -1,21 +1,20 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <form name="register" action="<?php $this->eurl('dashboard/documents/create'); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
-  	<?php $this->Input('text', 'title', 'Temat pracy', $this->formVal('title'), true, 'emp no-line', true);?>
-  	<?php $this->Input('text', 'author', 'Autor', $this->formVal('author'), true);?>
-  	<?php $this->Input('email', 'email', 'E-mail autora', $this->formVal('email'));?>
-  	<?php $this->Input('document', 'document', 'Wybierz dokument', '', true);?>
-  	<!--  data-ttip="Wypełnij to pole jeśli chcesz mieć możliwość szybkiego powiadamiania autora o wykryciu plagiatu" -->
-	<?php $this->InputRadio('type', 'Typ dokumentu', array(
-			'thesis'=>'Praca',
-			'book'=>'Książka' 
-		),'thesis');?>
-  	<?php $this->Input('submit', 'submit', 'Prześlij pracę', 'ok');?>
+  	<?php 
+      $this->Input('text', 'title', 'Temat pracy', $this->formVal('title'), true, 'emp no-line', true);
+      $this->Input('text', 'author', 'Autor', $this->formVal('author'), true);
+      $this->Input('email', 'email', 'E-mail autora', $this->formVal('email'));
+      $this->Input('document', 'document', 'Wybierz dokument', '', true);
+      $this->InputRadio('type', 'Typ dokumentu', array(
+    			'thesis'=>'Praca',
+    			'book'=>'Książka' 
+    		),'thesis');
+      $this->Input('submit', 'submit', 'Prześlij pracę', 'ok');
+    ?>
 </div>
 </form>
 

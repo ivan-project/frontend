@@ -457,7 +457,7 @@ h4, .s-h4, #panel .inside > .contents .add > h3, #panel .file-browse > .txt {
   font-weight: 600;
   margin: 16px 5px 8px 0px; }
 
-.s-h4-2, #content .inside .user h3, #content .inside .user span, #content .inside .document h3, #content .inside .document span, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4 {
+.s-h4-2, #content .inside .user h3, #content .inside .user span, #content .inside .document h3, #content .inside .document span, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4, #content .inside .info > * > h4, #content .inside .info > * > h5 {
   font-size: 18px;
   line-height: 22px;
   font-weight: 300;
@@ -1262,7 +1262,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
     position: relative;
     text-decoration: none;
     color: inherit; }
-    #content a:hover {
+    #content a[href]:hover {
       color: #4daf7c; }
   #content .inside {
     width: 100%;
@@ -1471,6 +1471,20 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
         color: darkgrey; }
       #content .inside .similar-fragments > ul > li:hover > span {
         background: #eeeeee; }
+    #content .inside .info > .left {
+      float: left;
+      width: 180px; }
+    #content .inside .info > .right {
+      float: right;
+      width: calc(100% - 180px - 40px); }
+    #content .inside .info > * {
+      margin-bottom: 30px; }
+      #content .inside .info > * > .header > h3 {
+        margin: 0px; }
+      #content .inside .info > * > h4 {
+        margin: 0px; }
+      #content .inside .info > * > h5 {
+        margin: 0px; }
   #content .container-scroll {
     position: absolute;
     top: 0px;

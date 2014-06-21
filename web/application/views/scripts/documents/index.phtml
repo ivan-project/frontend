@@ -1,21 +1,21 @@
 <?php echo $this->render('partials/layout-before.phtml'); // BEFORE ////////////////////////////////// ?>
 
-<div class="group avatar">
-	<a href="<?php $this->eurl('dashboard');?>" data-remote></a>
-	<p><?php $this->svg('graphics/icons/back.svg');?><span class="after">Powrót do panelu</span></p>
-</div>
+<?php echo $this->render('partials/history-back.phtml'); // HISTORY BACK //// ?>
+
 <form name="documents_filter" action="<?php $this->eurl('dashboard/documents'); ?>" method="get" data-remote>
 <div class="group">
-  	<?php $this->Input('text', 'search', 'Tytuł, autor lub e-mail', $this->formVal('search'), false, 'ic ic-search');?>
-  	<?php $this->InputCheckbox('type','Typ:',array(
+  	<?php 
+  		$this->Input('text', 'search', 'Tytuł, autor lub e-mail', $this->formVal('search'), false, 'ic ic-search');
+		$this->InputCheckbox('type','Typ:',array(
   				'thesis'=>'Praca',
 				'book'=>'Książka' 
-  			),$this->formVal('type'));?>
-  	<?php $this->InputRadio('owner','Właściciel',array(
+  			),$this->formVal('type'));
+		$this->InputRadio('owner','Właściciel',array(
   				'true'=>'Tylko moje',
 				'false'=>'Wszystkie dokumenty' 
-  			),$this->formVal('owner'));?>
-  	<?php $this->Input('submit', 'submit', 'Filtruj wyniki', 'ok');?>
+  			),$this->formVal('owner'));
+		$this->Input('submit', 'submit', 'Filtruj wyniki', 'ok');
+	?>
 </div>
 </form>
 
