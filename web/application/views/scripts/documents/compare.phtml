@@ -8,8 +8,8 @@
 	$level_doc = isset($this->comparisons['result']['percentageSimilarity']) ? $this->comparisons['result']['percentageSimilarity'] : 0; 
 ?>
 <div class="block document double">
-	<h2><?php echo $this->document['title'];?> <span><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></span></h2>
-	<h2><?php echo $this->document_c['title'];?> <span><?php echo date('Y-m-d H:i:s', $this->document_c['created_at']->sec);?></span></h2>
+	<h2><a href="<?php $this->eurl('dashboard/documents/show/'.$this->document['_id']);?>" data-remote><?php echo $this->document['title'];?></a> <span><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></span></h2>
+	<h2><a href="<?php $this->eurl('dashboard/documents/show/'.$this->document_c['_id']);?>" data-remote><?php echo $this->document_c['title'];?></a> <span><?php echo date('Y-m-d H:i:s', $this->document_c['created_at']->sec);?></span></h2>
 	<?php $this->statusInfo($level_doc, false, true); ?>
 </div>
 <?php if(isset($this->comparisons['result']['lines']) && count($this->comparisons['result']['lines'])>0) { ?>

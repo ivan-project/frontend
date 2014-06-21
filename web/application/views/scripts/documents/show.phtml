@@ -60,15 +60,13 @@
 		{"label":"Clean","value":<?php echo $this->comparisons_count_clean;?>,"color":"ok"},
 		{"label":"Left","value":<?php echo $this->comparisons_count_left;?>,"color":"left"}]'>
 	</div>
-	<h4 class="percent" data-connected="comparisons">
-		<?php 
+	<h4 class="percent" data-connected="comparisons"><?php 
 			if(isset($this->document['comparison'])) {
 				echo round(100*$this->document['comparison']['completed']/$this->document['comparison']['total']); 
 			} else {
 				echo 0;
 			}
-		?>
-	</h4>
+	?></h4>
 </div>
 <div class="block results-mini">
 	<ul>
