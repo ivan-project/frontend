@@ -271,19 +271,26 @@ a.submit {
 	@extend .sizing;
 	@extend .full-relative;
 
-	& > svg {
+	& > svg, & > img {
 		position: absolute;
 		width: 100%;
 		height: 100%;
 		display: block;
 		padding: 14px;
 		top: 0%;
+		margin: 0px;
+		border: none;
+		background: none;
 		@extend .transition-smooth;
 		@extend .sizing;
-
+	}
+	& > svg {
 		& * {
 			fill: $colWhite;
 		}
+	}
+	&.loader {
+		background: darken($lineDark, 8%);
 	}
 	&.ok {
 		background: $colAccent;
@@ -316,7 +323,7 @@ a.submit {
 		}
 	}
 	&.state2 {
-		& > svg {
+		& > svg, & > img {
 			top: -100%;
 		}
 		& > span {

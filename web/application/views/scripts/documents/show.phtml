@@ -38,7 +38,7 @@
 	}
 ?>
 <div class="block document">
-	<a <?php if($max_id) echo 'href="'.$this->url('dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$max_id).'"';?> data-remote><?php $this->statusInfo($level_doc, false, true); ?></a>
+	<a <?php if($max_id) echo 'href="'.$this->url('dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$max_id).'"';?> data-remote><?php $this->statusInfo($level_doc, false, true, $this->document['status']); ?></a>
 	<h2><?php echo $this->document['title'];?> </h2>
 	<h3><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></h3>
 </div>

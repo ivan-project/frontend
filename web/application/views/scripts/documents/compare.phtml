@@ -18,12 +18,6 @@
 	<?php 
 		$plain = explode("\n", $this->document['plaintext']);
 		$plain_c = explode("\n", $this->document_c['plaintext']);
-
-	    if(strcmp($this->comparisons['compared'][0].'', $this->document_c['_id'].'')==0) {
-	    	$tmp = $plain_c;
-	    	$plain_c = $plain;
-	    	$plain = $tmp;
-	    }
 	?>
 	<ul>
 		<?php if(false) { ?>
@@ -32,11 +26,20 @@
 			<span><?php echo str_replace("\n", "<br>", $this->document_c['plaintext']);?></span>
 		</li>
 		<?php } ?>
-		<?php foreach($this->comparisons['result']['lines'] as $line) { ?>
-		<li>
-			<span data-line="<?php echo $line['sourceLineId'];?>"><?php echo $plain[$line['sourceLineId']-1]; ?></span>
-			<span data-line="<?php echo $line['similarLineId'];?>"><?php echo $plain_c[$line['similarLineId']-1]; ?></span>
-		</li>
+		<?php if(strcmp($this->comparisons['compared'][0].'', $this->document['_id'].'')==0) {?>
+			<?php foreach($this->comparisons['result']['lines'] as $line) { ?>
+			<li>
+				<span data-line="<?php echo $line['similarLineId'];?>"><?php echo $plain_c[$line['similarLineId']-1]; ?></span>
+				<span data-line="<?php echo $line['sourceLineId'];?>"><?php echo $plain[$line['sourceLineId']-1]; ?></span>
+			</li>
+			<?php } ?>
+		<?php } else { ?>
+			<?php foreach($this->comparisons['result']['lines'] as $line) { ?>
+			<li>
+				<span data-line="<?php echo $line['similarLineId'];?>"><?php echo $plain[$line['similarLineId']-1]; ?></span>
+				<span data-line="<?php echo $line['sourceLineId'];?>"><?php echo $plain_c[$line['sourceLineId']-1]; ?></span>
+			</li>
+			<?php } ?>
 		<?php } ?>
 	</ul>
 </div>
