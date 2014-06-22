@@ -63,7 +63,7 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
         $object = $this->c()->find(
             array(),
             array('plaintext' => 0, 'lemmatized' => 0)
-        )->sort(array('title' => 1));
+        )->sort(array('created_at' => -1));
         return $object;
     }
     public function getShorts() {
@@ -81,21 +81,21 @@ class Application_Model_MongoDB_Document extends Application_Model_MongoDB_Abstr
         $object = $this->c()->find(
             $filter, 
             array('plaintext' => 0, 'lemmatized' => 0)
-        )->sort(array('title' => 1));
+        )->sort(array('created_at' => -1));
         return $object;
     }
     public function getByType($type) {
         $object = $this->c()->find(
             array('type' => $type),
             array('plaintext' => 0, 'lemmatized' => 0)
-        )->sort(array('title' => 1));
+        )->sort(array('created_at' => -1));
         return $object;
     }
     public function getByOwner($owner) {
         $object = $this->c()->find(
             array('_owner' => new MongoId($owner)),
             array('plaintext' => 0, 'lemmatized' => 0)
-        )->sort(array('title' => 1));
+        )->sort(array('created_at' => -1));
         return $object;
     }
     public function getById($id) {
