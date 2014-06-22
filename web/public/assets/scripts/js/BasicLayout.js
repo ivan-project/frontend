@@ -65,6 +65,7 @@ $(document).ready(function() {
     //initReloads();
     initContainerScroll('#panel');
     initContainerScroll('#content');
+    initDocumentRefresh();
     setTimeout(initReloads,10);
   } else {
     if($('#remote-content').length==0 && typeof top.reloadByIframe == 'function') {
@@ -72,21 +73,27 @@ $(document).ready(function() {
     }
   }
 });
-function initReloads() {
+function initReloads(context) {
   //console.log("RELOADS!!!!!!!!!!!!!");
-  resizeListener();
-  scrollListener();
+  if(typeof(context)=='undefined') {
+    context = $('body');
+  } else {
+    resizeListener();
+    scrollListener();
+  }
 
   if($('body').attr('data-ajax-enabled')=='true') {
-    initPostRemote();
-    initDataRemote();
+    initPostRemote(context);
+    initDataRemote(context);
   }
-  initRadio();
-  initCheckboxes();
-  initFileBrowse();
-  initTooltips();
-  initPercentages();
+  initRadio(context);
+  initCheckboxes(context);
+  initFileBrowse(context);
+  initTooltips(context);
+  initPercentages(context);
   initStatuses();
+
+  //initDocumentRefresh(context);
   $('#page-holder *[autofocus]').first().focus();
 }
 // CUSTOMS ####################################################
@@ -119,8 +126,8 @@ function redirect(redirect, unblock) {
     window.location.href = redirect;
   }
 }
-function initPostRemote() {
-  $('form[data-remote]:not(form[data-remote="true"])').each(function() {
+function initPostRemote(context) {
+  context.find('form[data-remote]:not(form[data-remote="true"])').each(function() {
     var th = $(this);
     th.attr('data-remote','true');
     th.attr('target','remote_iframe');
@@ -148,8 +155,8 @@ function initPostRemote() {
     });
   });
 }
-function initDataRemote() {
-  $('a[data-remote]:not(a[data-remote="true"])').each(function() {
+function initDataRemote(context) {
+  context.find('a[data-remote]:not(a[data-remote="true"])').each(function() {
     var th = $(this);
     var url = $(this).attr('href');
     th.attr('data-remote','true');
@@ -225,9 +232,82 @@ function updateContents(contents, url) {
     }
   });
 }
+// DOCUMENT REFRESH ###########################################
+function initDocumentRefresh() {
+
+  function timeout() {
+    setTimeout(function() {
+      var el = $('[data-document-refresh]');
+      var el_parent = el.parent();
+      var id = el.attr('data-document-refresh')+'';
+      var url = baseUrl+"dashboard/documents/refresh";
+      if(el.length>0 && !remote_block) {
+        $.ajax({
+          url: url,
+          method: 'post',
+          data: {'id':id},
+          success: function(response, status, jqXhr) {
+            if(el.length>0) {
+              var contents = $('<div>'+response+'</div>');
+              var refresh = false;
+              // CHECK CHART
+              /*var chart = contents.find('[data-id-refresh="chart"] > .chart').attr('data-percent');
+              var chart_compare = el_parent.find('[data-id-refresh="chart"] > .chart').attr('data-percent');
+              if(chart!=chart_compare) {
+                console.log('NOT EQUAL CHART');
+                refresh = true;
+              }*/
+              // CHECK STAT
+              //if(!refresh) {
+                var stat = el_parent.find('[data-id-refresh="status"]');
+                var stat_new = contents.find('[data-id-refresh="status"]');
+                if(stat.attr('href')!=stat_new.attr('href') ||
+                    stat.find('> .status').attr('data-ttip')!=stat_new.find('> .status').attr('data-ttip')) 
+                {
+                  stat.attr('href',stat_new.attr('href'));
+                  stat.find('> .status').attr('data-ttip',stat_new.find('> .status').attr('data-ttip'));
+                  stat.find('> .status').attr('class',stat_new.find('> .status').attr('class'));
+                  stat.find('> .status').empty();
+                  stat.find('> .status').append(stat_new.find('> .status').html());
+                  console.log('NOT EQUAL STATUS');
+                  refresh = true;
+                }
+                var chart = el_parent.find('[data-id-refresh="chart"] > .chart');
+                var chart_new = contents.find('[data-id-refresh="chart"] > .chart');
+                var results = el_parent.find('[data-id-refresh="compare-results"] > li');
+                var results_new = contents.find('[data-id-refresh="compare-results"] > li');
+                if(chart.attr('data-percent')!=chart_new.attr('data-percent') || results.length!=results_new.length) {
+                  chart[0].updatePercentages(chart_new.attr('data-percent'), contents.find('[data-connected="'+chart_new.attr('data-percent-connected')+'"]').text());
+                  refresh = true;
+                  // NIE IDEALNE, NIE WYKRYWA JEŚLI JEDEN PLIK DOSZEDŁ INNY ODSZEDŁ
+                  results.parent().append(results_new);
+                  results.remove();
+                }
+              //}
+
+              if(false) {//refresh) {
+                $('#content > .inside').empty();
+                $('#content > .inside').append(contents);
+                initReloads($('#content > .inside'));
+              }
+            }
+          },
+          error: function(response, status, jqXhr){
+          },
+          complete: function (response, status, jqXhr){
+            timeout();
+          }
+        });
+      } else {
+        timeout();
+      }
+    },1000);
+  }
+  timeout();
+}
 // INPUTS #####################################################
-function initRadio() {
-  var radios = $('[data-select-radio]:not([data-select-radio="true"])');
+function initRadio(context) {
+  var radios = context.find('[data-select-radio]:not([data-select-radio="true"])');
   var count_def = 4;
   var catch_marg = 20;
   var el_h = 40;
@@ -287,8 +367,8 @@ function initRadio() {
     label.find('> span').text(lis.find('input[type=radio]:checked').parent().find('> div').text());
   });
 }
-function initCheckboxes() {
-  var checkboxes = $('[data-select-checkbox]:not([data-select-checkbox="true"])');
+function initCheckboxes(context) {
+  var checkboxes = context.find('[data-select-checkbox]:not([data-select-checkbox="true"])');
   checkboxes.attr('data-select-checkbox','true');
   var selectMe = function() {
     var th = $(this);
@@ -306,8 +386,8 @@ function initCheckboxes() {
     th.find('li').click(selectMe);
   });
 }
-function initFileBrowse() {
-  var files = $('[data-file-browse="true"]');
+function initFileBrowse(context) {
+  var files = context.find('[data-file-browse="true"]');
   files.attr('data-file-browse','');
   var trigger = function(e) {
     var th = $(this);
@@ -372,8 +452,8 @@ function initFileBrowse() {
   files.first().find('a').click();
 }
 // TOOLTIPS ###################################################
-function initTooltips() {
-  var ttips = $('[data-ttip]:not([data-ttip-ready])');
+function initTooltips(context) {
+  var ttips = context.find('[data-ttip]:not([data-ttip-ready])');
   ttips.attr('data-ttip-ready',true);
   var tooltips_holder = $('#tooltips');
   var tooltipEnter = function() {
@@ -424,12 +504,13 @@ function initTooltips() {
   ttips.mouseenter(tooltipEnter);
 }
 // PERCENTAGES ################################################
-function initPercentages() {
-  $('[data-chart]').each(function() {
+function initPercentages(context) {
+  context.find('[data-chart]:not([data-chart="true"])').each(function() {
     var th = $(this);
-    var perc = JSON.parse(th.attr('data-percent'));
+    th.attr('data-chart','true');
     th.append('<canvas width="100%" height="100%"></canvas>');
     var canvas = th.find('canvas');
+    var perc;
     canvas[0].style.width ='100%';
     canvas[0].style.height='100%';
     canvas[0].width  = th.width();
@@ -443,22 +524,28 @@ function initPercentages() {
     var x = dim/2;
     var y = dim/2;
     var rad = dim/2-thick/2-1;
-    var sum=0;
-    var connected;
-    var connected_val;
-    if(th.attr('data-percent-connected')) {
-      connected = $('[data-connected="'+th.attr('data-percent-connected')+'"]');
-      connected_val = parseFloat(connected.text());
-      connected.text('0');
-    }
-    $.each(perc, function(key, value) {
-      sum += value.value;
-    });
+    var sum;
+    var connected = $('[data-connected="'+th.attr('data-percent-connected')+'"]');
+    var connected_val = parseFloat(connected.text());
+    connected.text('0');
+    
     var colors = {};
     colors["ok"] = $('#conf-css .color-ok').css('color');
     colors["warning"] = $('#conf-css .color-warning').css('color');
     colors["alert"] = $('#conf-css .color-alert').css('color');
     colors["left"] = $('#conf-css .color-left').css('color');
+
+    th[0].updatePercentages = function(data, percent) {
+      connected_val = percent;
+      th.attr('data-percent',data);
+      perc = JSON.parse(data);
+      //console.log(perc);
+      sum = 0;
+      $.each(perc, function(key, value) {
+        sum += value.value;
+      });
+      initShow();
+    };
 
     var drawArc = function(draw, from, to, color) {
       draw.beginPath();
@@ -489,12 +576,14 @@ function initPercentages() {
     
 
     //drawArc(draw, 100, 'rgba(210,200,191,1)');
+    var interval;
     var initShow = function() {
       var time_now = 0;
       var time_delay = 10;
       var time_counter = 200;
       var now_perc;
-      var interval = setInterval(function() {
+      clearInterval(interval);
+      interval = setInterval(function() {
         time_now++;
         if(time_now>=time_counter) {
           clearInterval(interval);
@@ -513,21 +602,12 @@ function initPercentages() {
           from = to;
         });
         if(connected) {
-          connected.text(Math.round(now_perc*connected_val));
+          connected.text(connected_val);
         }
       }, time_delay);
     }
-    initShow();
-    //setTimeout(initShow,ind*200);
-    /*var checkVisibility = function(e) {
-      var st = $(window).scrollTop()+window_h;
-      var my_t = th.offset().top+hei;
-      if(st-my_t>0) {
-        initShow();
-        scrollRemoveFun(checkVisibility);
-      }
-    }*/
-    //scrollAddFun(checkVisibility);
+
+    th[0].updatePercentages(th.attr('data-percent'), connected_val);
   });
 }
 // STATUSES ###################################################

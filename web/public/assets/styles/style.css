@@ -584,7 +584,7 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.transition-smooth, .statuses > svg, #content .inside .user img > svg, #content .inside .user .status > svg, #content .inside .document img > svg, #content .inside .document .status > svg, #content .inside .results-mini > ul > li > a > .status > svg, .statuses > img, #content .inside .user img > img, #content .inside .user .status > img, #content .inside .document img > img, #content .inside .document .status > img, #content .inside .results-mini > ul > li > a > .status > img, .statuses > span, #content .inside .user img > span, #content .inside .user .status > span, #content .inside .document img > span, #content .inside .document .status > span, #content .inside .results-mini > ul > li > a > .status > span, #panel a:after, #panel .inside > .logo > svg *, #panel .inside > .contents .avatar > p > svg *, #panel .inside > .contents .avatar:hover > p > span > a, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #panel .inside > .contents .add > h3, #panel .inside > .contents .add > h3 > svg *, #panel .file-browse, #panel .file-browse > .txt, #panel .file-browse > .txt > svg *, #content a, #content .inside .user-mini ul li, #content .inside .document-mini ul li, #content .inside .results-mini ul li, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .results-mini ul li > .avatar, #content .inside .results-mini > ul > li > .doc, #content .inside .results-mini > ul > li > a > .status {
+.transition-smooth, .statuses, #content .inside .user img, #content .inside .user .status, #content .inside .document img, #content .inside .document .status, #content .inside .results-mini > ul > li > a > .status, .statuses > svg, #content .inside .user img > svg, #content .inside .user .status > svg, #content .inside .document img > svg, #content .inside .document .status > svg, #content .inside .results-mini > ul > li > a > .status > svg, .statuses > img, #content .inside .results-mini > ul > li > a > .status > img, .statuses > span, #content .inside .user img > span, #content .inside .user .status > span, #content .inside .document img > span, #content .inside .document .status > span, #content .inside .results-mini > ul > li > a > .status > span, #panel a:after, #panel .inside > .logo > svg *, #panel .inside > .contents .avatar > p > svg *, #panel .inside > .contents .avatar:hover > p > span > a, #panel .inside > .contents .pending-users > .pending > ul > li > img, #panel .inside > .contents .lr > .left > span, #panel .inside > .contents .lr > .right > span, #panel .inside > .contents .lr > .left > h5, #panel .inside > .contents .lr > .right > h5, #panel .inside > .contents .add > h3, #panel .inside > .contents .add > h3 > svg *, #panel .file-browse, #panel .file-browse > .txt, #panel .file-browse > .txt > svg *, #content a, #content .inside .user-mini ul li, #content .inside .document-mini ul li, #content .inside .results-mini ul li, #content .inside .user-mini ul li > h4, #content .inside .document-mini ul li > h4, #content .inside .results-mini ul li > h4, #content .inside .user-mini ul li > .avatar, #content .inside .document-mini ul li > .avatar, #content .inside .results-mini ul li > .avatar, #content .inside .results-mini > ul > li > .doc {
   -webkit-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -moz-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   -ms-transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -1285,6 +1285,14 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
     /* Standard Property */
     transform-origin: 50% 50%;
     /* Standard Property */ }
+    #content .inside .content-filler {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: url("../graphics/content-filler.png") 50% calc(50% + 15px) no-repeat; }
     #content .inside .user, #content .inside .document {
       border-bottom: 2px solid #eeeeee;
       margin-bottom: 30px; }
@@ -1394,8 +1402,10 @@ a.submit, #panel .inside > .contents form button[type="submit"] {
             margin: 0px;
             border: none;
             right: 0px; }
-            #content .inside .results-mini > ul > li > a > .status > svg {
+            #content .inside .results-mini > ul > li > a > .status > svg, #content .inside .results-mini > ul > li > a > .status > img {
               padding: 8px; }
+            #content .inside .results-mini > ul > li > a > .status.loader > img {
+              padding: 5px; }
             #content .inside .results-mini > ul > li > a > .status.ok {
               background: #dadada; }
         #content .inside .results-mini > ul > li > .doc {

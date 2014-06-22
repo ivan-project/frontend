@@ -82,6 +82,24 @@ class DocumentsController extends AppController
         $this->view->config_['back'] = array("/dashboard/documents", "Spis dokumentów");
         $id = $this->_request->getParam('param1');
 
+        $this->showDataRetrieve($id);
+        //$this->view->document['status'] = 0;
+
+        if(!$this->view->document) {
+            $this->redirect_('dashboard');
+        }
+    }
+    public function refreshAction() {
+        if($this->_request->isPost() && $this->_request->getPost('id')) {
+            $this->_helper->layout()->disableLayout();
+            $id = $this->_request->getPost('id');
+            $this->showDataRetrieve($id);
+            $this->render('show-content');
+        } else {
+            $this->redirect_('dashboard/documents');
+        }
+    }
+    private function showDataRetrieve($id) {
         $db_documents = new Application_Model_MongoDB_Document();
         $this->view->document = $db_documents->getById($id);
         $this->view->document_shorts = $db_documents->getShorts();
@@ -100,10 +118,6 @@ class DocumentsController extends AppController
 
         $db_users = new Application_Model_MongoDB_User();
         $this->view->owner = $db_users->getById($this->view->document['_owner']);
-
-        if(!$this->view->document) {
-            $this->redirect_('dashboard');
-        }
     }
     public function compareAction() {
         $id = $this->_request->getParam('doc');

@@ -5,7 +5,7 @@
 <form name="register" action="<?php $this->eurl('dashboard/users/create'); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
   	<?php 
-  		$this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp', true);
+  		$this->Input('text', 'name', 'Imię i nazwisko', $this->formVal('name'), true, 'emp no-line', true);
   		$this->Input('email', 'email', 'Adres e-mail', $this->formVal('email'), true);
   		$this->Input('image', 'avatar', 'Wybierz zdjęcie');
   		$this->InputRadio('role', 'Uprawnienia', array(
@@ -19,5 +19,7 @@
 </form>
 
 <?php echo $this->render('partials/layout-middle.phtml'); // MIDDLE ////////////////////////////////// ?>
+
+<div class="content-filler"></div>
 
 <?php echo $this->render('partials/layout-after.phtml'); // AFTER //////////////////////////////////// ?>

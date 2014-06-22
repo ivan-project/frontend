@@ -31,6 +31,7 @@ class UserController extends AppController
         $this->redirect_('user/sign-in');
     }
     public function signUpAction() {
+        $this->view->config_['logo'] = false;
         $this->view->title = 'Rejestracja';
         $this->view->config_['back'] = array("/user/sign-in", "Powrót do logowania");
         $form = array();

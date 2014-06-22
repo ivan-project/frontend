@@ -6,7 +6,7 @@
 <form name="user_data_change" action="<?php $this->eurl('dashboard/users/update/'.$this->user['_id']); ?>" method="post" enctype="multipart/form-data" data-remote>
 <div class="group">
 	<?php 
-    $this->Input('text', 'name', 'Imię i nazwisko', $this->user['name'], true, 'emp');
+    $this->Input('text', 'name', 'Imię i nazwisko', $this->user['name'], true, 'emp no-line');
     $this->Input('email', 'email', 'E-mail', $this->user['email'], true);
     $this->Input('image', 'avatar', 'Wybierz zdjęcie');
 
@@ -53,7 +53,7 @@
     ?>
     <li>
       <a href="<?php $this->eurl('dashboard/documents/show/'.$document['_id']);?>" data-remote>
-        <?php $this->statusInfo($level, true, true); ?>
+        <?php $this->statusInfo($level, true, true, $document['status']); ?>
       </a>
       <div class="doc">
         <span><?php echo $document['title'];?></span>

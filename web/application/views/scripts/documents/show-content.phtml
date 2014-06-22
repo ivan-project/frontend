@@ -1,0 +1,72 @@
+<?php 
+	$level_doc = 0;
+	$max_id = false;
+	if($this->comparisons->count()>0) {
+		$this->comparisons->next();
+	    $first = $this->comparisons->current();
+	    if(strcmp($first['compared'][0].'',$this->document['_id'])==0) {
+	    	$max_id = $first['compared'][1];
+	    } else {
+	    	$max_id = $first['compared'][0];
+	    }
+		$level_doc = isset($first['result']['percentageSimilarity']) ? $first['result']['percentageSimilarity'] : 0; 
+	}
+?>
+<div class="block document" data-document-refresh="<?php echo $this->document['_id'].'';?>">
+	<a data-id-refresh="status" <?php if($max_id) echo 'href="'.$this->url('dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$max_id).'"';?> data-remote><?php $this->statusInfo($level_doc, false, true, $this->document['status']); ?></a>
+	<h2><?php echo $this->document['title'];?> </h2>
+	<h3><?php echo date('Y-m-d H:i:s', $this->document['created_at']->sec);?></h3>
+</div>
+<div class="block info">
+	<div class="left">
+		<div class="block header line"><h3>Autor </h3></div>
+		<h4><a <?php echo $this->document['email'] ? 'href="mailto:'.$this->document['email'].'"' : '';?>><?php echo $this->document['author'];?></a></h4>
+	</div>
+	<div class="right">
+		<div class="block header line"><h3>Dodający </h3></div>
+		<h4><a href="<?php $this->eurl('dashboard/users/show/'.$this->owner['_id']);?>" data-remote><?php echo $this->owner['name'];?></a></h4>
+	</div>
+</div>
+<div class="block header line"><h3>Porównane dokumenty </h3></div>
+<div class="block percent-chart" data-id-refresh="chart">
+	<div class="chart" data-chart data-percent-connected="comparisons" data-percent='[
+		{"label":"Alert","value":<?php echo $this->comparisons_count_alert;?>,"color":"alert"},
+		{"label":"Warning","value":<?php echo $this->comparisons_count_warning;?>,"color":"warning"},
+		{"label":"Clean","value":<?php echo $this->comparisons_count_clean;?>,"color":"ok"},
+		{"label":"Left","value":<?php echo $this->comparisons_count_left;?>,"color":"left"}]'>
+	</div>
+	<h4 class="percent" data-connected="comparisons"><?php 
+			if(isset($this->document['comparison'])) {
+				echo round(100*$this->document['comparison']['completed']/$this->document['comparison']['total']); 
+			} else {
+				echo 0;
+			}
+	?></h4>
+</div>
+<div class="block results-mini">
+	<ul data-id-refresh="compare-results">
+		<?php if($this->comparisons->count()>0) { foreach($this->comparisons as $comparison) { 
+			$level = isset($comparison['result']['percentageSimilarity']) ? $comparison['result']['percentageSimilarity'] : 0;
+		?>
+		<li>
+			<?php $compared;?>
+			<?php if($comparison['compared'][0]==$this->document['_id']) { 
+					$compared = $comparison['compared'][1];
+				} else {
+					$compared = $comparison['compared'][0];
+				}
+			?>
+			<a href="<?php $this->eurl('dashboard/documents/compare?doc='.$this->document['_id'].'&compare='.$compared);?>" data-remote>
+				<?php $this->statusInfo($level, true, true); ?>
+			</a>
+			<div class="doc">
+				<span><?php echo $this->document_shorts[$compared.""];?></span>
+			</div>
+		</li>
+		<?php } } else { ?>
+		<li class="empty">
+			<h4>Brak wyników</h4>
+		</li>
+		<?php } ?>
+	</ul>
+</div>
