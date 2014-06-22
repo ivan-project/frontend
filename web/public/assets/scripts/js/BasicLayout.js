@@ -282,6 +282,7 @@ function initDocumentRefresh() {
                   // NIE IDEALNE, NIE WYKRYWA JEŚLI JEDEN PLIK DOSZEDŁ INNY ODSZEDŁ
                   results.parent().append(results_new);
                   results.remove();
+                  initReloads(el_parent.find('[data-id-refresh="compare-results"]'));
                 }
               //}
 
