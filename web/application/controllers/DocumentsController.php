@@ -154,7 +154,7 @@ class DocumentsController extends AppController
 
                     if($action==0) {
                         $db_documents->destroy($id);
-                        $this->redirect_('dashboard/documents');
+                        $this->redirect_('dashboard/documents/create');
                     } else {
                         $db_documents->update($id, $title, $author, $email);
                         $this->showAction();

@@ -512,6 +512,7 @@ function initPercentages(context) {
     th.append('<canvas width="100%" height="100%"></canvas>');
     var canvas = th.find('canvas');
     var perc;
+    var perc_old;
     canvas[0].style.width ='100%';
     canvas[0].style.height='100%';
     canvas[0].width  = th.width();
@@ -520,7 +521,7 @@ function initPercentages(context) {
     var wid = canvas.width();
     var hei = canvas.height();
     var dim = Math.min(wid, hei);
-    var thick = 40;
+    var thick = 16;//6;
     var thick_half = thick/2;
     var x = dim/2;
     var y = dim/2;
@@ -528,7 +529,8 @@ function initPercentages(context) {
     var sum;
     var connected = $('[data-connected="'+th.attr('data-percent-connected')+'"]');
     var connected_val = parseFloat(connected.text());
-    connected.text('0');
+    var old_val = connected_val;
+    connected.text(connected_val);
     
     var colors = {};
     colors["ok"] = $('#conf-css .color-ok').css('color');
@@ -537,14 +539,26 @@ function initPercentages(context) {
     colors["left"] = $('#conf-css .color-left').css('color');
 
     th[0].updatePercentages = function(data, percent) {
-      connected_val = percent;
+      if(typeof(perc_old)=='undefined') {
+        perc_old = JSON.parse(data);
+        $.each(perc_old, function(key, value) {
+          value.value = 0;
+          value.from = 1.5*Math.PI;
+          value.to = 1.5*Math.PI;
+        });
+      } else {
+        perc_old = $.merge([],perc);
+      }
+
+      old_val = parseInt(connected_val);
+      connected_val = parseInt(percent);
       th.attr('data-percent',data);
       perc = JSON.parse(data);
-      //console.log(perc);
       sum = 0;
       $.each(perc, function(key, value) {
         sum += value.value;
       });
+      sum = Math.max(sum,0.00000000001);
       initShow();
     };
 
@@ -569,7 +583,7 @@ function initPercentages(context) {
         draw.moveTo(x1, y1);
         draw.lineTo(x2, y2);
         draw.strokeStyle = color;
-        draw.lineWidth = 1.2;
+        draw.lineWidth = 2;
         draw.stroke();
       }
     }
@@ -597,14 +611,19 @@ function initPercentages(context) {
         var from = 1.5*Math.PI;
         drawArc(draw, from, from+2*Math.PI, colors['left']);
         //console.log(now_perc);
-        $.each(perc, function(key, value) {
-          var to = from + now_perc*value.value/sum*2*Math.PI;
-          drawArc(draw, from, to+0.001, colors[value.color]);
+        for(var i = 0; i < perc.length; i++) {
+          var to = from 
+              + (perc_old[i].to - perc_old[i].from)
+              + now_perc*(perc[i].value/sum*2*Math.PI-(perc_old[i].to - perc_old[i].from));
+          drawArc(draw, from, to, colors[perc[i].color]);
+          perc[i].from = from;
+          perc[i].to = to;
           from = to;
-        });
-        if(connected) {
-          connected.text(connected_val);
         }
+        if(connected) {
+          connected.text(parseInt(old_val+(connected_val-old_val)*now_perc));
+        }
+        //drawDivisions(draw, 10, "rgba(0,0,0,0.04)");
       }, time_delay);
     }
 
